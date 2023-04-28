@@ -15,4 +15,6 @@
 	- Sensoraufnahmen vom Anfang des Tages bis kurz vor'm Mittagessen (gelabelt mit dem Wochentag)
 	- Sensoraufnahme während des Mittagessens (gelabelt mit Wochentag und dem Label "Mittagessen")
 		-> Über die Uhrzeit, den Wochentag, die Beschleunigung und das Umgebungslicht wird vorhergesagt, ob man gerade zu Mittag isst
-	
+
+
+- ML-App, die predictet, wann man sein Handy an macht und einem unmittelbar, nachdem man das Handy angemacht hat, irgendwas schickt	
