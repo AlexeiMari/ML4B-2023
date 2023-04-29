@@ -1,9 +1,15 @@
 -ML-App, die erkennt, in welchem Fahrzeug man sich befindet (Accelerator Sensor)
-	- Label, in welchem man war (laufen, fahrrad, auto_fahrer, auto_beifahrer, bus, ubahn)
+	- Label, in welchem man war (laufen, fahrrad, auto, bus, ubahn, idle)
 	- Analyse des Handyverhaltens während der Transportation (Light Sensor oder Display Sensor)
 		-> Bessere Bestimmung des Fahrzeugs durch Multisensoren (Bsp. Hohe Beschleunigung und wenig Licht, aber viel Handyaktivität = Ubahn)
 			-> Anpassen der Benachrichtigungsarten basierend auf dem Fahrzeug
 			-> Eine nette Nachricht senden, weil's egal ist, was wir machen ("Hey, du musst Bus fahren... Blöd gelaufen, aber ich hab's erkannt xD")
+	- Vorgehen beim Datensammeln:
+		- Laufen: Aufnahme, während man läuft, beim stehenbleiben ausschalten. Verschiedene Geschwindigkeiten in verschiedenen Aufnahmen (langsam laufen, normal laufen, schnell laufen, rennen)
+		- Fahrrad: Aufnahme beim Radfahren, bei roten Ampeln, ect. ausschalten. Verschiedene Szenarien in verschiedenen Aufnahmen (gerade Strecke, Berg hochfahren, Berg runterfahren)
+		- Bus: Nur aufnehmen, wenn der Bus fährt
+		- U-Bahn: Nur aufnehmen, wenn die U-Bahn fährt
+		- Idle: Aufnahmen, wenn man steht. Also nichts macht und einfach nur rumsteht
 
 -ML-App, die die Display Helligkeit automatisch anpasst, basierend auf der umgebenden Helligkeit (Light und Display Sensor)
 	-> (Wahrscheinlich) easy
@@ -17,4 +23,5 @@
 		-> Über die Uhrzeit, den Wochentag, die Beschleunigung und das Umgebungslicht wird vorhergesagt, ob man gerade zu Mittag isst
 
 
-- ML-App, die predictet, wann man sein Handy an macht und einem unmittelbar, nachdem man das Handy angemacht hat, irgendwas schickt	
+- ML-App, die predictet, wann man sein Handy an macht und einem unmittelbar, nachdem man das Handy angemacht hat, irgendwas schickt
+	- Über dem Lichtsensor oder den Displaysensor + die Zeitpunkte 	
