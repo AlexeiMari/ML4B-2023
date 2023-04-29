@@ -25,3 +25,6 @@
 
 - ML-App, die predictet, wann man sein Handy an macht und einem unmittelbar, nachdem man das Handy angemacht hat, irgendwas schickt
 	- Über dem Lichtsensor oder den Displaysensor + die Zeitpunkte 	
+- Wecker, durch Sonneneinstrahlung aufs Display (also Ambiente light)
+- Langweilige Vorlesung -> Batterie niedrig
+- Fallbenachritigung bei alten Menschen, wenn das Handy ruckartig das Gyroskop schlagartig ändert und nicht mehr zurück geht
