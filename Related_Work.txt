@@ -1,0 +1,21 @@
+Data Cleaning and Preparation
+https://ieeexplore.ieee.org/document/8509447
+https://ieeexplore.ieee.org/document/9651832
+
+Wichtigkeit von Klassifizierungen durch ML auf Basis eines Beispiels über die tägliche "Nachrichtenflut"
+https://ieeexplore.ieee.org/document/9725409
+
+Effizients durch Klassifizierungen von Lieferanten im SCM:
+https://ieeexplore.ieee.org/document/8999282
+
+Vorhersage der Irisblumenarten mit 3 verschiedenen ML Klassifizierungsmodellen:
+https://ieeexplore.ieee.org/document/10065178
+
+Klassifizierung von Kleidung durch verschiedene ML Modelle:
+https://ieeexplore.ieee.org/document/9786364
+
+Artikel dazu, welche Modelle sich für kleine Datensätze und welche für große eignen
+https://ieeexplore.ieee.org/document/8987479
+
+Probleme von fehlenden Daten in der Medizin
+https://ieeexplore.ieee.org/document/9820448
