@@ -9,5 +9,6 @@ import json
 import pickle
 import math
 import os
+import tsfresh
 
 st.title("Mobility Classification App")
