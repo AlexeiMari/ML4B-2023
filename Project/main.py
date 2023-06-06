@@ -86,7 +86,27 @@ def transform_data_json(file):
 
 ### Pythonic Area
 
-st.title("Mobility Classification App")
+### Streamlit Area
+st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide")
 
-uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed")
+st.subheader("Lets classify your mobility!")
+st.write("First we need some Input from you")
+#uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed")
+knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
+def main():
+    uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed")
+    if st.button("Classify me!"):
+        def classify_temperature(temperature):
+            if temperature >= 20:
+                return "T-Shirt"
+            elif temperature >= 10:
+                return "Pullover"
+            else:
+                return "Jacke"
+        input_temperature = 20
+        classify_temperature = classify_temperature(input_temperature)
+        st.write("The prediction is: ", classify_temperature)
+if __name__ == "__main__":
+    main()
+
 
