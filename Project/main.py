@@ -10,17 +10,51 @@ import torch
 import math
 import os
 import tsfresh
+import pickle
+import zipfile as zf
 
 ### Attributes
-#knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
+
+#knn = torch.load(r"..\Models\KNN (hpo)_2023-06-02")
 #rnf = torch.load(r"..\Models" + "\\" + "RNF_2023-06-02")
+
+#Rene Workaround
+knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
+rnf = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\RNF_2023-06-02")
 
 #Don't touch this! The List has to be identical to the list in the notebook
 sensors = ["Accelerometer","Location","Orientation"]
 
 ### Functions
-def process_data(file):
-    return None
+def process_data(upload):
+    data = None
+    if zf.is_zipfile(upload): #Hochgeladene Datei ist eine zip mit CSVs drinnen
+        st.write("Is ne zip")
+        file = None
+        extr_dir = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\uploaded_files"
+
+        with zf.ZipFile(upload, 'r') as zip_ref:
+            zip_ref.extractall(extr_dir)
+
+        for f in os.listdir(extr_dir):
+            file = f
+
+        data = transform_data_csv(extr_dir + "\\" + file)
+        st.write(extr_dir + "\\" + file)
+
+    else: #Hochgeladene Datei ist eine JSON
+        st.write("Is ne json")
+        x = upload.getvalue()
+        #st.write(x)
+        x_json = x.decode('utf8')
+        data = json.loads(x_json)
+        #st.write(s)
+        with open(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json", 'w') as j:
+            json.dump(data,j)
+        data = transform_data_json(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json")
+
+    st.write(data)
+    return data
 
 def transform_data_csv(file):
     datasets = {}  # Ein Dictionary
@@ -57,11 +91,6 @@ def transform_data_json(file):
 
     df = pd.read_json(file)
 
-    # Zeittransformation
-    # df["time"] = pd.to_datetime(df['time'], unit = 'ns')
-    ##df["Readable_Time"] = df["time"]
-    # for i in range(0,len(df["time"])):
-    #    df["Readable_Time"][i] = df["time"][i].to_pydatetime()
     df = df.drop(columns=["time"])
 
     for sensor in sensors:
@@ -92,10 +121,11 @@ st.set_page_config(page_title="Mobility Classification App", page_icon=":oncomin
 st.subheader("Lets classify your mobility!")
 st.write("First we need some Input from you")
 #uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed")
-knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
+#knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
 def main():
-    uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed")
+    uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed", accept_multiple_files=False)
     if st.button("Classify me!"):
+        process_data(uploaded_file)
         def classify_temperature(temperature):
             if temperature >= 20:
                 return "T-Shirt"
