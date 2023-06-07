@@ -53,17 +53,20 @@ def process_data(upload):
             json.dump(data,j)
         data = transform_data_json(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json")
 
-    st.write(data)
-    splitData = split_data(data, 1)
+    #st.write(data)
+    splitData = split_data([data], 1)
     metrics = data_to_metric(splitData)
     end = combine(metrics)
+
+    st.write(end)
+    st.write((end.keys()))
 
     prediction = rnf.predict(end)
 
     timeLineData = create_time_line_data(prediction)
-
-    st.write(timeLineData)
-    return timeLineData
+    tupelList = time_line_data_to_tupel(timeLineData)
+    st.write(tupelList)
+    return tupelList
 
 def transform_data_csv(file):
     datasets = {}  # Ein Dictionary
@@ -139,7 +142,6 @@ def split_data(list, length_of_time_series):
 
         else:
             split_dict = {}  # Dieses dictionary wird jedem Sensor eine Liste von aufgesplitteten DFs zuweisen
-            split_dict["activity"] = dict["activity"]
             for sensor in sensors:
                 splitted_dict_entry = np.array_split(dict[sensor],
                                                      amount_of_splits)  # Das ist jetzt ne Liste mit aufgeteilten Dataframes
@@ -153,7 +155,6 @@ def split_data(list, length_of_time_series):
 
             for i in range(0, amount_of_splits):
                 sub_dict = {}
-                sub_dict["activity"] = dict["activity"]
                 for sensor in sensors:
                     sub_dict[sensor] = split_dict[sensor][i]
                 splitted_list.append(sub_dict)
@@ -169,7 +170,7 @@ def data_to_metric(list):
 
             temp = tsfresh.extract_features(dict[sensor], column_id = "ID",
                                         default_fc_parameters=tsfresh.feature_extraction.MinimalFCParameters())
-            temp["activity"] = dict["activity"]
+
             #temp["ID"] = dict[sensor]["ID"]
             final_form_data_list.append({"data" : temp, "sensor" : sensor})
             i += 1
@@ -192,8 +193,10 @@ def combine(final_form_data_list):
 
     # Drop duplicate "activity" Columns
     d = df_final.T.drop_duplicates().T
-    df_final = df_final.drop(columns=["activity"])
-    df_final["activity"] = d["activity"]
+
+    #################
+
+    #################
 
     # Final Dataframe with all the transformed data
     return df_final
@@ -231,6 +234,13 @@ def create_time_line_data(dataList:list):
             returnList.append(activityCountMapper(str(entry)))
 
     return returnList
+
+def time_line_data_to_tupel(time_line):
+    tupel_list = []
+    for entry in time_line:
+        tupel_list.append((entry.getActivity(),entry.getCount()))
+
+    return tupel_list
 
 ### Pythonic Area
 
