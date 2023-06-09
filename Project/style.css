@@ -1,0 +1,82 @@
+h2 {
+    color: white;
+    font-size: 80px;
+    font-weight: bold;
+    padding-top: 50px;
+    text-align: center;
+}
+
+h3 {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+p {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/*Radio Buttons Hauptkasten*/
+.st-b3 {
+    padding: 20px;
+    align-content: center;
+}
+
+/*Fragentext zentrieren*/
+.stTextLabelWrapper {
+    justify-content: center;
+    /*background-color: rgba(0, 0, 0, 0.8);*/
+}
+
+/*Styling des Fragetextes*/
+.css-183lzff {
+    font-size: 50px;
+    color: white;
+    margin-top: 50px;
+}
+
+/*Font der Radiobuttontexte Page One*/
+.st-c1 {
+    font-size: 25px;
+    padding-left: 15px;
+}
+
+/*Font der Radiobuttontexte restliche Pages*/
+.st-c0 {
+    font-size: 25px;
+    padding-left: 15px;
+}
+
+button {
+    margin-bottom: 50px;
+    background-color: teal;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    padding: .75rem 1.2rem;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+}
+
+/*erzeugt den schwarzen Hintergrund*/
+.css-1pg9l7q {
+    background-color: rgba(0, 0, 0, 0.8);
+}

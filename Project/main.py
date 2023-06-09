@@ -15,12 +15,12 @@ import zipfile as zf
 
 ### Attributes
 
-#knn = torch.load(r"..\Models\KNN (hpo)_2023-06-02")
-#rnf = torch.load(r"..\Models" + "\\" + "RNF_2023-06-02")
+knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
+rnf = torch.load(r"..\Models\RNF_2023-06-02")
 
 #Rene Workaround
-knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
-rnf = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\RNF_2023-06-02")
+#knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
+#rnf = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\RNF_2023-06-02")
 
 #Don't touch this! The List has to be identical to the list in the notebook
 sensors = ["Accelerometer","Location","Orientation"]
