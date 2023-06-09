@@ -15,12 +15,12 @@ import zipfile as zf
 
 ### Attributes
 
-knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
-rnf = torch.load(r"..\Models\RNF_2023-06-02")
+#knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
+#rnf = torch.load(r"..\Models\RNF_2023-06-02")
 
 #Rene Workaround
-#knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
-#rnf = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\RNF_2023-06-02")
+knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
+rnf = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\RNF_2023-06-02")
 
 #Don't touch this! The List has to be identical to the list in the notebook
 sensors = ["Accelerometer","Location","Orientation"]
@@ -39,7 +39,7 @@ def process_data(upload):
         for f in os.listdir(extr_dir):
             file = f
 
-        data = transform_data_csv(extr_dir + "\\" + file)
+        data, gps = transform_data_csv(extr_dir + "\\" + file)
         st.write(extr_dir + "\\" + file)
 
     else: #Hochgeladene Datei ist eine JSON
@@ -51,25 +51,22 @@ def process_data(upload):
         #st.write(s)
         with open(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json", 'w') as j:
             json.dump(data,j)
-        data = transform_data_json(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json")
+        data, gps = transform_data_json(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json")
 
     #st.write(data)
     splitData = split_data([data], 1)
     metrics = data_to_metric(splitData)
     end = combine(metrics)
 
-    st.write(end)
-    st.write((end.keys()))
-
     prediction = rnf.predict(end)
 
     timeLineData = create_time_line_data(prediction)
     tupelList = time_line_data_to_tupel(timeLineData)
-    st.write(tupelList)
-    return tupelList
+    return tupelList, gps, end, prediction
 
 def transform_data_csv(file):
     datasets = {}  # Ein Dictionary
+    gps = None
     for sensor in sensors:
         # Dataframe wird eingelesen
         df = pd.read_csv(file + "\\" + sensor + ".csv")
@@ -84,6 +81,7 @@ def transform_data_csv(file):
 
         # Datenschutz. Falls Location ein Sensor ist, wird davon nur die Speed verwendet
         if (sensor == "Location"):
+            gps = df
             df = df.drop(columns=df.columns.difference(["speed", "Readable_Time", "seconds_elapsed"]))
 
         elif sensor == "Accelerometer":
@@ -95,11 +93,12 @@ def transform_data_csv(file):
         # Dataframe wird dem Dictionay hinzugefügt
         datasets[sensor] = df
 
-    return datasets
+    return datasets, gps
 
 
 def transform_data_json(file):
     datasets = {}  # Ein Dictionary
+    gps = None
 
     df = pd.read_json(file)
 
@@ -111,6 +110,7 @@ def transform_data_json(file):
         temp = temp.drop(columns=["sensor"])
         # Datenschutz. Falls Location ein Sensor ist, wird davon nur die Speed verwendet
         if (sensor == "Location"):
+            gps = temp
             temp = temp.drop(columns=temp.columns.difference(["speed", "Readable_Time", "seconds_elapsed"]))
 
         elif sensor == "Accelerometer":
@@ -123,7 +123,7 @@ def transform_data_json(file):
         # Dataframe wird dem Dictionary hinzugefügt
         datasets[sensor] = temp
 
-    return datasets
+    return datasets, gps
 
 def split_data(list, length_of_time_series):
     splitted_list = []
@@ -254,18 +254,34 @@ st.write("First we need some Input from you")
 def main():
     uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed", accept_multiple_files=False)
     if st.button("Classify me!"):
-        process_data(uploaded_file)
-        def classify_temperature(temperature):
-            if temperature >= 20:
-                return "T-Shirt"
-            elif temperature >= 10:
-                return "Pullover"
-            else:
-                return "Jacke"
-        input_temperature = 20
-        classify_temperature = classify_temperature(input_temperature)
-        st.write("The prediction is: ", classify_temperature)
+        prediction_data, gps, metric_data, raw_predictions = process_data(uploaded_file)
+
+        st.subheader("Der Ursprung deiner Daten")
+        st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
+        st.map(gps)
+
+        st.subheader("Dein Fortbewegungsgraph")
+        output_string = ""
+        import graphviz
+        graph = graphviz.Digraph()
+        i = 0
+        if len(prediction_data) > 1:
+            while i < len(prediction_data) -1:
+                graph.edge((prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min"), (prediction_data[i+1][0] + " " + str(prediction_data[i+1][1]) + " min"))
+                i += 1
+        else:
+            graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
+        st.write(output_string)
+        st.graphviz_chart(graph)
+
+        st.subheader("Deine Fortbewegungsverteilung")
+        
+
+
+
+
 if __name__ == "__main__":
     main()
+
 
 
