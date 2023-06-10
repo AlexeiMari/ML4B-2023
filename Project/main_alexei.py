@@ -1,3 +1,5 @@
+#Hier werden schon Mal die wichtigsten Libs, die wir verwenden werden, importiert.
+#Geht sicher, dass ihr die installiert habt
 import pandas as pd
 import streamlit as st
 import csv
@@ -10,9 +12,7 @@ import os
 import tsfresh
 import pickle
 import zipfile as zf
-import requests
-from streamlit_lottie import st_lottie 
-import json
+
 
 ### Streamlit Area
 ### Page config

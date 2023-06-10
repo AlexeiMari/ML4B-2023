@@ -276,10 +276,6 @@ def main():
 
         st.subheader("Deine Fortbewegungsverteilung")
         
-
-
-
-
 if __name__ == "__main__":
     main()
 
