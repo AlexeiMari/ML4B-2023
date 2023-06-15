@@ -253,8 +253,8 @@ background: linear-gradient(#e66465, #9198e5);
 st.markdown(bg_gradient, unsafe_allow_html=True)
 ###
 
-with open('style.css') as f:
-    st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+#with open('style.css') as f:
+#    st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
 ###
 st.header("Thank you for the answers!")
 with st.container():
