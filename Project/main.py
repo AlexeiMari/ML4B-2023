@@ -2,15 +2,12 @@
 #Geht sicher, dass ihr die installiert habt
 import pandas as pd
 import streamlit as st
-import csv
-import sklearn
 import numpy as np
 import json
 import torch
 import math
 import os
 import tsfresh
-import pickle
 import zipfile as zf
 
 ### Attributes
