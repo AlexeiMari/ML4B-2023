@@ -9,6 +9,7 @@ import math
 import os
 import tsfresh
 import zipfile as zf
+from tqdm.auto import tqdm
 
 ### Attributes
 
@@ -161,12 +162,14 @@ def split_data(list, length_of_time_series):
 def data_to_metric(list):
     i = 0
     final_form_data_list = []
-    for dict in list:
+    for dict in tqdm(list):
         for sensor in sensors:
             dict[sensor] = dict[sensor].drop(columns=["seconds_elapsed"])
 
             temp = tsfresh.extract_features(dict[sensor], column_id = "ID",
-                                        default_fc_parameters=tsfresh.feature_extraction.MinimalFCParameters())
+                                        default_fc_parameters=tsfresh.feature_extraction.MinimalFCParameters(),
+                                        n_jobs = 2)
+
 
             #temp["ID"] = dict[sensor]["ID"]
             final_form_data_list.append({"data" : temp, "sensor" : sensor})
