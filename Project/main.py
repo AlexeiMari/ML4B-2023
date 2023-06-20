@@ -13,14 +13,13 @@ from tqdm.auto import tqdm
 
 ### Attributes
 local = False
-
+print("you are stupid!")
+print(os.getcwd())
 if not local:
-    try:
-        knn = torch.load("KNN")
-        rnf = torch.load("RNF")
-    except:
-        print("you are stupid!")
-        print(os.getcwd())
+    knn = torch.load("KNN")
+    rnf = torch.load("RNF")
+
+
 #Rene Workaround
 if local:
     knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
