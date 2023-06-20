@@ -59,7 +59,7 @@ def process_data(upload):
         if local:
             json_path = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json"
         if not local:
-            json_path = r"..\json.json"
+            json_path = r"json.json"
 
         with open(json_path, 'w') as j:
             json.dump(data,j)
