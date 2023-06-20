@@ -37,7 +37,7 @@ def process_data(upload):
         if local:
             extr_dir = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\uploaded_files"
         if not local:
-            extr_dir = r"..\uploaded_files"
+            extr_dir = r"uploaded_files"
 
         with zf.ZipFile(upload, 'r') as zip_ref:
             zip_ref.extractall(extr_dir)

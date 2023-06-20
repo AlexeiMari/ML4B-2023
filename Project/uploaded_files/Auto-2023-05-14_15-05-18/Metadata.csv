@@ -1,2 +1,0 @@
-version,device name,recording time,platform,appVersion,device id,sensors,sampleRateMs
-3,SM-G973F,2023-05-14_15-05-18,android,1.15.2,a3ae7c26-e17b-464a-ac40-e56956e73df5,Accelerometer|Gravity|Orientation|Location|Annotation|TotalAcceleration|AccelerometerUncalibrated,10|10|10|0||10|10

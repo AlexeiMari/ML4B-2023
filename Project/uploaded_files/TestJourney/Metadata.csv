@@ -1,2 +1,0 @@
-version,device name,recording time,platform,appVersion,device id,sensors,sampleRateMs
-3,HTC Desire 12s,2023-06-07_16-09-32,android,1.15.2,05857188-f20b-4f43-b826-df42ba6537db,Accelerometer|Gravity|Orientation|Magnetometer|Location|Light|Battery|Brightness|Annotation|TotalAcceleration,10|10|10|10|0|0|1000|1000||10
