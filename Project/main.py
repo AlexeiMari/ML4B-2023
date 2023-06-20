@@ -12,7 +12,7 @@ import zipfile as zf
 from tqdm.auto import tqdm
 
 ### Attributes
-local = True
+local = False
 
 if not local:
     knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
