@@ -10,7 +10,7 @@ import os
 import tsfresh
 import zipfile as zf
 from tqdm.auto import tqdm
-
+st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide")
 ### Attributes
 local = False
 st.write("you are stupid!")
@@ -259,7 +259,7 @@ def time_line_data_to_tupel(time_line):
 ### Pythonic Area
 
 ### Streamlit Area
-st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide")
+
 
 st.subheader("Lets classify your mobility!")
 st.write("First we need some Input from you")
