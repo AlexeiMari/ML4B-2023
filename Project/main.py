@@ -16,8 +16,8 @@ local = False
 st.write("you are stupid!")
 st.write(os.getcwd())
 if not local:
-    knn = torch.load("KNN")
-    rnf = torch.load("RNF")
+    knn = torch.load("\Project\KNN")
+    rnf = torch.load("\Project\RNF")
 
 
 #Rene Workaround
