@@ -13,8 +13,8 @@ from tqdm.auto import tqdm
 
 ### Attributes
 local = False
-print("you are stupid!")
-print(os.getcwd())
+st.write("you are stupid!")
+st.write(os.getcwd())
 if not local:
     knn = torch.load("KNN")
     rnf = torch.load("RNF")
