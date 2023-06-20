@@ -15,8 +15,8 @@ from tqdm.auto import tqdm
 local = False
 
 if not local:
-    knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
-    rnf = torch.load(r"..\Models\RNF_2023-06-02")
+    knn = torch.load(r"..\Models" + "\\" + "KNN_2023_06_02")
+    rnf = torch.load(r"..\Models\RNF_2023_06_02")
 
 #Rene Workaround
 if local:
