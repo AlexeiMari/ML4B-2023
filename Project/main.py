@@ -12,13 +12,16 @@ import zipfile as zf
 from tqdm.auto import tqdm
 
 ### Attributes
+local = True
 
-#knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
-#rnf = torch.load(r"..\Models\RNF_2023-06-02")
+if not local:
+    knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
+    rnf = torch.load(r"..\Models\RNF_2023-06-02")
 
 #Rene Workaround
-knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
-rnf = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\RNF_2023-06-02")
+if local:
+    knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
+    rnf = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\RNF_2023-06-02")
 
 #Don't touch this! The List has to be identical to the list in the notebook
 sensors = ["Accelerometer","Location","Orientation"]
@@ -29,7 +32,10 @@ def process_data(upload):
     if zf.is_zipfile(upload): #Hochgeladene Datei ist eine zip mit CSVs drinnen
         st.write("Is ne zip")
         file = None
-        extr_dir = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\uploaded_files"
+        if local:
+            extr_dir = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\uploaded_files"
+        if not local:
+            extr_dir = r"..\uploaded_files"
 
         with zf.ZipFile(upload, 'r') as zip_ref:
             zip_ref.extractall(extr_dir)
@@ -47,9 +53,15 @@ def process_data(upload):
         x_json = x.decode('utf8')
         data = json.loads(x_json)
         #st.write(s)
-        with open(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json", 'w') as j:
+
+        if local:
+            json_path = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json"
+        if not local:
+            json_path = r"..\json.json"
+
+        with open(json_path, 'w') as j:
             json.dump(data,j)
-        data, gps = transform_data_json(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json")
+        data, gps = transform_data_json(json_path)
 
     #st.write(data)
     splitData = split_data([data], 1)
