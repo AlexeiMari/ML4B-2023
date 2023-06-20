@@ -15,8 +15,13 @@ import zipfile as zf
 import graphviz
 ### Attributes
 
-knn = torch.load(r"Models\KNN (hpo)_2023-06-02")
-rnf = torch.load(r"Models\RNF_2023-06-02")
+model_knn = 'Models/KNN_2023_06_02'
+model = torch.load(model_knn)
+model_rnf = 'Models/RNF_2023_06_02'
+model = torch.load(model_rnf)
+
+#knn = torch.load(r"Models\KNN_2023_06_02")
+#rnf = torch.load(r"Models\RNF_2023_06_02")
 
 #Don't touch this! The List has to be identical to the list in the notebook
 sensors = ["Accelerometer","Location","Orientation"]
