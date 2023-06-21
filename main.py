@@ -67,7 +67,7 @@ def process_data(upload):
 
     #st.write(data)
     splitData = split_data([data], 1)
-    metrics = data_to_metric(splitData)
+    metrics = calculate_features(splitData)
     end = combine(metrics)
 
     prediction = rnf.predict(end)
@@ -173,28 +173,62 @@ def split_data(list, length_of_time_series):
 
     return splitted_list
 
-def data_to_metric(list):
-    i = 0
-    final_form_data_list = []
-    for dict in tqdm(list):
+
+def calculate_features(input_list):
+    ff_list = []
+
+    def rms(df):
+        square = df ** 2
+        square = square.sum()
+        mean = (square / len(df))
+        root = math.sqrt(mean)
+        return root
+
+    for dict in tqdm(input_list):
+        print((list(dict.keys())[1] == "Accelerometer") and (list(dict.keys())[2] == "Location") and (
+                    list(dict.keys())[3] == "Orientation"))
         for sensor in sensors:
+
             dict[sensor] = dict[sensor].drop(columns=["seconds_elapsed"])
 
-            temp = tsfresh.extract_features(dict[sensor], column_id = "ID",
-                                        default_fc_parameters=tsfresh.feature_extraction.MinimalFCParameters(),
-                                        n_jobs = 2)
+            if sensor == "Accelerometer" or sensor == "Location":
+                temp = tsfresh.extract_features(dict[sensor], column_id="ID",
+                                                default_fc_parameters=tsfresh.feature_extraction.MinimalFCParameters(),
+                                                n_jobs=4)
+
+                if sensor == "Location":  # Orientation Stuff. I don't get it better merged, tbh
+                    temp["roll__standard_deviation"] = dict["Orientation"]["roll"].std()
+                    temp["roll__variance"] = dict["Orientation"]["roll"].var()
+                    temp["roll__root_mean_square"] = rms(dict["Orientation"]["roll"])
+
+                    temp["pitch__standard_deviation"] = dict["Orientation"]["pitch"].std()
+                    temp["pitch__variance"] = dict["Orientation"]["pitch"].var()
+                    temp["pitch__root_mean_square"] = rms(dict["Orientation"]["pitch"])
+                    temp["pitch__absolute_maximum"] = dict["Orientation"]["pitch"].abs().max()
+
+                    temp["yaw__standard_deviation"] = dict["Orientation"]["yaw"].std()
+                    temp["yaw__variance"] = dict["Orientation"]["yaw"].var()
+
+                temp["activity"] = dict["activity"]
+                ff_list.append({"data": temp.copy(), "sensor": sensor})
 
 
-            #temp["ID"] = dict[sensor]["ID"]
-            final_form_data_list.append({"data" : temp, "sensor" : sensor})
-            i += 1
-            print(i)
-    return final_form_data_list
+            elif sensor == "Gravity":
+                temp["Magnitude(grav)__sum_values"] = dict[sensor]["Magnitude(grav)"].sum()
+                temp["Magnitude(grav)__mean"] = dict[sensor]["Magnitude(grav)"].mean()
+                temp["Magnitude(grav)__minimum"] = dict[sensor]["Magnitude(grav)"].min()
+
+            elif sensor == "Orientation":
+                continue
+
+    return ff_list
 
 def combine(final_form_data_list):
     very_final_form_data_list = []
 
     for sensor in sensors:
+        if sensor == "Orientation":
+            continue
         temp_list = []
         for dict in final_form_data_list:
             if str(dict["sensor"]) == str(sensor):
@@ -202,17 +236,17 @@ def combine(final_form_data_list):
         concat_temp = pd.concat(temp_list)
         very_final_form_data_list.append(concat_temp)
 
-    # Join all the Dataframes to one Dataframe
-    df_final = pd.concat(very_final_form_data_list, axis=1)
 
-    # Drop duplicate "activity" Columns
+    #Join all the Dataframes to one Dataframe
+    df_final = pd.concat(very_final_form_data_list, axis = 1)
+
+    #Drop duplicate "activity" Columns
     d = df_final.T.drop_duplicates().T
+    df_final = df_final.drop(columns=["activity"])
 
-    #################
+    df_final["activity"] = d["activity"]
 
-    #################
-
-    # Final Dataframe with all the transformed data
+    #Final Dataframe with all the transformed data
     return df_final
 
 
