@@ -10,7 +10,7 @@ import math
 import os
 import tsfresh
 import zipfile as zf
-from tqdm.auto import tqdm
+from stqdm import stqdm
 
 st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide")
 ### Attributes
@@ -184,9 +184,11 @@ def calculate_features(input_list):
         root = math.sqrt(mean)
         return root
 
-    for dict in tqdm(input_list):
-        print((list(dict.keys())[1] == "Accelerometer") and (list(dict.keys())[2] == "Location") and (
-                    list(dict.keys())[3] == "Orientation"))
+
+    for dict in stqdm(input_list):
+        #print((list(dict.keys())[1] == "Accelerometer") and (list(dict.keys())[2] == "Location") and (
+        #            list(dict.keys())[3] == "Orientation"))
+
         for sensor in sensors:
 
             dict[sensor] = dict[sensor].drop(columns=["seconds_elapsed"])
