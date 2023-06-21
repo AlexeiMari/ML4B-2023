@@ -5,16 +5,16 @@ import streamlit as st
 import numpy as np
 import json
 import torch
+import plotly.express as px
 import math
 import os
 import tsfresh
 import zipfile as zf
 from tqdm.auto import tqdm
+
 st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide")
 ### Attributes
 local = False
-st.write("you are stupid!")
-st.write(os.getcwd())
 if not local:
     knn = torch.load(r"KNN")
     rnf = torch.load(r"RNF")
@@ -261,6 +261,56 @@ def time_line_data_to_tupel(time_line):
 ### Streamlit Area
 
 
+### mock data
+import random
+
+activities = ['Laufen', 'Idle', 'Auto', 'U-Bahn', 'Fahrrad']
+minutes_range = (5, 15)  # Bereich der Minuten für jede Aktivität
+
+data = {'Aktivität': []}
+
+for activity in activities:
+    minutes = random.randint(minutes_range[0], minutes_range[1])
+    data['Aktivität'].extend([activity] * minutes)
+df = pd.DataFrame(data)
+st.dataframe(df)
+###
+
+
+aktivität = st.sidebar.multiselect("Aktivität", options= df['Aktivität'].unique(), default=df['Aktivität'].unique())
+df_selection = df.query("Aktivität == @aktivität")
+st.dataframe(df_selection)
+bar = px.bar(
+    df_selection,
+    x='Aktivität',
+    orientation='v',
+    title='Aktivitäten',
+    color_discrete_sequence=['#2ECC71'],
+    template='plotly_white'
+)
+bar.update_layout(
+    xaxis=dict(tickmode='linear'),
+    plot_bgcolor="rgba(0,0,0,0)",
+    yaxis=(dict(showgrid=False))
+)
+
+st.plotly_chart(bar)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 st.subheader("Lets classify your mobility!")
 st.write("First we need some Input from you")
 #uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed")
@@ -269,11 +319,17 @@ def main():
     uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed", accept_multiple_files=False)
     if st.button("Classify me!"):
         prediction_data, gps, metric_data, raw_predictions = process_data(uploaded_file)
-
+        st.header("prediction_data")
+        st.write(prediction_data)
+        st.header("gps")
+        st.write(gps)
+        st.header("metric_data")
+        st.write(metric_data)
+        st.header("raw_predictions")
+        st.write(raw_predictions)
         st.subheader("Der Ursprung deiner Daten")
         st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
         st.map(gps)
-
         st.subheader("Dein Fortbewegungsgraph")
         output_string = ""
         import graphviz
