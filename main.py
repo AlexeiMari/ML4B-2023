@@ -17,13 +17,13 @@ st.set_page_config(page_title="Mobility Classification App", page_icon=":oncomin
 local = False
 if not local:
     knn = torch.load(r"KNN")
-    rnf = torch.load(r"RNF")
+    gbc = torch.load(r"GBC_2023-06-22")
 
 
 #Rene Workaround
 if local:
     knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
-    rnf = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\RNF_2023-06-02")
+    gbc = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\GBC_2023-06-22")
 
 #Don't touch this! The List has to be identical to the list in the notebook
 sensors = ["Accelerometer","Location","Orientation"]
@@ -70,7 +70,7 @@ def process_data(upload):
     metrics = calculate_features(splitData)
     end = combine(metrics)
 
-    prediction = rnf.predict(end)
+    prediction = gbc.predict(end)
 
     timeLineData = create_time_line_data(prediction)
     tupelList = time_line_data_to_tupel(timeLineData)
@@ -242,7 +242,10 @@ def combine(final_form_data_list):
     df_final = pd.concat(very_final_form_data_list, axis = 1)
 
     #Drop duplicate "activity" Columns
-    d = df_final.T.drop_duplicates().T
+    #d = df_final.T.drop_duplicates().T
+    df_final = df_final.drop(columns=["activity"])
+
+    #df_final["activity"] = d["activity"]
 
     #Final Dataframe with all the transformed data
     return df_final
