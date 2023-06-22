@@ -243,9 +243,6 @@ def combine(final_form_data_list):
 
     #Drop duplicate "activity" Columns
     d = df_final.T.drop_duplicates().T
-    df_final = df_final.drop(columns=["activity"])
-
-    df_final["activity"] = d["activity"]
 
     #Final Dataframe with all the transformed data
     return df_final
