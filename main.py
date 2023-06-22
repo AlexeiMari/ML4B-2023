@@ -81,6 +81,7 @@ def transform_data_csv(file):
     gps = None
     for sensor in sensors:
         # Dataframe wird eingelesen
+        st.write(file)
         df = pd.read_csv(file + "\\" + sensor + ".csv")
 
         # Zeittransformation
