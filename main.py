@@ -47,8 +47,10 @@ def process_data(upload):
             st.write(f)
 
         st.write(extr_dir)
-
-        data, gps = transform_data_csv(extr_dir + "\\" + file)
+        if local:
+            data, gps = transform_data_csv(extr_dir + "\\" + file)
+        if not local:
+            data, gps = transform_data_csv(extr_dir)
         st.write(extr_dir + "\\" + file)
 
     else: #Hochgeladene Datei ist eine JSON
@@ -85,6 +87,7 @@ def transform_data_csv(file):
     for sensor in sensors:
         # Dataframe wird eingelesen
         st.write(file)
+
         df = pd.read_csv(file + "\\" + sensor + ".csv")
 
         # Zeittransformation
