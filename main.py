@@ -296,57 +296,6 @@ def time_line_data_to_tupel(time_line):
 
 ### Streamlit Area
 
-
-### mock data
-import random
-
-activities = ['Laufen', 'Idle', 'Auto', 'U-Bahn', 'Fahrrad']
-minutes_range = (5, 15)  # Bereich der Minuten für jede Aktivität
-
-data = {'Aktivität': []}
-
-for activity in activities:
-    minutes = random.randint(minutes_range[0], minutes_range[1])
-    data['Aktivität'].extend([activity] * minutes)
-df = pd.DataFrame(data)
-st.dataframe(df)
-###
-
-
-aktivität = st.sidebar.multiselect("Aktivität", options= df['Aktivität'].unique(), default=df['Aktivität'].unique())
-df_selection = df.query("Aktivität == @aktivität")
-st.dataframe(df_selection)
-bar = px.bar(
-    df_selection,
-    x='Aktivität',
-    orientation='v',
-    title='Aktivitäten',
-    color_discrete_sequence=['#2ECC71'],
-    template='plotly_white'
-)
-bar.update_layout(
-    xaxis=dict(tickmode='linear'),
-    plot_bgcolor="rgba(0,0,0,0)",
-    yaxis=(dict(showgrid=False))
-)
-
-st.plotly_chart(bar)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 st.subheader("Lets classify your mobility!")
 st.write("First we need some Input from you")
 #uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed")
