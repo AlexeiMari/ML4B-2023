@@ -45,6 +45,8 @@ def process_data(upload):
         for f in os.listdir(extr_dir):
             file = f
 
+        st.write(extr_dir)
+
         data, gps = transform_data_csv(extr_dir + "\\" + file)
         st.write(extr_dir + "\\" + file)
 
