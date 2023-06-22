@@ -22,8 +22,8 @@ if not local:
 
 #Rene Workaround
 if local:
-    knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
-    gbc = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\GBC_2023-06-22")
+    #knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
+    gbc = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\GBC_2023-06-22")
 
 #Don't touch this! The List has to be identical to the list in the notebook
 sensors = ["Accelerometer","Location","Orientation"]
@@ -35,7 +35,7 @@ def process_data(upload):
         st.write("Is ne zip")
         file = None
         if local:
-            extr_dir = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\uploaded_files"
+            extr_dir = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\uploaded_files"
         if not local:
             extr_dir = r"uploaded_files"
 
@@ -44,10 +44,11 @@ def process_data(upload):
 
         for f in os.listdir(extr_dir):
             file = f
+            st.write(f)
 
         st.write(extr_dir)
 
-        data, gps = transform_data_csv(extr_dir)
+        data, gps = transform_data_csv(extr_dir + "\\" + file)
         st.write(extr_dir + "\\" + file)
 
     else: #Hochgeladene Datei ist eine JSON
@@ -59,7 +60,7 @@ def process_data(upload):
         #st.write(s)
 
         if local:
-            json_path = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json"
+            json_path = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\json.json"
         if not local:
             json_path = r"json.json"
 
