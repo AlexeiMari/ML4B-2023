@@ -211,7 +211,6 @@ def calculate_features(input_list):
                     temp["yaw__standard_deviation"] = dict["Orientation"]["yaw"].std()
                     temp["yaw__variance"] = dict["Orientation"]["yaw"].var()
 
-                temp["activity"] = dict["activity"]
                 ff_list.append({"data": temp.copy(), "sensor": sensor})
 
 
