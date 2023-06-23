@@ -416,6 +416,37 @@ def main():
 
         st.pyplot(fig2)
 
+        ### Balkendiagramm
+        activities = {
+            "car": 0,
+            "bike": 0,
+            "walk": 0,
+            "subway": 0,
+            "idle": 0,
+            "roller": 0
+        }
+        for entry in raw_predictions:
+            dict[entry] += 1
+
+        # Erstellen eines DataFrames aus dem Wörterbuch
+        df = pd.DataFrame.from_dict(activities, orient='index', columns=['value'])
+        bar = px.bar(
+            df,
+            x='value',
+            orientation='v',
+            title='Aktivitäten',
+            color='value',
+            color_discrete_sequence=['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803'],
+            template='plotly_white'
+            )
+        bar.update_layout(
+        plot_bgcolor='#282C34',
+        paper_bgcolor='#282C34',
+        height=300,
+        width=500,
+        )
+        st.plotly_chart(bar)
+
         ### Kalorienzähler
         def berechne_kalorien_bike(json_data, aktivitaet):
             kalorien_verbrauch = 0
