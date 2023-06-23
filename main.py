@@ -433,7 +433,7 @@ def main():
 
         # Erstellen eines DataFrames aus dem Wörterbuch
         df = pd.DataFrame.from_dict(activities, orient='index', columns=['value'])
-        st.write(df)
+
         bar = px.bar(
             df,
             x='value',
@@ -451,7 +451,9 @@ def main():
         )
         bar2 = px.bar(
             x = bar_x,
-            y = bar_y
+            y = bar_y,
+            color_discrete_sequence=['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803'],
+            template='plotly_white'
         )
         st.plotly_chart(bar2)
 
