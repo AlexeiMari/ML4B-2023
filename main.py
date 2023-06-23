@@ -89,7 +89,8 @@ def transform_data_csv(file):
     for sensor in sensors:
         # Dataframe wird eingelesen
         st.write(file)
-        path = os.path.join(file, "\\", sensor, ".csv")
+
+        path = os.path.join(file, sensor, ".csv")
         df = pd.read_csv(path)
 
         # Zeittransformation
