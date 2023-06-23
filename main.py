@@ -427,7 +427,7 @@ def main():
             activities[entry] += 1
 
         # Erstellen eines DataFrames aus dem Wörterbuch
-        df = pd.DataFrame.from_dict(activities, orient='index', columns=['value'])
+        df = pd.DataFrame.from_dict(activities)
         st.write(df)
         bar = px.bar(
             df,
