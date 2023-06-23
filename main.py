@@ -427,10 +427,12 @@ def main():
         for entry in raw_predictions:
             activities[entry] += 1
 
-        bar_x = activities.keys()
         bar_y = []
-        for key in bar_x:
-            bar_y.append(activities[key])
+        bar_x = []
+        for key in activities.keys():
+            if(activities[key] > 0):
+                bar_y.append(activities[key])
+                bar_x.append(key)
 
         # Erstellen eines DataFrames aus dem Wörterbuch
         df = pd.DataFrame.from_dict(activities, orient='index', columns=['value'])
