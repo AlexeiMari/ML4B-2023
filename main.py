@@ -46,13 +46,11 @@ def process_data(upload):
 
         for f in os.listdir(extr_dir):
             file = f
-            st.write(f)
 
-        st.write(extr_dir)
+        #st.write(extr_dir)
         if local:
             data, gps = transform_data_csv(extr_dir + "\\" + file)
         if not local:
-            st.write(str(os.getcwd()))
             cwd = os.getcwd()
             data, gps = transform_data_csv(extr_dir)
         st.write(extr_dir + "\\" + file)
@@ -90,10 +88,10 @@ def transform_data_csv(file):
     gps = None
     for sensor in sensors:
         # Dataframe wird eingelesen
-        st.write(file)
+        #st.write(file)
 
         path = os.path.join(file, sensor)
-        st.write(path)
+        #st.write(path)
         df = pd.read_csv(path + ".csv")
 
         # Zeittransformation
@@ -426,11 +424,11 @@ def main():
             "roller": 0
         }
         for entry in raw_predictions:
-            st.write(type(activities[entry]))
             activities[entry] += 1
 
         # Erstellen eines DataFrames aus dem Wörterbuch
         df = pd.DataFrame.from_dict(activities, orient='index', columns=['value'])
+        st.write(df)
         bar = px.bar(
             df,
             x='value',
@@ -446,6 +444,7 @@ def main():
         height=300,
         width=500,
         )
+
         st.plotly_chart(bar)
 
         ### Kalorienzähler
