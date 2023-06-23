@@ -319,16 +319,16 @@ def main():
     if st.button("Classify me!"):
         prediction_data, gps, metric_data, raw_predictions = process_data(uploaded_file)
         st.header("prediction_data")
-        st.write(prediction_data)
+        #st.write(prediction_data)
         st.header("gps")
-        st.write(gps)
+        #st.write(gps)
         st.header("metric_data")
-        st.write(metric_data)
+        #st.write(metric_data)
         st.header("raw_predictions")
-        st.write(raw_predictions)
+        #st.write(raw_predictions)
         st.subheader("Der Ursprung deiner Daten")
         st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
-        st.map(gps)
+        #st.map(gps)
         st.subheader("Dein Fortbewegungsgraph")
         output_string = ""
         import graphviz
@@ -338,6 +338,7 @@ def main():
             while i < len(prediction_data) -1:
                 graph.edge((prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min"), (prediction_data[i+1][0] + " " + str(prediction_data[i+1][1]) + " min"))
                 i += 1
+            graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
         else:
             graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
         st.write(output_string)
@@ -452,9 +453,16 @@ def main():
         bar2 = px.bar(
             x = bar_x,
             y = bar_y,
-            #color = bar_x,
-            color=['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803'],
+            color_discrete_sequence=['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803'],
             template='plotly_white'
+        )
+        bar2.update_layout(
+        plot_bgcolor='#282C34',
+        paper_bgcolor='#282C34',
+        height=300,
+        width=500,
+        xaxis_title="Fortbewegungsarten",
+        yaxis_title="Anzahl an Minuten"
         )
         st.plotly_chart(bar2)
 
