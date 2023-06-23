@@ -40,13 +40,17 @@ def process_data(upload):
             extr_dir = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\uploaded_files"
         if not local:
             extr_dir = r"uploaded_files"
+        #Alte hochgeladene Daten werden gelöscht
+        for f in os.listdir(extr_dir):
+            os.remove(f)
 
+        #Hochgeladene Daten werden in den upload Ordner extrahiert
         with zf.ZipFile(upload, 'r') as zip_ref:
             zip_ref.extractall(extr_dir)
 
         for f in os.listdir(extr_dir):
             file = f
-            st.write(f)
+            #st.write(f)
 
         st.write(extr_dir)
         if local:
@@ -55,7 +59,6 @@ def process_data(upload):
             st.write(str(os.getcwd()))
             cwd = os.getcwd()
             data, gps = transform_data_csv(extr_dir)
-        st.write(extr_dir + "\\" + file)
 
     else: #Hochgeladene Datei ist eine JSON
         st.write("Is ne json")
@@ -90,10 +93,10 @@ def transform_data_csv(file):
     gps = None
     for sensor in sensors:
         # Dataframe wird eingelesen
-        st.write(file)
+        #st.write(file)
 
         path = os.path.join(file, sensor)
-        st.write(path)
+        #st.write(path)
         df = pd.read_csv(path + ".csv")
 
         # Zeittransformation
@@ -290,10 +293,14 @@ def create_time_line_data(dataList:list):
         if latestElement == None:
             latestElement = str(entry)
             returnList.append(activityCountMapper(str(entry)))
+            #st.write("Start:" + latestElement)
         elif str(entry) == latestElement:
             returnList[len(returnList) -1].countUp()
+            #st.write(latestElement + " wird um 1 erhöht")
         elif str(entry) != latestElement:
             returnList.append(activityCountMapper(str(entry)))
+            latestElement = str(entry)
+            #st.write("Neue Aktivität " + )
 
     return returnList
 
@@ -347,9 +354,16 @@ def main():
               ###############################################################################################
                 ###############################################################################################
         ###############################################################################################
+<<<<<<< Updated upstream
         # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
         aktivitaeten = [key[0] for key in prediction_data]
         haeufigkeiten = [key[1] for key in prediction_data]
+=======
+
+
+        aktivitaeten = [prediction_data[key][0] for key in prediction_data]
+        haeufigkeiten = [prediction_data[key][1] for key in prediction_data]
+>>>>>>> Stashed changes
 
         # Aktivitäten und Farben
         farben = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803']
