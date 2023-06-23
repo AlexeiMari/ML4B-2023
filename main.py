@@ -91,6 +91,7 @@ def transform_data_csv(file):
         st.write(file)
 
         path = os.path.join(file, sensor, ".csv")
+        st.write(path)
         df = pd.read_csv(path)
 
         # Zeittransformation
