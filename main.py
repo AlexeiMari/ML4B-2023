@@ -354,11 +354,16 @@ def main():
               ###############################################################################################
                 ###############################################################################################
         ###############################################################################################
-
+<<<<<<< Updated upstream
         # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
         aktivitaeten = [key[0] for key in prediction_data]
         haeufigkeiten = [key[1] for key in prediction_data]
+=======
 
+
+        aktivitaeten = [prediction_data[key][0] for key in prediction_data]
+        haeufigkeiten = [prediction_data[key][1] for key in prediction_data]
+>>>>>>> Stashed changes
 
         # Aktivitäten und Farben
         farben = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803']
