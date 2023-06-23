@@ -347,41 +347,69 @@ def main():
               ###############################################################################################
                 ###############################################################################################
         ###############################################################################################
-        aktivitaeten = [prediction_data[key][0] for key in prediction_data]
-        haeufigkeiten = [prediction_data[key][1] for key in prediction_data]
+        # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
+        aktivitaeten = [key[0] for key in prediction_data]
+        haeufigkeiten = [key[1] for key in prediction_data]
 
         # Aktivitäten und Farben
-        farben = ['red', 'blue', 'green', 'gray', 'orange']
+        farben = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803']
+
+        # Dictionary zur Zuordnung von Aktivitäten zu Farben
+        aktivitaeten_farben = {}
+        startfarbe_index = 0
 
         # Erstellen der Figure und Axes
-        fig, ax = plt.subplots()
+        fig2, ax = plt.subplots(figsize=(6, 1))
+        fig2.set_facecolor('#282C34')
 
         # Schleife über die Aktivitäten
         startpunkt = 0
         bar_hoehe = 0.01
+
+        # Liste für die Legendenbeschriftungen und zugehörige Farben
+        legenden_beschriftungen = []
+        legenden_farben = []
+
         for idx, aktivitaet in enumerate(aktivitaeten):
-            farbe = farben[idx]
+            # Überprüfen, ob die Aktivität bereits im Dictionary vorhanden ist
+            if aktivitaet in aktivitaeten_farben:
+                farbe = aktivitaeten_farben[aktivitaet]
+            else:
+                # Falls die Aktivität noch keine Farbe hat, die nächste Farbe auswählen
+                farbe = farben[startfarbe_index % len(farben)]
+                startfarbe_index += 1
+                aktivitaeten_farben[aktivitaet] = farbe
             
             # Zählen der Häufigkeit der Aktivität
             haeufigkeit = haeufigkeiten[idx]
             
-            # Beschriftung der Aktivität
-            mittelpunkt = startpunkt + haeufigkeit / 2
-            ax.text(mittelpunkt, bar_hoehe, aktivitaet, ha='center', va='bottom', color='black')
-            
             # Anzahl der Aktivitäten innerhalb des Balkens
-            ax.text(startpunkt + 0.5 * haeufigkeit, bar_hoehe / 2, str(haeufigkeit), ha='center', va='center', color='white')
-            
+            ax.text(startpunkt + haeufigkeit / 2, bar_hoehe + 0.005, str(haeufigkeit), ha='center', va='bottom', color='white', fontsize=6)
+
             # Einfärben des Strahls entsprechend der Häufigkeit
             ax.bar(startpunkt, bar_hoehe, width=haeufigkeit, color=farbe, align='edge')
             
+            # Überprüfen, ob die Aktivität bereits in der Legendenliste vorhanden ist
+            if aktivitaet not in legenden_beschriftungen:
+                # Hinzufügen der Aktivitätsbeschreibung zur Legendenliste
+                legenden_beschriftungen.append(aktivitaet)
+                legenden_farben.append(farbe)
+
             # Aktualisierung des Startpunkts für die nächste Aktivität
             startpunkt += haeufigkeit
 
         # Anpassung der Achsen
         ax.set_xlim(0, startpunkt)
-        ax.set_ylim(0, 0.1)
+        ax.set_ylim(0, 0)
         ax.axis('off')
+
+        legende_handles = [plt.Rectangle((0, 0), 1, 1, color=farbe) for farbe in legenden_farben]
+
+        # Anzeigen der Legende mit den korrekten Farben
+        ax.legend(legende_handles, legenden_beschriftungen, loc='center', bbox_to_anchor=(0.5, -0.2), ncol=len(legenden_beschriftungen), labelcolor='white', facecolor='#282C34', edgecolor='#282C34', fontsize=6)
+
+
+        st.pyplot(fig2)
 
           ###############################################################################################
             ###############################################################################################
