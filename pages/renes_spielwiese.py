@@ -74,3 +74,5 @@ st.write("Der Plan ist, die Zeitreihen zu normalisieren und als Vektoren von Met
          "Tabellenform. Wir nehmen daher die Zeitreihen, also unsere Aufnahmen, schneiden sie in gleichlange Teile und berechnen dann über diese Teile Metainformationen, "
          "oder auch Metriken / Kennzahlen. Ein Beispiel für so eine Metrik wäre die durchschnittliche Geschwindigkeit (speed). Damit können wir aus einer Tabelle einen Tabelleneintrag machen."
          "Jede Zeitreihe wird also zu einer Reihe in dem Trainingsdatensatz, mit dem wir unser ML Modell trainieren möchten")
+st.image("Pipeline Prozess.png", caption = "Der Pipelineprozess abstrahiert")
+st.image("Zeitreihennormalisierung.png", caption = "Normalisierung der Zeitreihendaten abstrahiert")
