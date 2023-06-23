@@ -90,9 +90,9 @@ def transform_data_csv(file):
         # Dataframe wird eingelesen
         st.write(file)
 
-        path = os.path.join(file, sensor, ".csv")
+        path = os.path.join(file, sensor)
         st.write(path)
-        df = pd.read_csv(path)
+        df = pd.read_csv(path + ".csv")
 
         # Zeittransformation
         # df["time"] = pd.to_datetime(df['time'], unit = 'ns')
