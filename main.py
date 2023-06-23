@@ -50,7 +50,7 @@ def process_data(upload):
         if local:
             data, gps = transform_data_csv(extr_dir + "\\" + file)
         if not local:
-            data, gps = transform_data_csv(extr_dir)
+            data, gps = transform_data_csv(extr_dir + "\\" + file)
         st.write(extr_dir + "\\" + file)
 
     else: #Hochgeladene Datei ist eine JSON
