@@ -290,10 +290,14 @@ def create_time_line_data(dataList:list):
         if latestElement == None:
             latestElement = str(entry)
             returnList.append(activityCountMapper(str(entry)))
+            #st.write("Start:" + latestElement)
         elif str(entry) == latestElement:
             returnList[len(returnList) -1].countUp()
+            #st.write(latestElement + " wird um 1 erhöht")
         elif str(entry) != latestElement:
             returnList.append(activityCountMapper(str(entry)))
+            latestElement = str(entry)
+            #st.write("Neue Aktivität " + )
 
     return returnList
 
