@@ -19,13 +19,13 @@ st.set_page_config(page_title="Mobility Classification App", page_icon=":oncomin
 local = False
 if not local:
     knn = torch.load(r"KNN")
-    rnf = torch.load(r"RNF")
+    gbc = torch.load(r"GBC_2023-06-22")
 
 
 #Rene Workaround
 if local:
-    knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
-    rnf = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\RNF_2023-06-02")
+    #knn = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\Models\KNN (hpo)_2023-06-02")
+    gbc = torch.load(r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\GBC_2023-06-22")
 
 #Don't touch this! The List has to be identical to the list in the notebook
 sensors = ["Accelerometer","Location","Orientation"]
@@ -37,7 +37,7 @@ def process_data(upload):
         st.write("Is ne zip")
         file = None
         if local:
-            extr_dir = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\uploaded_files"
+            extr_dir = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\uploaded_files"
         if not local:
             extr_dir = r"uploaded_files"
 
@@ -46,8 +46,15 @@ def process_data(upload):
 
         for f in os.listdir(extr_dir):
             file = f
+            st.write(f)
 
-        data, gps = transform_data_csv(extr_dir + "\\" + file)
+        st.write(extr_dir)
+        if local:
+            data, gps = transform_data_csv(extr_dir + "\\" + file)
+        if not local:
+            st.write(str(os.getcwd()))
+            cwd = os.getcwd()
+            data, gps = transform_data_csv(extr_dir)
         st.write(extr_dir + "\\" + file)
 
     else: #Hochgeladene Datei ist eine JSON
@@ -59,7 +66,7 @@ def process_data(upload):
         #st.write(s)
 
         if local:
-            json_path = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\Project\json.json"
+            json_path = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\json.json"
         if not local:
             json_path = r"json.json"
 
@@ -72,7 +79,7 @@ def process_data(upload):
     metrics = calculate_features(splitData)
     end = combine(metrics)
 
-    prediction = rnf.predict(end)
+    prediction = gbc.predict(end)
 
     timeLineData = create_time_line_data(prediction)
     tupelList = time_line_data_to_tupel(timeLineData)
@@ -83,7 +90,11 @@ def transform_data_csv(file):
     gps = None
     for sensor in sensors:
         # Dataframe wird eingelesen
-        df = pd.read_csv(file + "\\" + sensor + ".csv")
+        st.write(file)
+
+        path = os.path.join(file, sensor)
+        st.write(path)
+        df = pd.read_csv(path + ".csv")
 
         # Zeittransformation
         # df["time"] = pd.to_datetime(df['time'], unit = 'ns')
@@ -213,7 +224,6 @@ def calculate_features(input_list):
                     temp["yaw__standard_deviation"] = dict["Orientation"]["yaw"].std()
                     temp["yaw__variance"] = dict["Orientation"]["yaw"].var()
 
-                temp["activity"] = dict["activity"]
                 ff_list.append({"data": temp.copy(), "sensor": sensor})
 
 
@@ -245,10 +255,10 @@ def combine(final_form_data_list):
     df_final = pd.concat(very_final_form_data_list, axis = 1)
 
     #Drop duplicate "activity" Columns
-    d = df_final.T.drop_duplicates().T
-    df_final = df_final.drop(columns=["activity"])
+    #d = df_final.T.drop_duplicates().T
+    #df_final = df_final.drop(columns=["activity"])
 
-    df_final["activity"] = d["activity"]
+    #df_final["activity"] = d["activity"]
 
     #Final Dataframe with all the transformed data
     return df_final
