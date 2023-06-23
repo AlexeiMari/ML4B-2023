@@ -426,7 +426,8 @@ def main():
             "roller": 0
         }
         for entry in raw_predictions:
-            dict[entry] += 1
+            st.write(type(activities[entry]))
+            activities[entry] += 1
 
         # Erstellen eines DataFrames aus dem Wörterbuch
         df = pd.DataFrame.from_dict(activities, orient='index', columns=['value'])
