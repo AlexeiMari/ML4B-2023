@@ -347,6 +347,7 @@ def main():
               ###############################################################################################
                 ###############################################################################################
         ###############################################################################################
+        ### Zeitstrahl
         # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
         aktivitaeten = [key[0] for key in prediction_data]
         haeufigkeiten = [key[1] for key in prediction_data]
@@ -411,6 +412,32 @@ def main():
 
         st.pyplot(fig2)
 
+        ### Kalorienzähler
+        def berechne_kalorien_bike(json_data, aktivitaet):
+            kalorien_verbrauch = 0
+            for item in json_data:
+                if item[0] == aktivitaet:
+                    minuten = item[1]
+                    kalorien_verbrauch += minuten * 6
+            return kalorien_verbrauch
+
+        def berechne_kalorien_walk(json_data, aktivitaet):
+            kalorien_verbrauch = 0
+            for item in json_data:
+                if item[0] == aktivitaet:
+                    minuten = item[1]
+                    kalorien_verbrauch += minuten * 4
+            return kalorien_verbrauch
+        verbrauchte_kalorien_bike = berechne_kalorien_bike(prediction_data, "bike")
+        verbrauchte_kalorien_walk = berechne_kalorien_walk(prediction_data, "walk")
+        st.markdown("## Kalorienverbrauch", unsafe_allow_html=True)
+        st.markdown(
+            f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
+            f'<div style="color: white; font-weight: bold; text-align: center;">Kalorien</div>'
+            f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
           ###############################################################################################
             ###############################################################################################
               ###############################################################################################
