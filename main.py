@@ -426,8 +426,13 @@ def main():
         for entry in raw_predictions:
             activities[entry] += 1
 
+        bar_x = activities.keys()
+        bar_y = []
+        for key in bar_x:
+            bar_y.append(activities[key])
+
         # Erstellen eines DataFrames aus dem Wörterbuch
-        df = pd.DataFrame.from_dict(activities)
+        df = pd.DataFrame.from_dict(activities, orient='index', columns=['value'])
         st.write(df)
         bar = px.bar(
             df,
@@ -444,8 +449,16 @@ def main():
         height=300,
         width=500,
         )
-
-        st.plotly_chart(bar)
+        bar2 = px.bar(
+            x = bar_x,
+            y = bar_y,
+            orientation='v',
+            title='Aktivitäten',
+            color='value',
+            color_discrete_sequence=['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803'],
+            template='plotly_white'
+        )
+        st.plotly_chart(bar2)
 
         ### Kalorienzähler
         def berechne_kalorien_bike(json_data, aktivitaet):
