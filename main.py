@@ -451,12 +451,7 @@ def main():
         )
         bar2 = px.bar(
             x = bar_x,
-            y = bar_y,
-            orientation='v',
-            title='Aktivitäten',
-            color='value',
-            color_discrete_sequence=['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803'],
-            template='plotly_white'
+            y = bar_y
         )
         st.plotly_chart(bar2)
 
