@@ -10,9 +10,11 @@ import math
 import os
 import tsfresh
 import zipfile as zf
+import matplotlib.pyplot as plt
 from stqdm import stqdm
 
 st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide")
+
 ### Attributes
 local = False
 if not local:
@@ -330,7 +332,56 @@ def main():
         st.graphviz_chart(graph)
 
         st.subheader("Deine Fortbewegungsverteilung")
-        
+          ###############################################################################################
+            ###############################################################################################
+              ###############################################################################################
+                ###############################################################################################
+        ###############################################################################################
+        aktivitaeten = [prediction_data[key][0] for key in prediction_data]
+        haeufigkeiten = [prediction_data[key][1] for key in prediction_data]
+
+        # Aktivitäten und Farben
+        farben = ['red', 'blue', 'green', 'gray', 'orange']
+
+        # Erstellen der Figure und Axes
+        fig, ax = plt.subplots()
+
+        # Schleife über die Aktivitäten
+        startpunkt = 0
+        bar_hoehe = 0.01
+        for idx, aktivitaet in enumerate(aktivitaeten):
+            farbe = farben[idx]
+            
+            # Zählen der Häufigkeit der Aktivität
+            haeufigkeit = haeufigkeiten[idx]
+            
+            # Beschriftung der Aktivität
+            mittelpunkt = startpunkt + haeufigkeit / 2
+            ax.text(mittelpunkt, bar_hoehe, aktivitaet, ha='center', va='bottom', color='black')
+            
+            # Anzahl der Aktivitäten innerhalb des Balkens
+            ax.text(startpunkt + 0.5 * haeufigkeit, bar_hoehe / 2, str(haeufigkeit), ha='center', va='center', color='white')
+            
+            # Einfärben des Strahls entsprechend der Häufigkeit
+            ax.bar(startpunkt, bar_hoehe, width=haeufigkeit, color=farbe, align='edge')
+            
+            # Aktualisierung des Startpunkts für die nächste Aktivität
+            startpunkt += haeufigkeit
+
+        # Anpassung der Achsen
+        ax.set_xlim(0, startpunkt)
+        ax.set_ylim(0, 0.1)
+        ax.axis('off')
+
+          ###############################################################################################
+            ###############################################################################################
+              ###############################################################################################
+                ###############################################################################################
+        ###############################################################################################      
+            ###############################################################################################
+              ###############################################################################################
+                ###############################################################################################
+        ###############################################################################################
 if __name__ == "__main__":
     main()
 
