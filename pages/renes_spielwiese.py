@@ -70,9 +70,33 @@ st.write("")
 
 st.subheader("Der Pipelineprozess")
 st.write("Ok, jetzt, wo wir wissen, welche Sensordaten wir genau benutzen, müssen wir darüber reden, was wir eigentlich genau machen wollen.")
-st.write("Der Plan ist, die Zeitreihen zu normalisieren und als Vektoren von Metriken zu speichern. Die Tabellen, die die Sensordaten speichern, sind die Zeitreihe einer Aufnahme in"
-         "Tabellenform. Wir nehmen daher die Zeitreihen, also unsere Aufnahmen, schneiden sie in gleichlange Teile und berechnen dann über diese Teile Metainformationen, "
-         "oder auch Metriken / Kennzahlen. Ein Beispiel für so eine Metrik wäre die durchschnittliche Geschwindigkeit (speed). Damit können wir aus einer Tabelle einen Tabelleneintrag machen."
+st.write("Der Plan ist, die **Zeitreihen zu normalisieren** und als **Vektoren von Metriken** zu speichern. Die Tabellen, die die Sensordaten speichern, sind die Zeitreihe einer Aufnahme in"
+         " Tabellenform. Wir nehmen daher die Zeitreihen, also unsere Aufnahmen, schneiden sie in gleichlange Teile und berechnen dann über diese Teile Metainformationen, "
+         "oder auch Metriken / Kennzahlen. Ein Beispiel für so eine Metrik wäre die durchschnittliche Geschwindigkeit (speed). **Damit können wir aus einer Tabelle einen Tabelleneintrag machen**. "
          "Jede Zeitreihe wird also zu einer Reihe in dem Trainingsdatensatz, mit dem wir unser ML Modell trainieren möchten")
 st.image("Pipeline Prozess.png", caption = "Der Pipelineprozess abstrahiert")
+st.write("")
 st.image("Zeitreihennormalisierung.png", caption = "Normalisierung der Zeitreihendaten abstrahiert")
+st.write("")
+
+st.subheader("Die Daten - Erneut")
+st.write("Der erste Schritt des Pipelineprozesses ist, die aufgenommen Daten in das Python Projekt einzulesen. Da begegnen wir bereits dem ersten Problem, das Dateiformat. Die Sensorlogger App, "
+         "die wir verwendet haben, ermöglicht es uns, die Daten in zwei Formaten zu exportieren, als **JSON** oder als **CSV**.")
+st.write("Exportiert man die Daten als CSV, erhält man eine ZIP, in der für jeden aufgenommenen Sensor eine CSV Datei liegt.")
+st.write("Exportiert man die Daten als JSON erhält man eine einzelne JSON, diese enthält alle Daten über alle Sensoren.")
+st.write("Das Ganze ist ein Problem, weil die Daten in einer anderen Form vorliegen, je nachdem, über welches Format sie exportiert und dann in das Projekt eingelesen wurden. "
+         "Liest man mit Pandas eine JSON ein, bekommt man einen einzelnen Dataframe mit allen Attributen von allen Sensoren. Die Sensoren sind aber nicht aufeinander gejoint worden, das heißt, "
+         "wenn ich eine 10 Minuten Aufnahme hätte und jede Minute einmal die Sensordaten erfassen würde, hätte ich einen Dataframe mit x * 10 Einträgen, wobei x die Anzahl an Sensoren ist. "
+         "Die Attribute, die ein Sensor nicht aufnimmt, sind dann None.")
+st.write("Der CSV Export stellt uns eine CSV für jeden Sensor zur Verfügung. Also müssen wir hier für jeden Sensor einen Dataframe anlegen.")
+st.write("Diese beiden Dataframe Formate sind nicht miteinander kompatibel und unterscheiden sich zu stark voneinander, als dass man ohne eine Formatsangleichung weiter machen könne. "
+         "Hier haben wir nun drei Möglichkeiten, wir passen die JSON and die CSV an, wir passen die CSV an die JSON an oder wir lassen nur ein Dateiformat zu.")
+st.write("Die dritte Option ist für unseren Fall keine Option gewesen, da die Sensorlogger App Aufnahmen, die eine gewissen Dateigröße überschreiten, nicht mehr als JSON, sonder nur noch als"
+         " CSV exportieren kann. Wir hätten also JSONs einfach kicken können, aber das wäre einfach unschön gewesen.")
+st.write("Wir haben uns am Ende dazu entschieden, die JSON an die CSV anzupassen.")
+
+st.image("Datenanpassung.png", caption = "Datenanpassung mit den transform_data Methoden")
+
+st.write("Die Grafik zeigt, wie wir unsere Daten anpassen. Aus jeder JSON und jeder ZIP, die CSVs enthält, werden Dictionaries, die jeden Sensornamen einen Dataframe zuordnen. Zusätzlich dazu haben "
+         "alle Dicts auch noch einen Key namens label. label speichert die Aktivität, die während dieser Aufnahme durchgeführt wird. Am Ende sind all unsere JSONs und CSVs als "
+         "Dictionaries in einer Liste. Das ist unser transformierter Datenbestand.")
