@@ -102,7 +102,7 @@ def transform_data_csv(file):
         # for i in range(0,len(df["time"])):
         #    df["Readable_Time"][i] = df["time"][i].to_pydatetime()
         if sensor == "Accelerometer":
-            start_time_stamp = pd.to_datetime(['time'], unit = "ns").iloc[0].to_pydatetime()
+            start_time_stamp = pd.to_datetime(df['time'], unit = "ns").iloc[0].to_pydatetime()
 
         df = df.drop(columns=["time"])
         df = df.dropna(axis=1)
