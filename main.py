@@ -550,29 +550,31 @@ def main():
                     emission = math.ceil(berechne_zurückgelegte_meter_roller(gps) / 1000 * 146)
             return emission
         #Quelle: https://www.co2online.de/klima-schuetzen/mobilitaet/auto-co2-ausstoss/
-        emission_auto= verbrauchte_emission_auto(prediction_data, "car")
-        st.markdown(
-            f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
-            f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
-            f'<div style="color: white; font-size: 24px; text-align: center;">{emission_auto} g CO2</div>'
-            '</div>',
-            unsafe_allow_html=True
-        )         
-
-
+        
         def verbrauchte_emission_roller(json_data, aktivitaet):
             emission = 0
             for item in json_data:
                 if item[0] == aktivitaet:
                     emission = math.ceil(berechne_zurückgelegte_meter_roller(gps) / 1000 * 100)
             return emission
+        
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
+        emission_auto= verbrauchte_emission_auto(prediction_data, "car")
         st.markdown(
             f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
             f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
-            f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller} g CO2</div>'
+            f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller + emission_auto} g CO2</div>'
             '</div>',
             unsafe_allow_html=True
+        )
+        if emission_roller + emission_auto > 1000:
+            emission_kg = (emission_roller + emission_auto) / 1000
+            st.markdown(
+                f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
+                f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
+                f'<div style="color: white; font-size: 24px; text-align: center;">{emission_kg} kg CO2</div>'
+                '</div>',
+                unsafe_allow_html=True
         )
         #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
           ###############################################################################################
