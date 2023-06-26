@@ -298,7 +298,7 @@ class activityCountMapper:
 
 def create_time_line_data(dataList:list, start_time_stamp):
     returnList = []
-    global latestElement
+    global latestElement #String
     latestElement = None
     startHour = start_time_stamp.hour
     startMin = start_time_stamp.minute
@@ -315,7 +315,7 @@ def create_time_line_data(dataList:list, start_time_stamp):
             #st.write(latestElement + " wird um 1 erhöht")
         elif str(entry) != latestElement:
 
-            currentMin = startMin + latestElement.getCount()
+            currentMin = startMin + returnList[len(returnList) -1].getCount()
             while currentMin >= 60:
                 startHour += 1
                 currentMin -= 60
