@@ -542,17 +542,21 @@ def main():
             letzter_eintrag = df['seconds_elapsed'].iloc[-1]
             ergebnis = durchschnitt * letzter_eintrag
             return ergebnis
-            
-        ergebnis = berechne_zurückgelegte_meter(gps)
-        st.write(ergebnis)
-        
-        def berechne_emission(json_data, aktivitaet):
+
+        def verbrauchte_emission_roller(json_data, aktivitaet):
             emission = 0
-            for key, value in json_data.items():
-                if value[0] == aktivitaet:
-                    minuten = value[1]
-                    emission += minuten * 6
+            for item in json_data:
+                if item[0] == aktivitaet:
+                    emission = berechne_zurückgelegte_meter(gps) / 1000 * 100
             return emission
+        emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
+        st.markdown(
+            f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
+            f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
+            f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller}</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
         #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
           ###############################################################################################
             ###############################################################################################
