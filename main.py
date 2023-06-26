@@ -537,17 +537,24 @@ def main():
         )
 
         ### CO2-Zähler
-        def berechne_zurückgelegte_meter(df):
+        def berechne_zurückgelegte_meter_roller(df):
             durchschnitt = df['speed'].mean()
             letzter_eintrag = df['seconds_elapsed'].iloc[-1]
             ergebnis = durchschnitt * letzter_eintrag
             return ergebnis
-
+        
+        def verbrauchte_emission_auto(json_data, aktivitaet):
+            emission = 0
+            for item in json_data:
+                if item[0] == aktivitaet:
+                    emission = math.ceil(berechne_zurückgelegte_meter_roller(gps) / 1000 * 146)
+            return emission
+        #Quelle: https://www.co2online.de/klima-schuetzen/mobilitaet/auto-co2-ausstoss/
         def verbrauchte_emission_roller(json_data, aktivitaet):
             emission = 0
             for item in json_data:
                 if item[0] == aktivitaet:
-                    emission = math.ceil(berechne_zurückgelegte_meter(gps) / 1000 * 100)
+                    emission = math.ceil(berechne_zurückgelegte_meter_roller(gps) / 1000 * 100)
             return emission
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
         st.markdown(
