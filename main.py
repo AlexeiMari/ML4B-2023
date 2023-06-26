@@ -363,7 +363,7 @@ def main():
         # start_minutes = int. Als die Aufnahme der hochgeladenen Daten gestartet wurde, war es prediction_data[0][2] Stunden und start_minutes Minuten spät
 
 
-        #st.write(prediction_data)
+        st.write(prediction_data)
 
         st.subheader("Der Ursprung deiner Daten")
         st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
