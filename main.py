@@ -535,6 +535,25 @@ def main():
             '</div>',
             unsafe_allow_html=True
         )
+
+        ### CO2-Zähler
+        def berechne_zurückgelegte_meter(df):
+            durchschnitt = df['speed'].mean()
+            letzter_eintrag = df['seconds_elapsed'].iloc[-1]
+            ergebnis = durchschnitt * letzter_eintrag
+            return ergebnis
+            
+        ergebnis = berechne_zurückgelegte_meter(gps)
+        st.write(ergebnis)
+        
+        def berechne_emission(json_data, aktivitaet):
+            emission = 0
+            for key, value in json_data.items():
+                if value[0] == aktivitaet:
+                    minuten = value[1]
+                    emission += minuten * 6
+            return emission
+        #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
           ###############################################################################################
             ###############################################################################################
               ###############################################################################################
