@@ -523,14 +523,6 @@ def main():
         #Quelle: https://www.apuntateuna.es/sonstig/wie-viele-kalorien-verbrennt-man-beim-gehen.html
         verbrauchte_kalorien_bike = berechne_kalorien_bike(prediction_data, "bike")
         verbrauchte_kalorien_walk = berechne_kalorien_walk(prediction_data, "walk")
-        st.markdown("## Kalorienverbrauch", unsafe_allow_html=True)
-        st.markdown(
-            f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
-            f'<div style="color: white; font-weight: bold; text-align: center;">Kalorien</div>'
-            f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
-            '</div>',
-            unsafe_allow_html=True
-        )
 
         ### CO2-Zähler
         def berechne_zurückgelegte_meter_roller(df):
@@ -556,28 +548,38 @@ def main():
         
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
         emission_auto= verbrauchte_emission_auto(prediction_data, "car")
-        if emission_roller + emission_auto > 1000:
-            emission_kg = round((emission_roller + emission_auto) / 1000, 2)
+        emission, kalorien = st.columns(2)
+        with emission:
+            if emission_roller + emission_auto > 1000:
+                emission_kg = round((emission_roller + emission_auto) / 1000, 2)
+                st.markdown(
+                    f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
+                    f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
+                    f'<div style="color: white; font-size: 24px; text-align: center;">{emission_kg} kg CO2</div>'
+                    f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg} kg / 33 kg CO2</div>'
+                    '</div>',
+                    unsafe_allow_html=True
+                )
+            else:
+                emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
+                st.markdown(
+                    f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
+                    f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
+                    f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller + emission_auto} g CO2</div>'
+                    f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg1} kg / 33 kg CO2</div>'
+                    #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
+                    '</div>',
+                    unsafe_allow_html=True
+                )
+            #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
+        with kalorien:
             st.markdown(
                 f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
-                f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
-                f'<div style="color: white; font-size: 24px; text-align: center;">{emission_kg} kg CO2</div>'
-                f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg} kg / 33 kg CO2</div>'
+                f'<div style="color: white; font-weight: bold; text-align: center;">Kalorien</div>'
+                f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
                 '</div>',
                 unsafe_allow_html=True
-            )
-        else:
-            emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
-            st.markdown(
-                f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
-                f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
-                f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller + emission_auto} g CO2</div>'
-                f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg1} kg / 33 kg CO2</div>'
-                #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
-                '</div>',
-                unsafe_allow_html=True
-            )
-        #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
+            )        
           ###############################################################################################
             ###############################################################################################
               ###############################################################################################
