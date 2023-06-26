@@ -302,6 +302,8 @@ def create_time_line_data(dataList:list, start_time_stamp):
     latestElement = None
     startHour = start_time_stamp.hour
     startMin = start_time_stamp.minute
+    st.write(type(startMin))
+    st.write(type(startHour))
 
     for entry in dataList:
         if latestElement == None:
