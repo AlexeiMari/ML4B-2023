@@ -502,7 +502,7 @@ def main():
         xaxis_title="Fortbewegungsarten",
         yaxis_title="Anzahl an Minuten"
         )
-        st.plotly_chart(bar2)
+        
 
         ### Kalorienzähler
         def berechne_kalorien_bike(json_data, aktivitaet):
@@ -548,8 +548,8 @@ def main():
         
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
         emission_auto= verbrauchte_emission_auto(prediction_data, "car")
-        emission, kalorien = st.columns(2)
-        with emission:
+        rechner, bar_chart = st.columns(2)
+        with rechner:
             if emission_roller + emission_auto > 1000:
                 emission_kg = round((emission_roller + emission_auto) / 1000, 2)
                 st.markdown(
@@ -572,14 +572,15 @@ def main():
                     unsafe_allow_html=True
                 )
             #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
-        with kalorien:
             st.markdown(
                 f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
                 f'<div style="color: white; font-weight: bold; text-align: center;">Kalorien</div>'
                 f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
                 '</div>',
                 unsafe_allow_html=True
-            )        
+            )               
+        with bar_chart:
+            st.plotly_chart(bar2)
           ###############################################################################################
             ###############################################################################################
               ###############################################################################################
