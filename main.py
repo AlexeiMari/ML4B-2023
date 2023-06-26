@@ -364,7 +364,7 @@ def main():
 
 
         st.write(prediction_data)
-
+        st.write(gps)
         st.subheader("Der Ursprung deiner Daten")
         st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
         st.map(gps)
@@ -515,7 +515,7 @@ def main():
                     minuten = item[1]
                     kalorien_verbrauch += minuten * 6
             return kalorien_verbrauch
-
+        #Quelle: https://www.canyon.com/de-de/blog-content/fahrrad-ratgeber/kalorienverbrauch-radfahren/b24062022.html
         def berechne_kalorien_walk(json_data, aktivitaet):
             kalorien_verbrauch = 0
             for item in json_data:
@@ -523,6 +523,7 @@ def main():
                     minuten = item[1]
                     kalorien_verbrauch += minuten * 4
             return kalorien_verbrauch
+        #Quelle: https://www.apuntateuna.es/sonstig/wie-viele-kalorien-verbrennt-man-beim-gehen.html
         verbrauchte_kalorien_bike = berechne_kalorien_bike(prediction_data, "bike")
         verbrauchte_kalorien_walk = berechne_kalorien_walk(prediction_data, "walk")
         st.markdown("## Kalorienverbrauch", unsafe_allow_html=True)
