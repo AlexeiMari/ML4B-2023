@@ -180,5 +180,13 @@ st.markdown(
 
 
 
+def berechne_emission(json_data, aktivitaet):
+    emission = 0
+    for key, value in json_data.items():
+        if value[0] == aktivitaet:
+            minuten = value[1]
+            emission += minuten * 6
+    return kalorien_verbrauch
+#Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
 
 

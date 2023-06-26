@@ -365,6 +365,7 @@ def main():
 
         st.write(prediction_data)
         st.write(gps)
+        st.write(type(gps))
         st.subheader("Der Ursprung deiner Daten")
         st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
         st.map(gps)
