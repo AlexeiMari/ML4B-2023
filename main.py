@@ -12,6 +12,7 @@ import tsfresh
 import zipfile as zf
 import matplotlib.pyplot as plt
 from stqdm import stqdm
+import datetime
 
 st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide")
 
@@ -52,7 +53,7 @@ def process_data(upload):
             data, gps = transform_data_csv(extr_dir + "\\" + file)
         if not local:
             cwd = os.getcwd()
-            data, gps = transform_data_csv(extr_dir)
+            data, gps, start_time_stamp = transform_data_csv(extr_dir)
         st.write(extr_dir + "\\" + file)
 
     else: #Hochgeladene Datei ist eine JSON
@@ -70,7 +71,7 @@ def process_data(upload):
 
         with open(json_path, 'w') as j:
             json.dump(data,j)
-        data, gps = transform_data_json(json_path)
+        data, gps, start_time_stamp = transform_data_json(json_path)
 
     #st.write(data)
     splitData = split_data([data], 1)
@@ -79,13 +80,14 @@ def process_data(upload):
 
     prediction = gbc.predict(end)
 
-    timeLineData = create_time_line_data(prediction)
+    timeLineData = create_time_line_data(prediction, start_time_stamp)
     tupelList = time_line_data_to_tupel(timeLineData)
     return tupelList, gps, end, prediction
 
 def transform_data_csv(file):
     datasets = {}  # Ein Dictionary
     gps = None
+    start_time_stamp = 0
     for sensor in sensors:
         # Dataframe wird eingelesen
         #st.write(file)
@@ -99,6 +101,9 @@ def transform_data_csv(file):
         # df["Readable_Time"] = df["time"]
         # for i in range(0,len(df["time"])):
         #    df["Readable_Time"][i] = df["time"][i].to_pydatetime()
+        if sensor == "Accelerometer":
+            start_time_stamp = df["time"][0].to_pydatetime()
+
         df = df.drop(columns=["time"])
         df = df.dropna(axis=1)
 
@@ -110,13 +115,16 @@ def transform_data_csv(file):
         elif sensor == "Accelerometer":
             df["Magnitude(acc)"] = np.sqrt(df["x"] ** 2 + df["y"] ** 2 + df["z"] ** 2)
             df = df.drop(columns=df.columns.difference(["Magnitude(acc)", "Readable_Time", "seconds_elapsed"]))
+
+        elif sensor == "Orientation":
+            df = df.drop(columns= df.columns.difference(["roll", "pitch", "yaw","Readable_Time", "seconds_elapsed"]))
         # df["activity"] = action #Darf hier nicht gesetzt werden, ist aber im Dicitonary vermerkt
         df["ID"] = file
 
         # Dataframe wird dem Dictionay hinzugefügt
         datasets[sensor] = df
 
-    return datasets, gps
+    return datasets, gps, start_time_stamp
 
 
 def transform_data_json(file):
@@ -125,6 +133,7 @@ def transform_data_json(file):
 
     df = pd.read_json(file)
 
+    start_time_stamp = df["time"][0].to_pydatetime()
     df = df.drop(columns=["time"])
 
     for sensor in sensors:
@@ -140,13 +149,16 @@ def transform_data_json(file):
             temp["Magnitude(acc)"] = np.sqrt(temp["x"] ** 2 + temp["y"] ** 2 + temp["z"] ** 2)
             temp = temp.drop(columns=temp.columns.difference(["Magnitude(acc)", "Readable_Time", "seconds_elapsed"]))
 
+        elif sensor == "Orientation":
+            temp = temp.drop(columns= temp.columns.difference(["roll", "pitch", "yaw","Readable_Time", "seconds_elapsed"]))
+
         # temp["activity"] = action #Darf hier nicht gesetzt werden, ist aber im Dicitonary vermerkt
         temp["ID"] = file
 
         # Dataframe wird dem Dictionary hinzugefügt
         datasets[sensor] = temp
 
-    return datasets, gps
+    return datasets, gps, start_time_stamp
 
 def split_data(list, length_of_time_series):
     splitted_list = []
@@ -265,10 +277,12 @@ def combine(final_form_data_list):
 class activityCountMapper:
     activity: str
     count: int
+    hour: int
 
-    def __init__(self, act: str):  # Konstruktor der Klasse
+    def __init__(self, act: str, h: int):  # Konstruktor der Klasse
         self.activity = act
         self.count = 1
+        self.hour = h
 
     def countUp(self):
         self.count += 1
@@ -279,21 +293,33 @@ class activityCountMapper:
     def getCount(self) -> int:
         return self.count
 
-def create_time_line_data(dataList:list):
+    def getHour(self) -> int:
+        return self.hour
+
+def create_time_line_data(dataList:list, start_time_stamp):
     returnList = []
     global latestElement
     latestElement = None
+    startHour = start_time_stamp.hour
+    startMin = start_time_stamp.minute
 
     for entry in dataList:
         if latestElement == None:
             latestElement = str(entry)
-            returnList.append(activityCountMapper(str(entry)))
+            returnList.append(activityCountMapper(str(entry), startHour))
             #st.write("Start:" + latestElement)
         elif str(entry) == latestElement:
             returnList[len(returnList) -1].countUp()
             #st.write(latestElement + " wird um 1 erhöht")
         elif str(entry) != latestElement:
-            returnList.append(activityCountMapper(str(entry)))
+
+            currentMin = startMin + latestElement.getCount()
+            while currentMin >= 60:
+                startHour += 1
+                currentMin -= 60
+            startMin = currentMin
+
+            returnList.append(activityCountMapper(str(entry), startHour))
             latestElement = str(entry)
             #st.write("Neue Aktivität " + )
 
@@ -302,7 +328,7 @@ def create_time_line_data(dataList:list):
 def time_line_data_to_tupel(time_line):
     tupel_list = []
     for entry in time_line:
-        tupel_list.append((entry.getActivity(),entry.getCount()))
+        tupel_list.append((entry.getActivity(), entry.getCount(), entry.getHour()))
 
     return tupel_list
 
@@ -326,6 +352,9 @@ def main():
         #st.write(metric_data)
         #st.header("raw_predictions")
         #st.write(raw_predictions)
+
+        st.write(prediction_data)
+
         st.subheader("Der Ursprung deiner Daten")
         st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
         st.map(gps)
