@@ -547,7 +547,7 @@ def main():
             emission = 0
             for item in json_data:
                 if item[0] == aktivitaet:
-                    emission = berechne_zurückgelegte_meter(gps) / 1000 * 100
+                    emission = math.ceil(berechne_zurückgelegte_meter(gps) / 1000 * 100)
             return emission
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
         st.markdown(
