@@ -553,7 +553,7 @@ def main():
         st.markdown(
             f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
             f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
-            f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller}</div>'
+            f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller} g CO2</div>'
             '</div>',
             unsafe_allow_html=True
         )
