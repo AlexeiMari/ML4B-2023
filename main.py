@@ -392,7 +392,7 @@ def main():
         haeufigkeiten = [key[1] for key in prediction_data]
 
         # Aktivitäten und Farben
-        farben = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803']
+        farben = ['#808080', '#C0C0C0', '#F5F5DC', '#483C32', '#F0E68C', '#ADD8E6']
 
         # Dictionary zur Zuordnung von Aktivitäten zu Farben
         aktivitaeten_farben = {}
