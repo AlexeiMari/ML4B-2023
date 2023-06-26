@@ -80,9 +80,9 @@ def process_data(upload):
 
     prediction = gbc.predict(end)
 
-    timeLineData = create_time_line_data(prediction, start_time_stamp)
+    timeLineData, start_minutes = create_time_line_data(prediction, start_time_stamp)
     tupelList = time_line_data_to_tupel(timeLineData)
-    return tupelList, gps, end, prediction
+    return tupelList, gps, end, prediction, start_minutes
 
 def transform_data_csv(file):
     datasets = {}  # Ein Dictionary
@@ -302,6 +302,7 @@ def create_time_line_data(dataList:list, start_time_stamp):
     latestElement = None
     startHour = start_time_stamp.hour
     startMin = start_time_stamp.minute
+    startMinUntouched = start_time_stamp.minute
 
     for entry in dataList:
         if latestElement == None:
@@ -315,6 +316,8 @@ def create_time_line_data(dataList:list, start_time_stamp):
 
             currentMin = startMin + returnList[len(returnList) -1].getCount()
             while currentMin >= 60:
+                if startHour == 24:
+                    startHour = 0
                 startHour += 1
                 currentMin -= 60
             startMin = currentMin
@@ -323,7 +326,7 @@ def create_time_line_data(dataList:list, start_time_stamp):
             latestElement = str(entry)
             #st.write("Neue Aktivität " + )
 
-    return returnList
+    return returnList, startMinUntouched
 
 def time_line_data_to_tupel(time_line):
     tupel_list = []
@@ -343,17 +346,24 @@ st.write("First we need some Input from you")
 def main():
     uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed", accept_multiple_files=False)
     if st.button("Classify me!"):
-        prediction_data, gps, metric_data, raw_predictions = process_data(uploaded_file)
-        #st.header("prediction_data")
-        #st.write(prediction_data)
-        #st.header("gps")
-        #st.write(gps)
-        #st.header("metric_data")
-        #st.write(metric_data)
-        #st.header("raw_predictions")
-        #st.write(raw_predictions)
+        prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
+        #SUPER WICHTIG!!! BITTE LESEN
+        #
+        # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
+        #   Aktivität liegt in Index 0
+        #   Länge liegt in Index 1
+        #   Startstunde liegt in Index 2
+        #
+        # gps = gps Daten, sind nur wichtig für die Karte, auf der ein Weg eingezeichnet wird
+        #
+        # metric_data = die eingelesenen Daten in ihrer transformierten Form. Wird eigentlich nicht weiter verwendet, ab dieser Stelle hier im Code
+        #
+        # raw_predictions = Die Ausgabe unseres ML Modells. Eine Liste von Strings.
+        #
+        # start_minutes = int. Als die Aufnahme der hochgeladenen Daten gestartet wurde, war es prediction_data[0][2] Stunden und start_minutes Minuten spät
 
-        st.write(prediction_data)
+
+        #st.write(prediction_data)
 
         st.subheader("Der Ursprung deiner Daten")
         st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
