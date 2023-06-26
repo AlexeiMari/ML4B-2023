@@ -133,7 +133,7 @@ def transform_data_json(file):
 
     df = pd.read_json(file)
 
-    start_time_stamp = df["time"][0].to_pydatetime()
+    start_time_stamp = pd.to_datetime(df['time'], unit = "ns").iloc[0].to_pydatetime()
     df = df.drop(columns=["time"])
 
     for sensor in sensors:
@@ -302,8 +302,6 @@ def create_time_line_data(dataList:list, start_time_stamp):
     latestElement = None
     startHour = start_time_stamp.hour
     startMin = start_time_stamp.minute
-    st.write(type(startMin))
-    st.write(type(startHour))
 
     for entry in dataList:
         if latestElement == None:
