@@ -548,7 +548,7 @@ def main():
         
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
         emission_auto= verbrauchte_emission_auto(prediction_data, "car")
-        rechner, bar_chart = st.columns(2)
+        rechner, bar_chart, platzhalter1, platzhalter2, platzhalter3 = st.columns(5)
         with rechner:
             if emission_roller + emission_auto > 1000:
                 emission_kg = round((emission_roller + emission_auto) / 1000, 2)
@@ -581,6 +581,12 @@ def main():
             )               
         with bar_chart:
             st.plotly_chart(bar2)
+        with platzhalter1:
+            None
+        with platzhalter2:
+            None
+        with platzhalter3:
+            None
           ###############################################################################################
             ###############################################################################################
               ###############################################################################################
