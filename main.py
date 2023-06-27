@@ -6,7 +6,6 @@ import numpy as np
 import json
 import torch
 import plotly.express as px
-import plotly.graph_objects as go
 import math
 import os
 import tsfresh
@@ -610,31 +609,37 @@ def main():
         st.write(hour_act_dict)
         st.write(start_minutes)
 
-        # Vorbereitung der Daten für das Balkendiagramm
-        categories = list(hour_act_dict.keys())
-        subcategories = list(set().union(*[d.keys() for d in hour_act_dict.values()]))
 
-        x = []
-        y = []
+        # Extrahiere Kategorien und Subkategorien
+        kategorien = list(hour_act_dict.keys())
+        subkategorien = set(sub for dic in hour_act_dict.values() for sub in dic.keys())
 
-        for category in categories:
-            for subcategory in subcategories:
-                value = hour_act_dict[category].get(subcategory, 0)
-                x.append(category)
-                y.append(value)
+        # Initialisiere leere Listen für Balkenhöhen
+        balken_hoehen = [[] for _ in range(len(subkategorien))]
 
-        # Erstellung des Balkendiagramms
-        fig = go.Figure(data=[go.Bar(x=x, y=y, text=y, textposition='auto')])
+        # Fülle Listen mit den entsprechenden Höhenwerten
+        for i, subkat in enumerate(subkategorien):
+            for kategorie in kategorien:
+                hohe = hour_act_dict.get(kategorie, {}).get(subkat, 0)
+                balken_hoehen[i].append(hohe)
 
-        # Anpassung der Diagrammeigenschaften
-        fig.update_layout(
-            title='Gruppiertes Balkendiagramm',
-            xaxis_title='Subkategorien',
-            yaxis_title='Zahlen'
-        )
+        # Erstelle das gruppierte Balkendiagramm
+        fig, ax = plt.subplots()
+        breite = 0.2  # Breite der einzelnen Balken
+        offset = breite * (len(kategorien) / 2)  # Offset für die Gruppierung
+        for i, hoehen in enumerate(balken_hoehen):
+            x_pos = [j + i * breite - offset for j in range(len(kategorien))]
+            ax.bar(x_pos, hoehen, width=breite, label=list(subkategorien)[i])
 
-        # Anzeige des Diagramms in Streamlit
-        st.plotly_chart(fig)
+        # Beschrifte die Achsen und die Legende
+        ax.set_xlabel('Kategorie')
+        ax.set_ylabel('Höhe')
+        ax.set_xticks(range(len(kategorien)))
+        ax.set_xticklabels(kategorien)
+        ax.legend()
+
+        # Zeige das Diagramm in Streamlit an
+        st.pyplot(fig)
 
 
 
