@@ -596,7 +596,14 @@ def main():
         for entry in prediction_data:
             activity_list_mapper[entry[0]][entry[2]].append(entry[1])
 
-        st.write(activity_list_mapper)
+        hour_act_dict = {}
+
+        for key in activity_list_mapper.keys():
+            hour_act_dict[key] = {}
+            for hour in activity_list_mapper[key].keys():
+                hour_act_dict[key][hour] = sum(activity_list_mapper[key])
+
+        st.write(hour_act_dict)
 
 
 
