@@ -428,11 +428,12 @@ def main():
 
         bar_y = []
         bar_x = []
-        color_sequence =  [color for color in aktivitaeten_farben.values()]
+        color_sequence = []
         for key in activities.keys():
             if(activities[key] > 0):
                 bar_y.append(activities[key])
                 bar_x.append(key)
+                color_sequence.append(aktivitaeten_farben[key])
 
         bar2 = px.bar(
             x = bar_x,
