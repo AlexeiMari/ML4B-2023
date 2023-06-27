@@ -428,12 +428,11 @@ def main():
 
         bar_y = []
         bar_x = []
-        color_sequence = []
+        color_sequence =  [color for color in aktivitaeten_farben.values()]
         for key in activities.keys():
             if(activities[key] > 0):
                 bar_y.append(activities[key])
                 bar_x.append(key)
-                color_sequence.append(aktivitaeten_farben[key])
 
         bar2 = px.bar(
             x = bar_x,
@@ -534,9 +533,13 @@ def main():
             paper_bgcolor='#282C34',
             font=dict(color='white')
         )
+
+        with open('style.css') as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
         bar_chart, rechnungen, pie_chart = st.columns(3)
         with bar_chart:
-            bar_chart.plotly_chart(bar2)
+            st.plotly_chart(bar2)
         with rechnungen:
             if emission_roller + emission_auto > 1000:
                 emission_kg = round((emission_roller + emission_auto) / 1000, 2)
@@ -568,7 +571,7 @@ def main():
             unsafe_allow_html=True
         )         
         with pie_chart:
-            pie_chart.plotly_chart(fig_pie)
+            st.plotly_chart(fig_pie)
 
         
 
