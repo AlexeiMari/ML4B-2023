@@ -346,6 +346,7 @@ def main():
     if st.button("Klassifizieren!"):
         prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
         st.subheader("Visualisierung")
+        st.write(prediction_data)
         #SUPER WICHTIG!!! BITTE LESEN
         #
         # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
