@@ -534,7 +534,8 @@ def main():
             font=dict(color='white')
         )
         bar_chart, rechnungen, pie_chart = st.columns(3)
-        bar_chart.plotly_chart(bar2)
+        with bar_chart:
+            bar_chart.plotly_chart(bar2)
         with rechnungen:
             if emission_roller + emission_auto > 1000:
                 emission_kg = round((emission_roller + emission_auto) / 1000, 2)
@@ -564,8 +565,9 @@ def main():
             f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
             '</div>',
             unsafe_allow_html=True
-        )          
-        pie_chart.plotly_chart(fig_pie)
+        )         
+        with pie_chart:
+            pie_chart.plotly_chart(fig_pie)
 
         
 
