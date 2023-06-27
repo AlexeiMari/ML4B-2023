@@ -544,6 +544,7 @@ def main():
         with rechnungen:
             if emission_roller + emission_auto > 1000:
                 emission_kg = round((emission_roller + emission_auto) / 1000, 2)
+                st.metric(emission_kg, "kg CO2", "Emissionen")
                 st.markdown(
                 f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
                 f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
@@ -554,6 +555,7 @@ def main():
                 )
             else:
                 emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
+                st.metric(emission_kg1, "kg CO2", "Emissionen")
                 st.markdown(
                 f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
                 f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
