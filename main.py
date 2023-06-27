@@ -495,6 +495,7 @@ def main():
         
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
         emission_auto= verbrauchte_emission_auto(prediction_data, "car")
+
         # Tortendiagramm erstellen
         activities = {
             "car": 0,
@@ -506,7 +507,7 @@ def main():
         }
         for entry in raw_predictions:
             activities[entry] += 1
-
+        farben = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803', '#1C516E']
         # Aktivitäten filtern
         filtered_activities = {key: value for key, value in activities.items() if value > 0}
 
@@ -523,7 +524,7 @@ def main():
             df = pd.DataFrame.from_dict(filtered_activities, orient='index', columns=['value'])
             fig_pie = px.pie(df, names=df.index, values='value', title='Verteilung der Aktivitäten')
             fig_pie.update_traces(textposition='inside', textinfo='percent+label')
-
+        fig_pie.update_traces(marker=dict(colors=farben))
         # Größe des Tortendiagramms anpassen
         fig_pie.update_layout(
             height=500,
