@@ -610,6 +610,7 @@ def main():
         st.write(start_minutes)
 
 
+        # Liste der Kategorien
         categories = list(hour_act_dict.keys())
 
         # Liste der Subkategorien
@@ -627,7 +628,8 @@ def main():
         df = df.fillna(0)
 
         # Gruppiertes Balkendiagramm erstellen
-        fig = df.plot(kind='bar', stacked=True)
+        fig, ax = plt.subplots()
+        df.plot(kind='bar', stacked=True, ax=ax)
 
         # Streamlit-Element für das Diagramm anzeigen
         st.pyplot(fig)
