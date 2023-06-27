@@ -545,7 +545,7 @@ def main():
             if emission_roller + emission_auto > 1000:
                         emission_kg = round((emission_roller + emission_auto) / 1000, 2)
                         st.markdown(
-                        f'<div class="test" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 250px; width:250px;">'
+                        f'<div class="test" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
                         f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
                         f'<div style="color: white; font-size: 24px; text-align: center;">{emission_kg} kg CO2</div>'
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg} kg / 33 kg CO2</div>'
@@ -555,7 +555,7 @@ def main():
             else:
                         emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
                         st.markdown(
-                        f'<div class="test1" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 250px; width:250px;">'
+                        f'<div class="test1" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
                         f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
                         f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller + emission_auto} g CO2</div>'
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg1} kg / 33 kg CO2</div>'
@@ -565,7 +565,7 @@ def main():
                         )
                     #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
             st.markdown(
-                    f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 250px; width:250px;">'
+                    f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
                     f'<div style="color: white; font-weight: bold; text-align: center;">Kalorien</div>'
                     f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
                     '</div>',
