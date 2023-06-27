@@ -542,10 +542,8 @@ def main():
 
         bar_chart, pie_chart = st.columns(2)
         with bar_chart:
-            st.plotly_chart(bar2)
             with st.container():
-                container = st.container()
-                container.write('<div class="offenheimerschmidt">')
+                st.markdown(f'<div class="penis">', unsafe_allow_html=True)
                 if emission_roller + emission_auto > 1000:
                         emission_kg = round((emission_roller + emission_auto) / 1000, 2)
                         st.markdown(
@@ -575,7 +573,7 @@ def main():
                     '</div>',
                     unsafe_allow_html=True
                 )
-                container.write('</div>')      
+                st.markdown(f'</div>', unsafe_allow_html=True)
         with pie_chart:
             st.plotly_chart(fig_pie)
 
