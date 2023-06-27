@@ -534,10 +534,8 @@ def main():
             font=dict(color='white')
         )
         bar_chart, pie_chart = st.columns(2)
-        with bar_chart:
-            st.plotly_chart(bar2)
-        with pie_chart:
-            st.plotly_chart(fig_pie)
+        bar_chart.plotly_chart(bar2)
+        pie_chart.plotly_chart(fig_pie)
         if emission_roller + emission_auto > 1000:
             emission_kg = round((emission_roller + emission_auto) / 1000, 2)
             st.markdown(
