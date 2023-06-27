@@ -418,19 +418,16 @@ def main():
 
         bar_y = []
         bar_x = []
-        color_sequence = []
+        color_sequence = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803', '#1C516E']
         for key in activities.keys():
             if(activities[key] > 0):
                 bar_y.append(activities[key])
                 bar_x.append(key)
-                color_sequence.append('#3D7A3F')
-             
-        num_activities = len(bar_x)
-        if num_activities > 0:
-            color_sequence = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803', '#1C516E'][:num_activities]
+
         bar2 = px.bar(
             x = bar_x,
             y = bar_y,
+            color = bar_x,
             color_discrete_sequence= color_sequence,
             template='plotly_white'
         )
