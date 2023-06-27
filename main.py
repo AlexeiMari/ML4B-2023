@@ -592,7 +592,7 @@ def main():
                 start_minutes_copy += prediction_data_copy[0 + i][1]
                 if start_minutes_copy > 60:
 
-                    prediction_data_copy[i][1] -= 60 - start_minutes
+                    prediction_data_copy[0 + i][1] -= (60 - start_minutes)
                     if len(prediction_data_copy) == i+1:
                         if (prediction_data_copy[i][2] == 23):
                             prediction_data_copy.append((prediction_data_copy[i][0],
