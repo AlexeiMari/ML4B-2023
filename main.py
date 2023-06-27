@@ -582,30 +582,34 @@ def main():
 
 
         start_minutes_copy = start_minutes
-
         prediction_data_copy = prediction_data.copy()
+        i = 0
+        go = True
+        while go and i+1 < len(prediction_data_copy):
+            if prediction_data_copy[i][1] + start_minutes_copy > 60:
+                add_value = (prediction_data_copy[i][1] + start_minutes_copy) - 60
+                prediction_data_copy[i][1] = 60 - start_minutes_copy
+                prediction_data_copy.insert((i+1,
+                                             prediction_data_copy[i][0],
+                                             add_value,
+                                             prediction_data_copy[i][0] +1))
+                go = False
+            else:
+                start_minutes_copy += prediction_data_copy[i][1]
+                i += 1
 
-        if len(prediction_data_copy) > 1:
-            i = 0
-            go = True
-            while go:
-                start_minutes_copy += prediction_data_copy[0 + i][1]
-                if start_minutes_copy > 60:
+        i = 0
+        go = True
+        while go and i+1 < len(prediction_data_copy):
+            if prediction_data_copy[i][1] > 60:
+                add_value = prediction_data_copy[i][1] - 60
+                prediction_data_copy[i][1] = 60
+                prediction_data_copy.insert((i+1,
+                                             prediction_data_copy[i][0],
+                                             add_value,
+                                             prediction_data_copy[i][0] +1))
+            i += 1
 
-                    prediction_data_copy[0 + i][1] -= (60 - start_minutes)
-                    if len(prediction_data_copy) == i+1:
-                        if (prediction_data_copy[i][2] == 23):
-                            prediction_data_copy.append((prediction_data_copy[i][0],
-                                                         (start_minutes + prediction_data_copy[i][1]) - 60,
-                                                         0))
-                        else:
-                            prediction_data_copy.append((prediction_data_copy[i][0],
-                                                         (start_minutes + prediction_data_copy[i][1]) - 60,
-                                                         prediction_data_copy[i][2] + 1))
-                    else:
-                        prediction_data_copy[i + 1][1] += (start_minutes + prediction_data_copy[i][1]) - 60
-
-                    go = False
 
 
         for entry in prediction_data_copy:
