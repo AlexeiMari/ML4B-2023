@@ -537,7 +537,7 @@ def main():
             font=dict(color='white')
         )
 
-        bar_chart, rechnungen, pie_chart = st.columns(2)
+        bar_chart, rechnungen, pie_chart = st.columns(3)
         with bar_chart:
             st.plotly_chart(bar2)  
         with pie_chart:
