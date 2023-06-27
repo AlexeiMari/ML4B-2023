@@ -340,6 +340,14 @@ def time_line_data_to_tupel(time_line):
 ### Streamlit Area
 st.subheader("Lass uns deine Fortbewegung klassifizieren!")
 st.write("Zunächst brauchen wir selbstverständlich ein paar Daten, die wir klassifizieren können")
+farben_dict = {
+    "car": "#3D7A3F",
+    "bike": "#EB7A27",
+    "walk": "#B4393C",
+    "subway": "#FBB024",
+    "idle": "#7A5803",
+    "roller": "#1C516E"
+}
 
 def main():
     uploaded_file = st.file_uploader("Bitte lade Sensordaten hoch. Diese können ein .JSON-Format oder auch ein .zip-Format haben, die CSVs enthalten.", accept_multiple_files=False)
@@ -370,7 +378,7 @@ def main():
         # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
         aktivitaeten = [key[0] for key in prediction_data]
         haeufigkeiten = [key[1] for key in prediction_data]
-        farben = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803', '#1C516E']
+        farben = [farben_dict.get(aktivitaet, '#000000') for aktivitaet in aktivitaeten]
 
         # Dictionary zur Zuordnung von Aktivitäten zu Farben
         aktivitaeten_farben = {}
@@ -392,7 +400,7 @@ def main():
                 aktivitaeten_farben[aktivitaet] = farbe
             haeufigkeit = haeufigkeiten[idx]
             ax.text(startpunkt + haeufigkeit / 2, bar_hoehe + 0.005, str(haeufigkeit), ha='center', va='bottom', color='white', fontsize=6)
-            ax.bar(startpunkt, bar_hoehe, width=haeufigkeit, color=farbe, align='edge')
+            ax.bar(startpunkt, bar_hoehe, width=haeufigkeit, color=farben[idx], align='edge')
             if aktivitaet not in legenden_beschriftungen:
                 legenden_beschriftungen.append(aktivitaet)
                 legenden_farben.append(farbe)
