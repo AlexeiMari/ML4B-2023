@@ -422,23 +422,6 @@ def main():
             if(activities[key] > 0):
                 bar_y.append(activities[key])
                 bar_x.append(key)
-        df = pd.DataFrame.from_dict(activities, orient='index', columns=['value'])
-
-        bar = px.bar(
-            df,
-            x='value',
-            orientation='v',
-            title='Aktivitäten',
-            color='value',
-            color_discrete_sequence=['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803'],
-            template='plotly_white'
-            )
-        bar.update_layout(
-        plot_bgcolor='#282C34',
-        paper_bgcolor='#282C34',
-        height=300,
-        width=500,
-        )
         bar2 = px.bar(
             x = bar_x,
             y = bar_y,
