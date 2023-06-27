@@ -6,6 +6,7 @@ import numpy as np
 import json
 import torch
 import plotly.express as px
+import plotly.graph_objects as go
 import math
 import os
 import tsfresh
@@ -616,23 +617,20 @@ def main():
         # Liste der Subkategorien
         subcategories = list(set(subcat for d in hour_act_dict.values() for subcat in d.keys()))
 
-        # Erstellen eines leeren DataFrames
-        df = pd.DataFrame(index=subcategories, columns=categories)
-
-        # Daten aus dem Dictionary in das DataFrame übertragen
+        # Daten für gruppierte Balkendiagramme vorbereiten
+        bar_data = []
         for category, subdict in hour_act_dict.items():
-            for subcategory, value in subdict.items():
-                df.at[subcategory, category] = value
+            bar_data.append(
+                go.Bar(name=category, x=subcategories, y=[subdict.get(subcat, 0) for subcat in subcategories]))
 
-        # Fehlende Werte (NaN) durch 0 ersetzen
-        df = df.fillna(0)
+        # Layout für das Diagramm definieren
+        layout = go.Layout(barmode='group', xaxis={'title': 'Subkategorien'}, yaxis={'title': 'Werte'})
 
-        # Gruppiertes Balkendiagramm erstellen
-        fig, ax = plt.subplots()
-        df.plot(kind='bar', stacked=True, ax=ax)
+        # Figur erstellen und Daten hinzufügen
+        fig = go.Figure(data=bar_data, layout=layout)
 
         # Streamlit-Element für das Diagramm anzeigen
-        st.pyplot(fig)
+        st.plotly_chart(fig)
 
 
 
