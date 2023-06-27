@@ -543,7 +543,6 @@ def main():
         bar_chart, pie_chart = st.columns(2)
         with bar_chart:
             with st.container():
-                st.markdown(f'<div class="penis">', unsafe_allow_html=True)
                 if emission_roller + emission_auto > 1000:
                         emission_kg = round((emission_roller + emission_auto) / 1000, 2)
                         st.markdown(
@@ -572,8 +571,7 @@ def main():
                     f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
                     '</div>',
                     unsafe_allow_html=True
-                )
-                st.markdown(f'</div>', unsafe_allow_html=True)
+                )    
         with pie_chart:
             st.plotly_chart(fig_pie)
 
