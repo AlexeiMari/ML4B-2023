@@ -6,6 +6,7 @@ import numpy as np
 import json
 import torch
 import plotly.express as px
+import plotly.graph_objects as go
 import math
 import os
 import tsfresh
@@ -609,28 +610,31 @@ def main():
         st.write(hour_act_dict)
         st.write(start_minutes)
 
-        kategorien = list(hour_act_dict.keys())
-        subkategorien = list(hour_act_dict[kategorien[0]].keys())
+        # Vorbereitung der Daten für das Balkendiagramm
+        categories = list(hour_act_dict.keys())
+        subcategories = list(set().union(*[d.keys() for d in hour_act_dict.values()]))
 
-        # Erstellen des Balkendiagramms
-        fig, ax = plt.subplots()
-        breite = 0.2
+        x = []
+        y = []
 
-        # Für jede Kategorie
-        for i, kategorie in enumerate(kategorien):
-            x = [j + i * breite for j in range(len(subkategorien))]
-            y = [hour_act_dict[kategorie][subkategorie] for subkategorie in subkategorien]
-            ax.bar(x, y, width=breite, label=kategorie)
+        for category in categories:
+            for subcategory in subcategories:
+                value = hour_act_dict[category].get(subcategory, 0)
+                x.append(category)
+                y.append(value)
 
-        # Konfiguration des Diagramms
-        ax.set_xlabel('Subkategorien')
-        ax.set_ylabel('Werte')
-        ax.set_xticks([j + (len(kategorien) - 1) * breite / 2 for j in range(len(subkategorien))])
-        ax.set_xticklabels(subkategorien)
-        ax.legend()
+        # Erstellung des Balkendiagramms
+        fig = go.Figure(data=[go.Bar(x=x, y=y, text=y, textposition='auto')])
 
-        # Anzeigen des Diagramms in Streamlit
-        st.pyplot(fig)
+        # Anpassung der Diagrammeigenschaften
+        fig.update_layout(
+            title='Gruppiertes Balkendiagramm',
+            xaxis_title='Subkategorien',
+            yaxis_title='Zahlen'
+        )
+
+        # Anzeige des Diagramms in Streamlit
+        st.plotly_chart(fig)
 
 
 
