@@ -495,7 +495,35 @@ def main():
         
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
         emission_auto= verbrauchte_emission_auto(prediction_data, "car")
-
+        if emission_roller + emission_auto > 1000:
+            emission_kg = round((emission_roller + emission_auto) / 1000, 2)
+            st.markdown(
+                f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
+                f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
+                f'<div style="color: white; font-size: 24px; text-align: center;">{emission_kg} kg CO2</div>'
+                f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg} kg / 33 kg CO2</div>'
+                '</div>',
+                unsafe_allow_html=True
+                )
+        else:
+            emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
+            st.markdown(
+                f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
+                f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
+                f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller + emission_auto} g CO2</div>'
+                f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg1} kg / 33 kg CO2</div>'
+                #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
+                '</div>',
+                unsafe_allow_html=True
+                )
+            #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
+            st.markdown(
+                f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
+                f'<div style="color: white; font-weight: bold; text-align: center;">Kalorien</div>'
+                f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
+                '</div>',
+                unsafe_allow_html=True
+            )      
         
         # Tortendiagramm erstellen
         activities = {
@@ -534,45 +562,12 @@ def main():
             paper_bgcolor='#282C34',
             font=dict(color='white')
         )
-        rechner, bar_chart, platzhalter1, platzhalter2, platzhalter3 = st.columns(5)
-        with rechner:
-            if emission_roller + emission_auto > 1000:
-                emission_kg = round((emission_roller + emission_auto) / 1000, 2)
-                st.markdown(
-                    f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
-                    f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
-                    f'<div style="color: white; font-size: 24px; text-align: center;">{emission_kg} kg CO2</div>'
-                    f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg} kg / 33 kg CO2</div>'
-                    '</div>',
-                    unsafe_allow_html=True
-                )
-            else:
-                emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
-                st.markdown(
-                    f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
-                    f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
-                    f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller + emission_auto} g CO2</div>'
-                    f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg1} kg / 33 kg CO2</div>'
-                    #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
-                    '</div>',
-                    unsafe_allow_html=True
-                )
-            #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
-            st.markdown(
-                f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
-                f'<div style="color: white; font-weight: bold; text-align: center;">Kalorien</div>'
-                f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
-                '</div>',
-                unsafe_allow_html=True
-            )               
+        bar_chart, pie_chart = st.columns(2)
         with bar_chart:
             st.plotly_chart(bar2)
-        with platzhalter1:
-            ('')
-        with platzhalter2:
+        with pie_chart:
             st.plotly_chart(fig_pie)
-        with platzhalter3:
-            ('')
+
 
 
 
