@@ -423,8 +423,8 @@ def main():
             "idle": 0,
             "roller": 0
         }
-        for entry in raw_predictions:
-            activities[entry] += 1
+        for entry in prediction_data:
+            activities[entry] += entry[1]
 
         bar_y = []
         bar_x = []
