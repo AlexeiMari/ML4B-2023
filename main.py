@@ -436,7 +436,7 @@ def main():
         xaxis_title="Fortbewegungsarten",
         yaxis_title="Anzahl an Minuten"
         )
-        
+
 
         ### Kalorienzähler
         def berechne_kalorien_bike(json_data, aktivitaet):
@@ -464,7 +464,7 @@ def main():
             letzter_eintrag = df['seconds_elapsed'].iloc[-1]
             ergebnis = durchschnitt * letzter_eintrag
             return ergebnis
-        
+
         def verbrauchte_emission_auto(json_data, aktivitaet):
             emission = 0
             for item in json_data:
@@ -472,18 +472,18 @@ def main():
                     emission = math.ceil(berechne_zurückgelegte_meter_roller(gps) / 1000 * 146)
             return emission
         #Quelle: https://www.co2online.de/klima-schuetzen/mobilitaet/auto-co2-ausstoss/
-        
+
         def verbrauchte_emission_roller(json_data, aktivitaet):
             emission = 0
             for item in json_data:
                 if item[0] == aktivitaet:
                     emission = math.ceil(berechne_zurückgelegte_meter_roller(gps) / 1000 * 100)
             return emission
-        
+
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
         emission_auto= verbrauchte_emission_auto(prediction_data, "car")
 
-        
+
         # Tortendiagramm erstellen
         activities = {
             "car": 0,
@@ -551,7 +551,7 @@ def main():
                 f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
                 '</div>',
                 unsafe_allow_html=True
-            )               
+            )
         with bar_chart:
             st.plotly_chart(bar2)
         with platzhalter1:
@@ -576,7 +576,22 @@ def main():
         for entry in prediction_data:
             activity_list_mapper[entry[0]][entry[2]] = []
 
-        for entry in prediction_data:
+
+        prediction_data_copy = prediction_data.copy()
+        if(prediction_data_copy[0][1] + start_minutes > 60):
+            prediction_data_copy[0][1] -= 60 - start_minutes
+            if len(prediction_data_copy) == 1:
+                if(prediction_data_copy[0][2] == 23):
+                    prediction_data_copy.append((prediction_data_copy[0][0],
+                                                 (start_minutes + prediction_data_copy[0][1]) - 60,
+                                                 0))
+                else:
+                    prediction_data_copy.append((prediction_data_copy[0][0],(start_minutes + prediction_data_copy[0][1]) - 60,prediction_data_copy[0][2] + 1))
+            else:
+                prediction_data_copy[1][1] += (start_minutes + prediction_data_copy[0][1]) - 60
+
+
+        for entry in prediction_data_copy:
             activity_list_mapper[entry[0]][entry[2]].append(entry[1])
 
         hour_act_dict = {}
@@ -586,7 +601,17 @@ def main():
             for hour in activity_list_mapper[key].keys():
                 hour_act_dict[key][hour] = sum(activity_list_mapper[key][hour])
 
+
+        for key in hour_act_dict.keys():
+            for hour in hour_act_dict[key].keys():
+                if hour_act_dict[key][hour] > 60:
+                    hour_act_dict[key][hour +1] = (hour_act_dict[key][hour] -60)
+                    hour_act_dict[key][hour] = 60
+
         st.write(hour_act_dict)
+
+
+
 
 
 
@@ -619,7 +644,7 @@ def main():
             graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
         st.write(output_string)
         st.graphviz_chart(graph)
-        
+
 if __name__ == "__main__":
     main()
 
