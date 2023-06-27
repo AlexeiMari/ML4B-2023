@@ -621,11 +621,11 @@ def main():
         with bar_chart:
             st.plotly_chart(bar2)
         with platzhalter1:
-            st.plotly_chart(fig_pie)
+            ('')
         with platzhalter2:
             ('')
         with platzhalter3:
-            ('')
+            st.plotly_chart(fig_pie)
         
           ###############################################################################################
             ###############################################################################################
