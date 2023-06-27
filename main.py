@@ -346,6 +346,7 @@ def main():
     if st.button("Klassifizieren!"):
         prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
         st.subheader("Visualisierung")
+        st.write(prediction_data)
         #SUPER WICHTIG!!! BITTE LESEN
         #
         # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
@@ -418,14 +419,17 @@ def main():
 
         bar_y = []
         bar_x = []
+        color_sequence = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803', '#1C516E']
         for key in activities.keys():
             if(activities[key] > 0):
                 bar_y.append(activities[key])
                 bar_x.append(key)
+
         bar2 = px.bar(
             x = bar_x,
             y = bar_y,
-            color_discrete_sequence=['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803'],
+            color = bar_x,
+            color_discrete_sequence= color_sequence,
             template='plotly_white'
         )
         bar2.update_layout(
