@@ -610,35 +610,26 @@ def main():
         st.write(start_minutes)
 
 
-        # Extrahiere Kategorien und Subkategorien
-        kategorien = list(hour_act_dict.keys())
-        subkategorien = set(sub for dic in hour_act_dict.values() for sub in dic.keys())
+        categories = list(hour_act_dict.keys())
 
-        # Initialisiere leere Listen für Balkenhöhen
-        balken_hoehen = [[] for _ in range(len(subkategorien))]
+        # Liste der Subkategorien
+        subcategories = list(set(subcat for d in hour_act_dict.values() for subcat in d.keys()))
 
-        # Fülle Listen mit den entsprechenden Höhenwerten
-        for i, subkat in enumerate(subkategorien):
-            for kategorie in kategorien:
-                hohe = hour_act_dict.get(kategorie, {}).get(subkat, 0)
-                balken_hoehen[i].append(hohe)
+        # Erstellen eines leeren DataFrames
+        df = pd.DataFrame(index=subcategories, columns=categories)
 
-        # Erstelle das gruppierte Balkendiagramm
-        fig, ax = plt.subplots()
-        breite = 0.2  # Breite der einzelnen Balken
-        offset = breite * (len(kategorien) / 2)  # Offset für die Gruppierung
-        for i, hoehen in enumerate(balken_hoehen):
-            x_pos = [j + i * breite - offset for j in range(len(kategorien))]
-            ax.bar(x_pos, hoehen, width=breite, label=list(subkategorien)[i])
+        # Daten aus dem Dictionary in das DataFrame übertragen
+        for category, subdict in data.items():
+            for subcategory, value in subdict.items():
+                df.at[subcategory, category] = value
 
-        # Beschrifte die Achsen und die Legende
-        ax.set_xlabel('Kategorie')
-        ax.set_ylabel('Höhe')
-        ax.set_xticks(range(len(kategorien)))
-        ax.set_xticklabels(kategorien)
-        ax.legend()
+        # Fehlende Werte (NaN) durch 0 ersetzen
+        df = df.fillna(0)
 
-        # Zeige das Diagramm in Streamlit an
+        # Gruppiertes Balkendiagramm erstellen
+        fig = df.plot(kind='bar', stacked=True)
+
+        # Streamlit-Element für das Diagramm anzeigen
         st.pyplot(fig)
 
 
