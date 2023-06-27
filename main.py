@@ -613,6 +613,7 @@ def main():
                     hour_act_dict[key][hour] = 60
 
         st.write(hour_act_dict)
+        st.write(start_minutes)
 
 
 
