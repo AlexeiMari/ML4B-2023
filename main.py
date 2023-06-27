@@ -424,7 +424,7 @@ def main():
             "roller": 0
         }
         for entry in prediction_data:
-            activities[entry] += entry[1]
+            activities[entry[0]] += entry[1]
 
         bar_y = []
         bar_x = []
