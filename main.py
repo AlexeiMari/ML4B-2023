@@ -349,9 +349,7 @@ def main():
     uploaded_file = st.file_uploader("Bitte lade Sensordaten hoch. Diese können ein .JSON-Format oder auch ein .zip-Format haben, die CSVs enthalten.", accept_multiple_files=False)
     if st.button("Klassifizieren!"):
         prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
-        page = st.sidebar.button("Dashboard")
-        if page:
-            show_dashboard_page()
+        st.markdown('<a href="/dashboard?page=dashboard" target="_self"><button>Previous</button></a>', unsafe_allow_html=True)
         #SUPER WICHTIG!!! BITTE LESEN
         #
         # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
