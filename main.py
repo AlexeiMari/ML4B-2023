@@ -382,7 +382,12 @@ def main():
         farben = ["#3D7A3F", "#EB7A27","#B4393C", "#FBB024", "#1C516E", "#7A5803"]
 
         # Dictionary zur Zuordnung von Aktivitäten zu Farben
-        aktivitaeten_farben = {}
+        aktivitaeten_farben = {    "car": "#3D7A3F",
+    "bike": "#EB7A27",
+    "walk": "#B4393C",
+    "subway": "#FBB024",
+    "idle": "#1C516E",
+    "roller": "#7A5803"}
         startfarbe_index = 0
 
         fig2, ax = plt.subplots(figsize=(6, 1))
@@ -393,12 +398,7 @@ def main():
         legenden_beschriftungen = []
         legenden_farben = []
         for idx, aktivitaet in enumerate(aktivitaeten):
-            if aktivitaet in aktivitaeten_farben:
-                farbe = aktivitaeten_farben[aktivitaet]
-            else:
-                farbe = farben[startfarbe_index % len(farben)]
-                startfarbe_index += 1
-                aktivitaeten_farben[aktivitaet] = farbe
+            farbe = aktivitaeten_farben[aktivitaet]
             haeufigkeit = haeufigkeiten[idx]
             ax.text(startpunkt + haeufigkeit / 2, bar_hoehe + 0.005, str(haeufigkeit), ha='center', va='bottom', color='white', fontsize=6)
             ax.bar(startpunkt, bar_hoehe, width=haeufigkeit, color=farbe, align='edge')
