@@ -619,7 +619,7 @@ def main():
         df = pd.DataFrame(index=subcategories, columns=categories)
 
         # Daten aus dem Dictionary in das DataFrame übertragen
-        for category, subdict in data.items():
+        for category, subdict in hour_act_dict.items():
             for subcategory, value in subdict.items():
                 df.at[subcategory, category] = value
 
