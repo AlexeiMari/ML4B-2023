@@ -339,7 +339,7 @@ def time_line_data_to_tupel(time_line):
 
 ### Streamlit Area
 def switch_page(page_name):
-    if page_name == "Dashboard":
+    if page_name == "dashboard":
         st.write("Willkommen im Dashboard!")
 
 st.subheader("Lass uns deine Fortbewegung klassifizieren!")
