@@ -590,7 +590,7 @@ def main():
         for key in activity_list_mapper.keys():
             hour_act_dict[key] = {}
             for hour in activity_list_mapper[key].keys():
-                hour_act_dict[key][hour] = sum(activity_list_mapper[key])
+                hour_act_dict[key][hour] = sum(activity_list_mapper[key][hour])
 
         st.write(hour_act_dict)
 
