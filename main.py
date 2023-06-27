@@ -346,8 +346,8 @@ farben_dict = {
     "bike": "#EB7A27",
     "walk": "#B4393C",
     "subway": "#FBB024",
-    "idle": "#7A5803",
-    "roller": "#1C516E"
+    "idle": "#1C516E",
+    "roller": "#7A5803"
 }
 
 def main():
