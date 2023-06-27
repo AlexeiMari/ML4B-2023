@@ -609,6 +609,29 @@ def main():
         st.write(hour_act_dict)
         st.write(start_minutes)
 
+        kategorien = list(hour_act_dict.keys())
+        subkategorien = list(hour_act_dict[kategorien[0]].keys())
+
+        # Erstellen des Balkendiagramms
+        fig, ax = plt.subplots()
+        breite = 0.2
+
+        # Für jede Kategorie
+        for i, kategorie in enumerate(kategorien):
+            x = [j + i * breite for j in range(len(subkategorien))]
+            y = [hour_act_dict[kategorie][subkategorie] for subkategorie in subkategorien]
+            ax.bar(x, y, width=breite, label=kategorie)
+
+        # Konfiguration des Diagramms
+        ax.set_xlabel('Subkategorien')
+        ax.set_ylabel('Werte')
+        ax.set_xticks([j + (len(kategorien) - 1) * breite / 2 for j in range(len(subkategorien))])
+        ax.set_xticklabels(subkategorien)
+        ax.legend()
+
+        # Anzeigen des Diagramms in Streamlit
+        st.pyplot(fig)
+
 
 
 
