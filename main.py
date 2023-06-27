@@ -626,7 +626,34 @@ def main():
             st.plotly_chart(fig_pie)
         with platzhalter3:
             ('')
-        
+
+
+
+
+        ### Filter Balkendiagramm
+
+        acti_list = ["car", "bike", "walk", "subway", "idle", "roller"]
+
+        activity_list_mapper = {}
+        for al in acti_list:
+            activity_list_mapper[al] = {}
+
+
+        for entry in prediction_data:
+            activity_list_mapper[entry[0]][entry[2]] = []
+
+        for entry in prediction_data:
+            activity_list_mapper[entry[0]][entry[2]].append(entry[1])
+
+        st.write(activity_list_mapper)
+
+
+
+
+        ###
+
+
+
           ###############################################################################################
             ###############################################################################################
               ###############################################################################################
