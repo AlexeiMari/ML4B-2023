@@ -338,15 +338,18 @@ def time_line_data_to_tupel(time_line):
 ### Pythonic Area
 
 ### Streamlit Area
+def show_dashboard_page():
+    st.title("Dashboard")
 
-st.subheader("Lets classify your mobility!")
-st.write("First we need some Input from you")
+st.subheader("Lass uns deine Fortbewegung klassifizieren!")
+st.write("Zunächst brauchen wir selbstverständlich ein paar Daten, die wir klassifizieren können")
 #uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed")
 #knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
 def main():
-    uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed", accept_multiple_files=False)
-    if st.button("Classify me!"):
+    uploaded_file = st.file_uploader("Bitte lade Sensordaten hoch. Diese können ein .JSON-Format oder auch ein .zip-Format haben, die CSVs enthalten.", accept_multiple_files=False)
+    if st.button("Klassifizieren!"):
         prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
+        st.markdown('<a href="/dashboard?page=dashboard" target="_self" style="background-color: rgb(19, 23, 32); color: white; padding: 0.25rem 0.75rem; border: 1px solid rgba(250, 250, 250, 0.2); text-decoration: none; font-weight: bold; border-radius: 0.5rem; cursor: pointer;">Dashboard</a>', unsafe_allow_html=True)
         #SUPER WICHTIG!!! BITTE LESEN
         #
         # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
