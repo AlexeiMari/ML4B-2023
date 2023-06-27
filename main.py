@@ -543,11 +543,11 @@ def main():
         bar_chart, pie_chart = st.columns(2)
         with bar_chart:
             st.plotly_chart(bar2)
-            with st.container(f'<div class="test"></div>'):
+            with st.container():
                 if emission_roller + emission_auto > 1000:
                         emission_kg = round((emission_roller + emission_auto) / 1000, 2)
                         st.markdown(
-                        f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
+                        f'<div class="test" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
                         f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
                         f'<div style="color: white; font-size: 24px; text-align: center;">{emission_kg} kg CO2</div>'
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg} kg / 33 kg CO2</div>'
