@@ -536,8 +536,10 @@ def main():
             paper_bgcolor='#282C34',
             font=dict(color='white')
         )
-
-        bar_chart, rechnungen, pie_chart, platzhalter1, platzhalter2 = st.columns(5)
+        with open('style.css') as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+            
+        bar_chart, rechnungen, pie_chart = st.columns(3)
         with bar_chart:
             st.plotly_chart(bar2)  
         with pie_chart:
@@ -572,10 +574,6 @@ def main():
                     '</div>',
                     unsafe_allow_html=True
                     )  
-        with platzhalter1:
-            st.write("")
-        with platzhalter2:
-            st.write("")
 
         
 
