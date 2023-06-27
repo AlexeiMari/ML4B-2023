@@ -379,7 +379,7 @@ def main():
         # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
         aktivitaeten = [key[0] for key in prediction_data]
         haeufigkeiten = [key[1] for key in prediction_data]
-        farben = [farben_dict.get(aktivitaet, '#282C34') for aktivitaet in aktivitaeten]
+        farben = ["#3D7A3F", "#EB7A27","#B4393C", "#FBB024", "#1C516E", "#7A5803"]
 
         # Dictionary zur Zuordnung von Aktivitäten zu Farben
         aktivitaeten_farben = {}
