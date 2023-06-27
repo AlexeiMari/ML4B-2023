@@ -180,13 +180,30 @@ st.markdown(
 
 
 
-def berechne_emission(json_data, aktivitaet):
-    emission = 0
-    for key, value in json_data.items():
-        if value[0] == aktivitaet:
-            minuten = value[1]
-            emission += minuten * 6
-    return kalorien_verbrauch
-#Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
+activities = ['Laufen', 'Idle', 'Auto', 'U-Bahn', 'Fahrrad']
+minutes_range = (5, 15)  # Bereich der Minuten für jede Aktivität
 
+data = {'Aktivität': []}
 
+for activity in activities:
+    minutes = random.randint(minutes_range[0], minutes_range[1])
+    data['Aktivität'].extend([activity] * minutes)
+
+df = pd.DataFrame(data)
+
+# Prozentsatz der Aktivitäten berechnen
+activity_counts = df['Aktivität'].value_counts()
+activity_percentages = activity_counts / activity_counts.sum() * 100
+
+fig_pie = px.pie(df, names='Aktivität', title='Verteilung der Aktivitäten')
+fig_pie.update_traces(textposition='inside', textinfo='percent+label')
+
+# Größe des Tortendiagramms anpassen
+fig_pie.update_layout(
+    height=500,
+    width=500,
+    plot_bgcolor='#282C34',
+    paper_bgcolor='#282C34',
+    font=dict(color='white')
+)
+st.plotly_chart(fig_pie)

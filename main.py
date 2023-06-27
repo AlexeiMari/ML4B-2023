@@ -392,7 +392,7 @@ def main():
         haeufigkeiten = [key[1] for key in prediction_data]
 
         # Aktivitäten und Farben
-        farben = ['#808080', '#C0C0C0', '#F5F5DC', '#483C32', '#F0E68C', '#ADD8E6']
+        farben = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803']
 
         # Dictionary zur Zuordnung von Aktivitäten zu Farben
         aktivitaeten_farben = {}
@@ -587,6 +587,46 @@ def main():
             None
         with platzhalter3:
             None
+        
+        # Tortendiagramm erstellen
+        activities = {
+            "car": 0,
+            "bike": 0,
+            "walk": 0,
+            "subway": 0,
+            "idle": 0,
+            "roller": 0
+        }
+        for entry in raw_predictions:
+            activities[entry] += 1
+
+        # Aktivitäten filtern
+        filtered_activities = {key: value for key, value in activities.items() if value > 0}
+
+        # Überprüfen, ob nur eine Aktivität vorhanden ist
+        num_activities = len(filtered_activities)
+        if num_activities == 1:
+            fig_pie = px.pie(
+                values=[1],
+                names=list(filtered_activities.keys()),
+                title='Verteilung der Aktivitäten',
+                hole=0.7  # Vollständig gefüllte Torte für eine Aktivität
+            )
+        else:
+            df = pd.DataFrame.from_dict(filtered_activities, orient='index', columns=['value'])
+            fig_pie = px.pie(df, names=df.index, values='value', title='Verteilung der Aktivitäten')
+            fig_pie.update_traces(textposition='inside', textinfo='percent+label')
+
+        # Größe des Tortendiagramms anpassen
+        fig_pie.update_layout(
+            height=500,
+            width=500,
+            plot_bgcolor='#282C34',
+            paper_bgcolor='#282C34',
+            font=dict(color='white')
+        )
+
+        st.plotly_chart(fig_pie)
           ###############################################################################################
             ###############################################################################################
               ###############################################################################################
