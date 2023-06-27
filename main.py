@@ -338,18 +338,14 @@ def time_line_data_to_tupel(time_line):
 ### Pythonic Area
 
 ### Streamlit Area
-def show_dashboard_page():
-    st.title("Dashboard")
-
 st.subheader("Lass uns deine Fortbewegung klassifizieren!")
 st.write("Zunächst brauchen wir selbstverständlich ein paar Daten, die wir klassifizieren können")
-#uploaded_file = st.file_uploader("Please upload a sensor data file. JSON or .zip containing CSVs are allowed")
-#knn = torch.load(r"..\Models" + "\\" + "KNN (hpo)_2023-06-02")
+
 def main():
     uploaded_file = st.file_uploader("Bitte lade Sensordaten hoch. Diese können ein .JSON-Format oder auch ein .zip-Format haben, die CSVs enthalten.", accept_multiple_files=False)
     if st.button("Klassifizieren!"):
         prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
-        st.markdown('<a href="/dashboard?page=dashboard" target="_self" style="background-color: rgb(19, 23, 32); color: white; padding: 0.25rem 0.75rem; border: 1px solid rgba(250, 250, 250, 0.2); text-decoration: none; font-weight: bold; border-radius: 0.5rem; cursor: pointer;">Dashboard</a>', unsafe_allow_html=True)
+        st.subheader("Visualisierung")
         #SUPER WICHTIG!!! BITTE LESEN
         #
         # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
@@ -368,91 +364,45 @@ def main():
         st.subheader("Der Ursprung deiner Daten")
         st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
         #st.map(gps)
-        st.subheader("Dein Fortbewegungsgraph")
-        output_string = ""
-        import graphviz
-        graph = graphviz.Digraph()
-        i = 0
-        if len(prediction_data) > 1:
-            while i < len(prediction_data) -1:
-                graph.edge((prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min"), (prediction_data[i+1][0] + " " + str(prediction_data[i+1][1]) + " min"))
-                i += 1
-            graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
-        else:
-            graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
-        st.write(output_string)
-        st.graphviz_chart(graph)
-
         st.subheader("Deine Fortbewegungsverteilung")
-          ###############################################################################################
-            ###############################################################################################
-              ###############################################################################################
-                ###############################################################################################
-        ###############################################################################################
         ### Zeitstrahl
         # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
         aktivitaeten = [key[0] for key in prediction_data]
         haeufigkeiten = [key[1] for key in prediction_data]
-
-        # Aktivitäten und Farben
-        farben = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803']
+        farben = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803', '#1C516E']
 
         # Dictionary zur Zuordnung von Aktivitäten zu Farben
         aktivitaeten_farben = {}
         startfarbe_index = 0
 
-        # Erstellen der Figure und Axes
         fig2, ax = plt.subplots(figsize=(6, 1))
         fig2.set_facecolor('#282C34')
-
-        # Schleife über die Aktivitäten
         startpunkt = 0
         bar_hoehe = 0.01
-
         # Liste für die Legendenbeschriftungen und zugehörige Farben
         legenden_beschriftungen = []
         legenden_farben = []
-
         for idx, aktivitaet in enumerate(aktivitaeten):
-            # Überprüfen, ob die Aktivität bereits im Dictionary vorhanden ist
             if aktivitaet in aktivitaeten_farben:
                 farbe = aktivitaeten_farben[aktivitaet]
             else:
-                # Falls die Aktivität noch keine Farbe hat, die nächste Farbe auswählen
                 farbe = farben[startfarbe_index % len(farben)]
                 startfarbe_index += 1
                 aktivitaeten_farben[aktivitaet] = farbe
-            
-            # Zählen der Häufigkeit der Aktivität
             haeufigkeit = haeufigkeiten[idx]
-            
-            # Anzahl der Aktivitäten innerhalb des Balkens
             ax.text(startpunkt + haeufigkeit / 2, bar_hoehe + 0.005, str(haeufigkeit), ha='center', va='bottom', color='white', fontsize=6)
-
-            # Einfärben des Strahls entsprechend der Häufigkeit
             ax.bar(startpunkt, bar_hoehe, width=haeufigkeit, color=farbe, align='edge')
-            
-            # Überprüfen, ob die Aktivität bereits in der Legendenliste vorhanden ist
             if aktivitaet not in legenden_beschriftungen:
-                # Hinzufügen der Aktivitätsbeschreibung zur Legendenliste
                 legenden_beschriftungen.append(aktivitaet)
                 legenden_farben.append(farbe)
-
-            # Aktualisierung des Startpunkts für die nächste Aktivität
             startpunkt += haeufigkeit
-
-        # Anpassung der Achsen
         ax.set_xlim(0, startpunkt)
         ax.set_ylim(0, 0)
         ax.axis('off')
-
         legende_handles = [plt.Rectangle((0, 0), 1, 1, color=farbe) for farbe in legenden_farben]
-
-        # Anzeigen der Legende mit den korrekten Farben
         ax.legend(legende_handles, legenden_beschriftungen, loc='center', bbox_to_anchor=(0.5, -0.2), ncol=len(legenden_beschriftungen), labelcolor='white', facecolor='#282C34', edgecolor='#282C34', fontsize=6)
-
-
         st.pyplot(fig2)
+
 
         ### Balkendiagramm
         activities = {
@@ -472,8 +422,6 @@ def main():
             if(activities[key] > 0):
                 bar_y.append(activities[key])
                 bar_x.append(key)
-
-        # Erstellen eines DataFrames aus dem Wörterbuch
         df = pd.DataFrame.from_dict(activities, orient='index', columns=['value'])
 
         bar = px.bar(
@@ -639,6 +587,22 @@ def main():
               ###############################################################################################
                 ###############################################################################################
         ###############################################################################################
+
+        st.subheader("Dein Fortbewegungsgraph")
+        output_string = ""
+        import graphviz
+        graph = graphviz.Digraph()
+        i = 0
+        if len(prediction_data) > 1:
+            while i < len(prediction_data) -1:
+                graph.edge((prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min"), (prediction_data[i+1][0] + " " + str(prediction_data[i+1][1]) + " min"))
+                i += 1
+            graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
+        else:
+            graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
+        st.write(output_string)
+        st.graphviz_chart(graph)
+        
 if __name__ == "__main__":
     main()
 
