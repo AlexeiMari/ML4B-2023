@@ -589,38 +589,7 @@ def main():
             activity_list_mapper[entry[0]][entry[2]] = []
 
 
-        start_minutes_copy = start_minutes
-        prediction_data_copy = prediction_data.copy()
-        i = 0
-        go = True
-        while go and i+1 < len(prediction_data_copy):
-            if prediction_data_copy[i][1] + start_minutes_copy > 60:
-                add_value = (prediction_data_copy[i][1] + start_minutes_copy) - 60
-                prediction_data_copy[i][1] = (60 - start_minutes_copy)
-                prediction_data_copy.insert((i+1,
-                                             prediction_data_copy[i][0],
-                                             add_value,
-                                             prediction_data_copy[i][0] +1))
-                go = False
-            else:
-                start_minutes_copy += prediction_data_copy[i][1]
-                i += 1
-
-        i = 0
-        go = True
-        while go and i+1 < len(prediction_data_copy):
-            if prediction_data_copy[i][1] > 60:
-                add_value = (prediction_data_copy[i][1] - 60)
-                prediction_data_copy[i][1] = 60
-                prediction_data_copy.insert((i+1,
-                                             prediction_data_copy[i][0],
-                                             add_value,
-                                             prediction_data_copy[i][0] +1))
-            i += 1
-
-
-
-        for entry in prediction_data_copy:
+        for entry in prediction_data:
             activity_list_mapper[entry[0]][entry[2]].append(entry[1])
 
         hour_act_dict = {}
