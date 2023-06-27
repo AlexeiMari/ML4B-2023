@@ -582,11 +582,11 @@ def main():
         with bar_chart:
             st.plotly_chart(bar2)
         with platzhalter1:
-            None
+            st.plotly_chart(fig_pie)
         with platzhalter2:
-            None
+            ('')
         with platzhalter3:
-            None
+            ('')
         
         # Tortendiagramm erstellen
         activities = {
@@ -626,7 +626,7 @@ def main():
             font=dict(color='white')
         )
 
-        st.plotly_chart(fig_pie)
+        
           ###############################################################################################
             ###############################################################################################
               ###############################################################################################
