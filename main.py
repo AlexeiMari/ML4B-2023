@@ -428,7 +428,7 @@ def main():
 
         bar_y = []
         bar_x = []
-        color_sequence = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803', '#1C516E']
+        color_sequence =  [color for color in aktivitaeten_farben.values()]
         for key in activities.keys():
             if(activities[key] > 0):
                 bar_y.append(activities[key])
