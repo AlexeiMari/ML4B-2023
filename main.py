@@ -542,6 +542,7 @@ def main():
 
         bar_chart, pie_chart = st.columns(2)
         with bar_chart:
+            st.plotly_chart(bar2)
             with st.container():
                 if emission_roller + emission_auto > 1000:
                         emission_kg = round((emission_roller + emission_auto) / 1000, 2)

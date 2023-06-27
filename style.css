@@ -1,0 +1,3 @@
+div:has(.test1) {
+    background-color: blue !important;
+}
