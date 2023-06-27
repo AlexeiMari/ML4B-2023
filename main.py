@@ -6,6 +6,7 @@ import numpy as np
 import json
 import torch
 import plotly.express as px
+import plotly.graph_objects as go
 import math
 import os
 import tsfresh
@@ -588,6 +589,7 @@ def main():
         for entry in prediction_data:
             activity_list_mapper[entry[0]][entry[2]] = []
 
+
         for entry in prediction_data:
             activity_list_mapper[entry[0]][entry[2]].append(entry[1])
 
@@ -599,6 +601,32 @@ def main():
                 hour_act_dict[key][hour] = sum(activity_list_mapper[key][hour])
 
         st.write(hour_act_dict)
+        st.write(start_minutes)
+
+
+        # Liste der Kategorien
+        categories = list(hour_act_dict.keys())
+
+        # Liste der Subkategorien
+        subcategories = list(set(subcat for d in hour_act_dict.values() for subcat in d.keys()))
+
+        # Daten für gruppierte Balkendiagramme vorbereiten
+        bar_data = []
+        for category, subdict in hour_act_dict.items():
+            bar_data.append(
+                go.Bar(name=category, x=subcategories, y=[subdict.get(subcat, 0) for subcat in subcategories]))
+
+        # Layout für das Diagramm definieren
+        layout = go.Layout(barmode='group', xaxis={'title': 'Stunde des Tages'}, yaxis={'title': 'Minuten'})
+
+        # Figur erstellen und Daten hinzufügen
+        fig = go.Figure(data=bar_data, layout=layout)
+
+        # Streamlit-Element für das Diagramm anzeigen
+        st.plotly_chart(fig)
+
+
+
 
 
 
