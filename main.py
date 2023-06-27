@@ -624,7 +624,7 @@ def main():
                 go.Bar(name=category, x=subcategories, y=[subdict.get(subcat, 0) for subcat in subcategories]))
 
         # Layout für das Diagramm definieren
-        layout = go.Layout(barmode='group', xaxis={'title': 'Subkategorien'}, yaxis={'title': 'Werte'})
+        layout = go.Layout(barmode='group', xaxis={'title': 'Stunde des Tages'}, yaxis={'title': 'Minuten'})
 
         # Figur erstellen und Daten hinzufügen
         fig = go.Figure(data=bar_data, layout=layout)
