@@ -508,9 +508,11 @@ def main():
         }
         for entry in raw_predictions:
             activities[entry] += 1
-        farben = ['#3D7A3F', '#EB7A27', '#B4393C', '#FBB024', '#7A5803', '#1C516E']
+        farben = []
         # Aktivitäten filtern
         filtered_activities = {key: value for key, value in activities.items() if value > 0}
+        for key in filtered_activities.keys():
+            farben.append(aktivitaeten_farben[key])
 
         # Überprüfen, ob nur eine Aktivität vorhanden ist
         num_activities = len(filtered_activities)
