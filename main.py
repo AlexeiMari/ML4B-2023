@@ -544,6 +544,8 @@ def main():
         with bar_chart:
             st.plotly_chart(bar2)
             with st.container():
+                container = st.container()
+                container.write('<div class="offenheimerschmidt">')
                 if emission_roller + emission_auto > 1000:
                         emission_kg = round((emission_roller + emission_auto) / 1000, 2)
                         st.markdown(
@@ -572,7 +574,8 @@ def main():
                     f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
                     '</div>',
                     unsafe_allow_html=True
-                )         
+                )
+                container.write('</div>')      
         with pie_chart:
             st.plotly_chart(fig_pie)
 
