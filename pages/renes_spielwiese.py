@@ -11,7 +11,7 @@ st.markdown("- Motorroller")
 st.markdown("- Fahrrad")
 st.markdown("- Laufen")
 st.markdown("- U-Bahn")
-st.markdown("- Keine Bewegung")
+st.markdown("- Bewegungslos")
 st.markdown('''
 <style>
 [data-testid="stMarkdownContainer"] ul{
