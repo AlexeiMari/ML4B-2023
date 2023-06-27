@@ -560,13 +560,13 @@ def main():
                 unsafe_allow_html=True
                 )
             #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
-            st.markdown(
-                f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
-                f'<div style="color: white; font-weight: bold; text-align: center;">Kalorien</div>'
-                f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
-                '</div>',
-                unsafe_allow_html=True
-            )      
+        st.markdown(
+            f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 150px; width:150px;">'
+            f'<div style="color: white; font-weight: bold; text-align: center;">Kalorien</div>'
+            f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )      
         
 
 
