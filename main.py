@@ -596,7 +596,7 @@ def main():
         while go and i+1 < len(prediction_data_copy):
             if prediction_data_copy[i][1] + start_minutes_copy > 60:
                 add_value = (prediction_data_copy[i][1] + start_minutes_copy) - 60
-                prediction_data_copy[i][1] = 60 - start_minutes_copy
+                prediction_data_copy[i][1] = (60 - start_minutes_copy)
                 prediction_data_copy.insert((i+1,
                                              prediction_data_copy[i][0],
                                              add_value,
@@ -610,7 +610,7 @@ def main():
         go = True
         while go and i+1 < len(prediction_data_copy):
             if prediction_data_copy[i][1] > 60:
-                add_value = prediction_data_copy[i][1] - 60
+                add_value = (prediction_data_copy[i][1] - 60)
                 prediction_data_copy[i][1] = 60
                 prediction_data_copy.insert((i+1,
                                              prediction_data_copy[i][0],
