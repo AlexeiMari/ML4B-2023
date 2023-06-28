@@ -550,10 +550,6 @@ def main():
             paper_bgcolor='#282C34',
             font=dict(color='white')
         )
-        with open('style.css') as f:
-            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-
 
 
 
@@ -609,6 +605,11 @@ def main():
         fig = go.Figure(data=bar_data, layout=layout)
 
         # Streamlit-Element für das Diagramm anzeigen
+        with open('style.css') as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+
+
         filter_chart, pie_chart = st.columns(2)
         with filter_chart:
             st.plotly_chart(fig)
