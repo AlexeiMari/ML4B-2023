@@ -426,7 +426,7 @@ def main():
         with zeitstrahl:
             st.pyplot(fig2)
         with bilder:
-            st.write("")
+            st.image("Car.png")
 
         ### Balkendiagramm
         activities = {
