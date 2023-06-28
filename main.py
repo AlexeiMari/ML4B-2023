@@ -407,7 +407,6 @@ def main():
         # Liste für die Legendenbeschriftungen und zugehörige Farben
         legenden_beschriftungen = []
         legenden_farben = []
-        max_haeufigkeit = max(haeufigkeiten)
         for idx, aktivitaet in enumerate(aktivitaeten):
             farbe = aktivitaeten_farben[aktivitaet]
             haeufigkeit = haeufigkeiten[idx]
@@ -426,7 +425,6 @@ def main():
         zeitstrahl, bilder = st.columns(2)
         with zeitstrahl:
             st.pyplot(fig2)
-            st.write(max_haeufigkeit)
         with bilder:
             st.image("Car.png")
 
