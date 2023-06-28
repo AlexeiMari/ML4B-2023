@@ -389,6 +389,15 @@ def main():
             "subway": "#89cfdc",
             "idle": "#919191",
             "roller": "#ff7a4d"}
+        
+        aktivitaeten_bilder = {
+    "car": "c",
+    "bike": "b",
+    "walk": "w",
+    "subway": "s",
+    "idle": "i",
+    "roller": "r"
+}
         startfarbe_index = 0
 
         fig2, ax = plt.subplots(figsize=(6, 1))
@@ -412,9 +421,18 @@ def main():
         ax.axis('off')
         legende_handles = [plt.Rectangle((0, 0), 1, 1, color=farbe) for farbe in legenden_farben]
         ax.legend(legende_handles, legenden_beschriftungen, loc='center', bbox_to_anchor=(0.5, -0.2), ncol=len(legenden_beschriftungen), labelcolor='white', facecolor='#282C34', edgecolor='#282C34', fontsize=6)
+        max_haeufigkeit = max(haeufigkeiten)
+        am_haeufigsten = aktivitaeten[haeufigkeiten.index(max_haeufigkeit)]
+        bildpfad_am_haeufigsten = aktivitaeten_bilder[am_haeufigsten]
+        bild_am_haeufigsten = st.image(bildpfad_am_haeufigsten)
+
+
+
+
         zeitstrahl, bilder = st.columns(2)
         with zeitstrahl:
             st.pyplot(fig2)
+            st.image(bild_am_haeufigsten)
         with bilder:
             st.write("")
 
