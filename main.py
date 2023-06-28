@@ -614,6 +614,7 @@ def main():
                         emission_kg = round((emission_roller + emission_auto) / 1000, 2)
                         st.markdown(
                         f'<div class="test" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
+                        f'<div class="image"><img src="Emissionen.png"></div>'
                         f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
                         f'<div style="color: white; font-size: 24px; text-align: center;">{emission_kg} kg CO2</div>'
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg} kg / 33 kg CO2</div>'
