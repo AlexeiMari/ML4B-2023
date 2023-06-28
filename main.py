@@ -412,8 +412,11 @@ def main():
         ax.axis('off')
         legende_handles = [plt.Rectangle((0, 0), 1, 1, color=farbe) for farbe in legenden_farben]
         ax.legend(legende_handles, legenden_beschriftungen, loc='center', bbox_to_anchor=(0.5, -0.2), ncol=len(legenden_beschriftungen), labelcolor='white', facecolor='#282C34', edgecolor='#282C34', fontsize=6)
-        st.pyplot(fig2)
-
+        zeitstrahl, bilder = st.columns(2)
+        with zeitstrahl:
+            st.pyplot(fig2)
+        with bilder:
+            st.write("")
 
         ### Balkendiagramm
         activities = {
