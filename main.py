@@ -622,7 +622,6 @@ def main():
                         '</div>',
                         unsafe_allow_html=True
                         )
-                        st.markdown(f'<div class="hidden_sibling"></div>', unsafe_allow_html=True)
                         st.image("Emissionen.png", width=100)
             else:
                         emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
@@ -636,7 +635,6 @@ def main():
                         #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
                         '</div>',
                         unsafe_allow_html=True)
-                        st.markdown(f'<div class="hidden_sibling"></div>', unsafe_allow_html=True)
                         st.image("Emissionen.png", width=100)
                     #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
             st.markdown(
@@ -647,7 +645,6 @@ def main():
                     '</div>',
                     unsafe_allow_html=True
                     )
-            st.markdown(f'<div class="hidden_sibling"></div>', unsafe_allow_html=True)
             st.image("Kalorien.png", width=100)
         with bar_chart:
             st.plotly_chart(bar2)
