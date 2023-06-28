@@ -641,7 +641,8 @@ def main():
                     f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
                     '</div>',
                     unsafe_allow_html=True
-                    )  
+                    )
+            st.image("Kalorien.png", width=100)
         with bar_chart:
             st.plotly_chart(bar2)
         filter_chart, pie_chart = st.columns(2)
