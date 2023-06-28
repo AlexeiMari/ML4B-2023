@@ -382,12 +382,13 @@ def main():
         farben = ["#3D7A3F", "#EB7A27","#B4393C", "#FBB024", "#1C516E", "#7A5803"]
 
         # Dictionary zur Zuordnung von Aktivitäten zu Farben
-        aktivitaeten_farben = {    "car": "#3D7A3F",
-    "bike": "#EB7A27",
-    "walk": "#B4393C",
-    "subway": "#FBB024",
-    "idle": "#1C516E",
-    "roller": "#7A5803"}
+        aktivitaeten_farben = {
+            "car": "#ff4d4d",
+            "bike": "#ff4d4d",
+            "walk": "#36b576",
+            "subway": "#89cfdc",
+            "idle": "#ffff4d",
+            "roller": "#ff7a4d"}
         startfarbe_index = 0
 
         fig2, ax = plt.subplots(figsize=(6, 1))
