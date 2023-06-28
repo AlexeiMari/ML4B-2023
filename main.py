@@ -700,6 +700,9 @@ def main():
             graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
         #st.write(output_string)
         graph.attr(bgcolor="#282C34")
+        graph.attr('node', style='filled', color='white')  # Kreise weiß einfärben
+        graph.attr('edge', color='white')  # Pfeile weiß einfärben
+        graph.attr('graph', fontcolor='white')  # Schriftfarbe weiß setzen
         st.graphviz_chart(graph)
         
 if __name__ == "__main__":
