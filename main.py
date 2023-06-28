@@ -613,7 +613,7 @@ def main():
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg} kg / 33 kg CO2</div>'
                         f'</div>'
                         f'<div class="text-block">'
-                        f'<p>Text Text Text Text</p>'
+                        f'<p>Die nachfolgende Berechnung präsentiert die <b>Gesamtemissionen</b>, die während deiner Fortbewegung entstanden sind. Um eine grobe Einschätzung der Umweltauswirkungen zu erhalten, ist unten ein Vergleichswert aufgeführt. Im Durchschnitt verursacht eine Person in Deutschland täglich etwa <b>33 kg</b> Emissionen. Denke darüber nach, ob du bereits genug für die Umwelt tust oder ob noch mehr getan werden kann.</p>'
                         f'</div>'
                          '</div>',
                         unsafe_allow_html=True
@@ -632,7 +632,7 @@ def main():
                         #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
                         f'</div>'
                         f'<div class="text-block">'
-                        f'<p>Die nachfolgende Berechnung präsentiert die <b>Gesamtemissionen</b>, die während deiner Fortbewegung entstanden sind. Um eine grobe Einschätzung der Umweltauswirkungen zu erhalten, ist unten ein Vergleichswert aufgeführt. Im Durchschnitt verursacht eine Person in Deutschland täglich etwa <b>33 kg</b> Emissionen. Denke darüber nach, ob du bereits genug für die Umwelt tust oder ob noch mehr getan werden kann. <br> Quelle: Statista</p>'
+                        f'<p>Die nachfolgende Berechnung präsentiert die <b>Gesamtemissionen</b>, die während deiner Fortbewegung entstanden sind. Um eine grobe Einschätzung der Umweltauswirkungen zu erhalten, ist unten ein Vergleichswert aufgeführt. Im Durchschnitt verursacht eine Person in Deutschland täglich etwa <b>33 kg</b> Emissionen. Denke darüber nach, ob du bereits genug für die Umwelt tust oder ob noch mehr getan werden kann.</p>'
                         f'</div>'
                          '</div>',
                         unsafe_allow_html=True)
@@ -647,7 +647,7 @@ def main():
                     f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
                     f'</div>'
                     f'<div class="text-block">'
-                    f'<p>Es ist allgemein bekannt, dass Bewegung für den Menschen von großer Bedeutung ist. Doch was für einige möglicherweise noch ein Rätsel darstellt, ist die Anzahl der Kalorien, die bei bestimmten Aktivitäten verbrannt werden. Hier erhältst du einen Überblick darüber, wie viele Kalorien du während deiner Bewegung verbrannt hast.</p>'
+                    f'<p>Es ist allgemein bekannt, dass Bewegung für den Menschen von großer Bedeutung ist. Doch was für einige möglicherweise noch ein Rätsel darstellt, ist die Anzahl der Kalorien, die bei bestimmten Aktivitäten verbrannt werden. Hier erhältst du einen Überblick darüber, wie viele Kalorien du während deiner Bewegung verbrannt hast. <br> Quelle: </p>'
                     f'</div>'
                     '</div>',
                     unsafe_allow_html=True
