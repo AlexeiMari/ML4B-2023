@@ -567,8 +567,8 @@ def main():
             for hour in activity_list_mapper[key].keys():
                 hour_act_dict[key][hour] = sum(activity_list_mapper[key][hour])
 
-        st.write(hour_act_dict)
-        st.write(start_minutes)
+        #st.write(hour_act_dict)
+        #st.write(start_minutes)
 
 
         # Liste der Kategorien
@@ -665,7 +665,7 @@ def main():
             graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
         else:
             graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
-        st.write(output_string)
+        #st.write(output_string)
         st.graphviz_chart(graph)
         
 if __name__ == "__main__":
