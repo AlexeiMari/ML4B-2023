@@ -621,7 +621,7 @@ def main():
                         '</div>',
                         unsafe_allow_html=True
                         )
-                        st.image("Emissionen.png")
+                        st.image("Emissionen.png", width=100)
             else:
                         emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
 
@@ -633,7 +633,7 @@ def main():
                         #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
                         '</div>',
                         unsafe_allow_html=True)
-                        st.image("Emissionen.png")
+                        st.image("Emissionen.png", width=100)
                     #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
             st.markdown(
                     f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
