@@ -384,7 +384,7 @@ def main():
         # Dictionary zur Zuordnung von Aktivitäten zu Farben
         aktivitaeten_farben = {
             "car": "#ff4d4d",
-            "bike": "#89cfdc",
+            "bike": "#4d4dff",
             "walk": "#36b576",
             "subway": "#89cfdc",
             "idle": "#919191",
