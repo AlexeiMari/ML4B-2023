@@ -623,7 +623,7 @@ def main():
                         )
             else:
                         emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
-                        st.image("Emissionen.png"),
+                        st.image("Emissionen.png")
                         st.markdown(
                         f'<div class="test1" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
                         f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
