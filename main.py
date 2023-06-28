@@ -613,6 +613,7 @@ def main():
         filter_chart, pie_chart = st.columns(2)
         with filter_chart:
             st.plotly_chart(fig)
+            st.markdown(unsafe_allow_html=True)
         with pie_chart:
             st.plotly_chart(fig_pie)
 
