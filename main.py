@@ -645,9 +645,11 @@ def main():
 
         filter_chart, pie_chart = st.columns(2)
         with filter_chart:
-            st.plotly_chart(fig)
+            with st.container():
+                st.plotly_chart(fig)
         with pie_chart:
-            st.plotly_chart(fig_pie)
+            with st.container():
+                st.plotly_chart(fig_pie)
 
         ###
 
