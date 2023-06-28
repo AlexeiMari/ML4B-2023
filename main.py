@@ -389,15 +389,6 @@ def main():
             "subway": "#89cfdc",
             "idle": "#919191",
             "roller": "#ff7a4d"}
-        
-        aktivitaeten_bilder = {
-    "car": "Car.png",
-    "bike": "b",
-    "walk": "w",
-    "subway": "s",
-    "idle": "i",
-    "roller": "r"
-}
         startfarbe_index = 0
 
         fig2, ax = plt.subplots(figsize=(6, 1))
@@ -426,7 +417,7 @@ def main():
         with zeitstrahl:
             st.pyplot(fig2)
         with bilder:
-            st.image("Car.png")
+            st.image("Map.png")
 
         ### Balkendiagramm
         activities = {
@@ -641,7 +632,7 @@ def main():
                         #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
                         f'</div>'
                         f'<div class="text-block">'
-                        f'<p>dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>'
+                        f'<p>Die nachfolgende Berechnung präsentiert die Gesamtemissionen, die während deiner Fortbewegung entstanden sind. Um eine grobe Einschätzung der Umweltauswirkungen zu erhalten, ist unten ein Vergleichswert aufgeführt. Im Durchschnitt verursacht eine Person in Deutschland täglich etwa 33 kg Emissionen. Denke darüber nach, ob du bereits genug für die Umwelt tust oder ob noch mehr getan werden kann. Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/</p>'
                         f'</div>'
                          '</div>',
                         unsafe_allow_html=True)
