@@ -460,7 +460,7 @@ def main():
         plot_bgcolor='#282C34',
         paper_bgcolor='#282C34',
         height=300,
-        width=500,
+        width=880,
         xaxis_title="Fortbewegungsarten",
         yaxis_title="Anzahl an Minuten"
         )
