@@ -618,18 +618,19 @@ def main():
                         f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
                         f'<div style="color: white; font-size: 24px; text-align: center;">{emission_kg} kg CO2</div>'
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg} kg / 33 kg CO2</div>'
-                        '</div>',st.image("Emissionen.png"),
+                        '</div>',
                         unsafe_allow_html=True
                         )
             else:
                         emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
+                        st.image("Emissionen.png"),
                         st.markdown(
                         f'<div class="test1" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
                         f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
                         f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller + emission_auto} g CO2</div>'
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg1} kg / 33 kg CO2</div>'
                         #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
-                        '</div>', st.image("Emissionen.png"),
+                        '</div>',
                         unsafe_allow_html=True
                         )
                     #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
