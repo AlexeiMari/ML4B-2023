@@ -36,7 +36,7 @@ sensors = ["Accelerometer","Location","Orientation"]
 def process_data(upload):
     data = None
     if zf.is_zipfile(upload): #Hochgeladene Datei ist eine zip mit CSVs drinnen
-        st.write("Is ne zip")
+        #st.write("Is ne zip")
         file = None
         if local:
             extr_dir = r"C:\Users\ReneJ\Desktop\UnityStuff\ML4B-2023\uploaded_files"
@@ -55,10 +55,10 @@ def process_data(upload):
         if not local:
             cwd = os.getcwd()
             data, gps, start_time_stamp = transform_data_csv(extr_dir)
-        st.write(extr_dir + "\\" + file)
+        #st.write(extr_dir + "\\" + file)
 
     else: #Hochgeladene Datei ist eine JSON
-        st.write("Is ne json")
+        #st.write("Is ne json")
         x = upload.getvalue()
         #st.write(x)
         x_json = x.decode('utf8')
@@ -355,7 +355,7 @@ def main():
     if st.button("Klassifizieren!"):
         prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
         st.subheader("Visualisierung")
-        st.write(prediction_data)
+        #st.write(prediction_data)
         #SUPER WICHTIG!!! BITTE LESEN
         #
         # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
