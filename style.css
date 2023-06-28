@@ -25,3 +25,7 @@
 .margin-calc {
     margin-bottom: 10px;
 }
+
+.block {
+    display: flex;
+}

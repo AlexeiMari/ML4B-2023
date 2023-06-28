@@ -627,6 +627,7 @@ def main():
                         emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
 
                         st.markdown(
+                        f'<div class="block">'    
                         f'<div class="margin-calc" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
                         f'<div class="image_E"><img src="https://alexeimari-ml4b-2023-main-5a6h6b.streamlit.app/~/+/media/5942ece6a34f6b2e8d43fa583ae398b6dc922023910e12bbe51ffdf7.png"></div>'
                         f'<div style="color: white; font-size: 23px; font-weight: bold; text-align: center;">Emissionen</div>'
@@ -636,6 +637,7 @@ def main():
                         f'</div>'
                         f'<div class="text-block">'
                         f'<p>Text Text Text Text</p>'
+                        f'</div>'
                          '</div>',
                         unsafe_allow_html=True)
 
