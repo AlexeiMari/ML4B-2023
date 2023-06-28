@@ -619,7 +619,7 @@ def main():
         bar_data = []
         for category, subdict in hour_act_dict.items():
             bar_data.append(
-                go.Bar(name=category, color = aktivitaeten_farben,x=subcategories, y=[subdict.get(subcat, 0) for subcat in subcategories]))
+                go.Bar(name=category, color = aktivitaeten_farben[category] ,x=subcategories, y=[subdict.get(subcat, 0) for subcat in subcategories]))
 
         # Layout für das Diagramm definieren
         layout = go.Layout(barmode='group', xaxis={'title': 'Stunde des Tages'}, yaxis={'title': 'Minuten'})
