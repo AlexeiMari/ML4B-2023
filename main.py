@@ -417,7 +417,7 @@ def main():
         with zeitstrahl:
             st.pyplot(fig2)
         with bilder:
-            st.image("Map.png")
+            st.image("Car.png")
 
         ### Balkendiagramm
         activities = {
@@ -647,7 +647,7 @@ def main():
                     f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
                     f'</div>'
                     f'<div class="text-block">'
-                    f'<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet</p>'
+                    f'<p>Es ist allgemein bekannt, dass Bewegung für den Menschen von großer Bedeutung ist. Doch was für einige möglicherweise noch ein Rätsel darstellt, ist die Anzahl der Kalorien, die bei bestimmten Aktivitäten verbrannt werden. Hier erhältst du einen Überblick darüber, wie viele Kalorien du während deiner Bewegung verbrannt hast.</p>'
                     f'</div>'
                     '</div>',
                     unsafe_allow_html=True
