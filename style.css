@@ -13,7 +13,7 @@
     width: 235px;
 }
 
-[data-testid="stHorizontalBlock"]:nth-of-type(2) [data-testid="column"]:nth-of-type(2) {
+[data-testid="stHorizontalBlock"] [data-testid="column"]:nth-of-type(2) {
     padding-left: 160px !important;
 }
 
