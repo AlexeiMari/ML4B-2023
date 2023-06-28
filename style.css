@@ -17,6 +17,6 @@
     padding-left: 160px !important;
 }
 
-[data-testid="stHorizontalBlock"]:nth-of-type(2) {
+[data-testid="stHorizontalBlock"]:nth-of-type(3) {
     background-color: yellow;
 }
