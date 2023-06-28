@@ -608,9 +608,8 @@ def main():
         with open('style.css') as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-        bar_chart, filter_bar = st.columns(2)
-        with bar_chart:
-            st.plotly_chart(bar2)
+        rechnungen, bar_chart = st.columns(2)
+        with rechnungen:
             if emission_roller + emission_auto > 1000:
                         emission_kg = round((emission_roller + emission_auto) / 1000, 2)
                         st.markdown(
@@ -640,9 +639,8 @@ def main():
                     '</div>',
                     unsafe_allow_html=True
                     )  
-        with filter_bar:
-            st.write("Filter")
-
+        with bar_chart:
+            st.plotly_chart(bar2)
         filter_chart, pie_chart = st.columns(2)
         with filter_chart:
             with st.container():
