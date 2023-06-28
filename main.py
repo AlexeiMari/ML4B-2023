@@ -382,12 +382,13 @@ def main():
         farben = ["#3D7A3F", "#EB7A27","#B4393C", "#FBB024", "#1C516E", "#7A5803"]
 
         # Dictionary zur Zuordnung von Aktivitäten zu Farben
-        aktivitaeten_farben = {    "car": "#3D7A3F",
-    "bike": "#EB7A27",
-    "walk": "#B4393C",
-    "subway": "#FBB024",
-    "idle": "#1C516E",
-    "roller": "#7A5803"}
+        aktivitaeten_farben = {
+            "car": "#ff4d4d",
+            "bike": "#4d4dff",
+            "walk": "#36b576",
+            "subway": "#89cfdc",
+            "idle": "#919191",
+            "roller": "#ff7a4d"}
         startfarbe_index = 0
 
         fig2, ax = plt.subplots(figsize=(6, 1))
@@ -580,7 +581,13 @@ def main():
         bar_data = []
         for category, subdict in hour_act_dict.items():
             bar_data.append(
-                go.Bar(name=category, x=subcategories, y=[subdict.get(subcat, 0) for subcat in subcategories]))
+                go.Bar(
+                        name=category,
+                        x=subcategories,
+                        y=[subdict.get(subcat, 0) for subcat in subcategories],
+                        marker_color = aktivitaeten_farben[category]
+                )
+            )
 
         # Layout für das Diagramm definieren
         layout = go.Layout(barmode='group', xaxis={'title': 'Stunde des Tages'}, yaxis={'title': 'Minuten'})
