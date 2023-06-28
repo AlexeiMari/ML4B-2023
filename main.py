@@ -632,7 +632,7 @@ def main():
                         #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
                         f'</div>'
                         f'<div class="text-block">'
-                        f'<p>Die nachfolgende Berechnung präsentiert die Gesamtemissionen, die während deiner Fortbewegung entstanden sind. Um eine grobe Einschätzung der Umweltauswirkungen zu erhalten, ist unten ein Vergleichswert aufgeführt. Im Durchschnitt verursacht eine Person in Deutschland täglich etwa 33 kg Emissionen. Denke darüber nach, ob du bereits genug für die Umwelt tust oder ob noch mehr getan werden kann. <br> Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/</p>'
+                        f'<p>Die nachfolgende Berechnung präsentiert die <b>Gesamtemissionen</b>, die während deiner Fortbewegung entstanden sind. Um eine grobe Einschätzung der Umweltauswirkungen zu erhalten, ist unten ein Vergleichswert aufgeführt. Im Durchschnitt verursacht eine Person in Deutschland täglich etwa <b>33 kg</b> Emissionen. Denke darüber nach, ob du bereits genug für die Umwelt tust oder ob noch mehr getan werden kann. <br> Quelle: Statista</p>'
                         f'</div>'
                          '</div>',
                         unsafe_allow_html=True)
