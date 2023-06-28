@@ -28,6 +28,7 @@
 
 .block {
     display: flex;
+    flex-shrink: 0;
 }
 
 .text-block {
