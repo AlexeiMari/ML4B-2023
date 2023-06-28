@@ -544,8 +544,8 @@ def main():
         fig_pie.update_traces(marker=dict(colors=farben))
         # Größe des Tortendiagramms anpassen
         fig_pie.update_layout(
-            height=500,
-            width=500,
+            height=400,
+            width=600,
             plot_bgcolor='#282C34',
             paper_bgcolor='#282C34',
             font=dict(color='white')
@@ -603,17 +603,21 @@ def main():
             )
 
         # Layout für das Diagramm definieren
-        layout = go.Layout(barmode='group', xaxis={'title': 'Stunde des Tages'}, yaxis={'title': 'Minuten'}, plot_bgcolor='#282C34', paper_bgcolor='#282C34', width= 1500, height= 500)
+        layout = go.Layout(barmode='group', xaxis={'title': 'Stunde des Tages'}, yaxis={'title': 'Minuten'}, plot_bgcolor='#282C34', paper_bgcolor='#282C34', width= 1000, height= 400)
 
         # Figur erstellen und Daten hinzufügen
         fig = go.Figure(data=bar_data, layout=layout)
 
         # Streamlit-Element für das Diagramm anzeigen
-        st.plotly_chart(fig)
+        filter_chart, pie_chart = st.columns(2)
+        with filter_chart:
+            st.plotly_chart(fig)
+        with pie_chart:
+            st.plotly_chart(fig_pie)
 
 
 
-        bar_chart, pie_chart, filter_bar = st.columns(3)
+        bar_chart, filter_bar = st.columns(2)
         with bar_chart:
             st.plotly_chart(bar2)
             if emission_roller + emission_auto > 1000:
@@ -645,8 +649,6 @@ def main():
                     '</div>',
                     unsafe_allow_html=True
                     )  
-        with pie_chart:
-            st.plotly_chart(fig_pie)
         with filter_bar:
             st.write("Filter")
 
