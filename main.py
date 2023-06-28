@@ -596,7 +596,7 @@ def main():
         fig = go.Figure(data=bar_data, layout=layout)
 
         # Streamlit-Element für das Diagramm anzeigen
-        
+        st.plotly_chart(fig)
 
 
 
@@ -635,7 +635,7 @@ def main():
         with pie_chart:
             st.plotly_chart(fig_pie)
         with filter_bar:
-            st.plotly_chart(fig)
+            st.write("Filter")
 
 
 
