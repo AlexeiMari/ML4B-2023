@@ -614,12 +614,17 @@ def main():
                         emission_kg = round((emission_roller + emission_auto) / 1000, 2)
                     
                         st.markdown(
+                        f'<div class="block">' 
                         f'<div class="margin-calc" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
                         f'<div class="image"><img src="https://alexeimari-ml4b-2023-main-5a6h6b.streamlit.app/~/+/media/5942ece6a34f6b2e8d43fa583ae398b6dc922023910e12bbe51ffdf7.png"></div>'
                         f'<div style="color: white; font-size: 23px; font-weight: bold; text-align: center;">Emissionen</div>'
                         f'<div style="color: white; font-size: 24px; text-align: center;">{emission_kg} kg CO2</div>'
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg} kg / 33 kg CO2</div>'
-                        '</div>',
+                        f'</div>'
+                        f'<div class="text-block">'
+                        f'<p>Text Text Text Text</p>'
+                        f'</div>'
+                         '</div>',
                         unsafe_allow_html=True
                         )
                         st.image("Emissionen.png", width=100)
@@ -636,7 +641,7 @@ def main():
                         #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
                         f'</div>'
                         f'<div class="text-block">'
-                        f'<p>Text Text Text Text</p>'
+                        f'<p>dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>'
                         f'</div>'
                          '</div>',
                         unsafe_allow_html=True)
@@ -644,10 +649,15 @@ def main():
                         st.image("Emissionen.png", width=100)
                     #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
             st.markdown(
+                    f'<div class="block">'
                     f'<div class="margin-calc" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
                     f'<div class="image_k"><img src="https://alexeimari-ml4b-2023-main-5a6h6b.streamlit.app/~/+/media/1defdcb407ecfd76edb5073a1be75eb6ecaa0967fa7f3917c88639fe.png"></div>'
                     f'<div style="color: white; font-size: 23px; font-weight: bold; text-align: center;">Kalorien</div>'
                     f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
+                    f'</div>'
+                    f'<div class="text-block">'
+                    f'<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet</p>'
+                    f'</div>'
                     '</div>',
                     unsafe_allow_html=True
                     )

@@ -29,3 +29,7 @@
 .block {
     display: flex;
 }
+
+.text-block {
+    margin-left: 25px;
+}
