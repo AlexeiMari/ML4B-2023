@@ -612,7 +612,7 @@ def main():
         with rechnungen:
             if emission_roller + emission_auto > 1000:
                         emission_kg = round((emission_roller + emission_auto) / 1000, 2)
-                        st.image("Emissionen.png")
+                    
                         st.markdown(
                         f'<div class="test" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
                         f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
@@ -621,9 +621,10 @@ def main():
                         '</div>',
                         unsafe_allow_html=True
                         )
+                        st.image("Emissionen.png")
             else:
                         emission_kg1 = round((emission_roller + emission_auto) / 1000, 2)
-                        st.image("Emissionen.png")
+
                         st.markdown(
                         f'<div class="test1" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
                         f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
@@ -631,8 +632,8 @@ def main():
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg1} kg / 33 kg CO2</div>'
                         #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
                         '</div>',
-                        unsafe_allow_html=True
-                        )
+                        unsafe_allow_html=True)
+                        st.image("Emissionen.png")
                     #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
             st.markdown(
                     f'<div style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
