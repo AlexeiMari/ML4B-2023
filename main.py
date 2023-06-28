@@ -627,6 +627,7 @@ def main():
 
                         st.markdown(
                         f'<div class="test1" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
+                        f'<div class="image"><img src="https://alexeimari-ml4b-2023-main-5a6h6b.streamlit.app/~/+/media/5942ece6a34f6b2e8d43fa583ae398b6dc922023910e12bbe51ffdf7.png"></div>'
                         f'<div style="color: white; font-weight: bold; text-align: center;">Emissionen</div>'
                         f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller + emission_auto} g CO2</div>'
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg1} kg / 33 kg CO2</div>'
