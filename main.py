@@ -699,6 +699,7 @@ def main():
         else:
             graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
         #st.write(output_string)
+        graph.attr(bgcolor="#282C34")
         st.graphviz_chart(graph)
         
 if __name__ == "__main__":
