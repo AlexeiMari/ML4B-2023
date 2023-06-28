@@ -617,7 +617,7 @@ def main():
             st.plotly_chart(fig_pie)
 
 
-        with open('style1.css') as f:
+        with open('style_1.css') as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
         bar_chart, filter_bar = st.columns(2)
