@@ -647,7 +647,7 @@ def main():
                     f'<div style="color: white; font-size: 24px; text-align: center;">{verbrauchte_kalorien_bike + verbrauchte_kalorien_walk}</div>'
                     f'</div>'
                     f'<div class="text-block">'
-                    f'<p>Es ist allgemein bekannt, dass Bewegung für den Menschen von großer Bedeutung ist. Doch was für einige möglicherweise noch ein Rätsel darstellt, ist die Anzahl der Kalorien, die bei bestimmten Aktivitäten verbrannt werden. Hier erhältst du einen Überblick darüber, wie viele Kalorien du während deiner Bewegung verbrannt hast. <br> Quelle: </p>'
+                    f'<p>Es ist allgemein bekannt, dass Bewegung für den Menschen von großer Bedeutung ist. Doch was für einige möglicherweise noch ein Rätsel darstellt, ist die Anzahl der Kalorien, die bei bestimmten Aktivitäten verbrannt werden. Hier erhältst du einen Überblick darüber, wie viele Kalorien du während deiner Bewegung verbrannt hast.</p>'
                     f'</div>'
                     '</div>',
                     unsafe_allow_html=True
