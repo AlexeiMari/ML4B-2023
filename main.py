@@ -459,7 +459,7 @@ def main():
         bar2.update_layout(
         plot_bgcolor='#282C34',
         paper_bgcolor='#282C34',
-        height=880,
+        height=500,
         width=500,
         xaxis_title="Fortbewegungsarten",
         yaxis_title="Anzahl an Minuten"
