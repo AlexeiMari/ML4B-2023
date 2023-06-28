@@ -633,8 +633,12 @@ def main():
                         f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller + emission_auto} g CO2</div>'
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg1} kg / 33 kg CO2</div>'
                         #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
-                        '</div>',
+                        f'</div>'
+                        f'<div class="text-block">'
+                        f'<p>Text Text Text Text</p>'
+                         '</div>',
                         unsafe_allow_html=True)
+
                         st.image("Emissionen.png", width=100)
                     #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
             st.markdown(
