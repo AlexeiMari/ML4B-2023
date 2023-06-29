@@ -410,6 +410,7 @@ def main():
         ax.set_xlim(0, startpunkt)
         ax.set_ylim(0, 0)
         ax.axis('off')
+        ax.set_title('Zeitstrahl zu deinen Aktivitäten', color='white', fontsize=10)
         legende_handles = [plt.Rectangle((0, 0), 1, 1, color=farbe) for farbe in legenden_farben]
         ax.legend(legende_handles, legenden_beschriftungen, loc='center', bbox_to_anchor=(0.5, -0.2), ncol=len(legenden_beschriftungen), labelcolor='white', facecolor='#282C34', edgecolor='#282C34', fontsize=6)
         ###################################################################################
