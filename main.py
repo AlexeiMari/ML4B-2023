@@ -597,7 +597,7 @@ def main():
         with zeitstrahl:
             st.pyplot(fig2)
         with bilder:
-            st.image("Car.png")
+            st.image("Bild1.png")
         
         # Zweite horizontal_bar
         rechnungen, bar_chart = st.columns(2)
