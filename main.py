@@ -455,7 +455,7 @@ def main():
             'text': "Absolute Aktivitätsverteilung",
             'font': {
                 'color': '#FFFFFF',
-                'size': 18
+                'size': 24
             },
             'x': 0.3,  # Horizontal zentrieren
             'y': 0.95  # Oberhalb der Grafik positionieren
@@ -556,7 +556,7 @@ def main():
                 'text': "Relative Aktivitätsverteilung",
                 'font': {
                     'color': '#FFFFFF',
-                    'size': 18
+                    'size': 24
                 },
                 'x': 0.3,  # Horizontal zentrieren
                 'y': 0.95  # Oberhalb der Grafik positionieren
