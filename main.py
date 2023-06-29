@@ -376,7 +376,7 @@ def main():
             st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
             st.subheader("Deine Fortbewegungsverteilung")
         with bild:
-            st.image("Bild1.png")
+            st.image("Bild1.png", width=400)
         ###################################################################################
         ### Zeitstrahl
         # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
