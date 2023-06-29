@@ -485,8 +485,7 @@ def main():
                 if item[0] == aktivitaet:
                     emission = math.ceil(berechne_zurückgelegte_meter_roller(gps) / 1000 * 146)
             return emission
-        #Quelle: https://www.co2online.de/klima-schuetzen/mobilitaet/auto-co2-ausstoss/
-        
+
         def verbrauchte_emission_roller(json_data, aktivitaet):
             emission = 0
             for item in json_data:
@@ -496,6 +495,9 @@ def main():
         
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
         emission_auto= verbrauchte_emission_auto(prediction_data, "car")
+        #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
+        #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
+        #Quelle: https://www.co2online.de/klima-schuetzen/mobilitaet/auto-co2-ausstoss/
         ###################################################################################
 
         ###################################################################################
@@ -563,9 +565,6 @@ def main():
             for hour in activity_list_mapper[key].keys():
                 hour_act_dict[key][hour] = sum(activity_list_mapper[key][hour])
 
-        # Liste der Kategorien
-        categories = list(hour_act_dict.keys())
-
         # Liste der Subkategorien
         subcategories = list(set(subcat for d in hour_act_dict.values() for subcat in d.keys()))
 
@@ -631,16 +630,14 @@ def main():
                         f'<div style="color: white; font-size: 23px; font-weight: bold; text-align: center;">Emissionen</div>'
                         f'<div style="color: white; font-size: 24px; text-align: center;">{emission_roller + emission_auto} g CO2</div>'
                         f'<div style="color: white; font-size: 14px; text-align: center;">{emission_kg1} kg / 33 kg CO2</div>'
-                        #Quelle: https://de.statista.com/statistik/daten/studie/1275275/umfrage/treibhausgasbilanz-pro-person/
                         f'</div>'
                         f'<div class="text-block">'
                         f'<p>Die nachfolgende Berechnung präsentiert die <b>Gesamtemissionen</b>, die während deiner Fortbewegung entstanden sind. Um eine grobe Einschätzung der Umweltauswirkungen zu erhalten, ist unten ein Vergleichswert aufgeführt. Im Durchschnitt verursacht eine Person in Deutschland täglich etwa <b>33 kg</b> Emissionen. Denke darüber nach, ob du bereits genug für die Umwelt tust oder ob noch mehr getan werden kann.</p>'
                         f'</div>'
                          '</div>',
                         unsafe_allow_html=True)
-
                         st.image("Emissionen.png", width=100)
-                        #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
+
             
             st.markdown(
                     f'<div class="block">'
