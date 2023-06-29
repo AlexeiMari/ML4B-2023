@@ -373,6 +373,7 @@ def main():
         st.subheader("Der Ursprung deiner Daten")
         st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
         st.subheader("Deine Fortbewegungsverteilung")
+        ###################################################################################
         ### Zeitstrahl
         # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
         aktivitaeten = [key[0] for key in prediction_data]
@@ -407,7 +408,9 @@ def main():
         ax.axis('off')
         legende_handles = [plt.Rectangle((0, 0), 1, 1, color=farbe) for farbe in legenden_farben]
         ax.legend(legende_handles, legenden_beschriftungen, loc='center', bbox_to_anchor=(0.5, -0.2), ncol=len(legenden_beschriftungen), labelcolor='white', facecolor='#282C34', edgecolor='#282C34', fontsize=6)
+        ###################################################################################
 
+        ###################################################################################
         ### Balkendiagramm
         activities = {
             "car": 0,
@@ -444,8 +447,9 @@ def main():
         xaxis_title="Fortbewegungsarten",
         yaxis_title="Anzahl an Minuten"
         )
-        
+        ###################################################################################
 
+        ###################################################################################
         ### Kalorienzähler
         def berechne_kalorien_bike(json_data, aktivitaet):
             kalorien_verbrauch = 0
@@ -465,7 +469,9 @@ def main():
         #Quelle: https://www.apuntateuna.es/sonstig/wie-viele-kalorien-verbrennt-man-beim-gehen.html
         verbrauchte_kalorien_bike = berechne_kalorien_bike(prediction_data, "bike")
         verbrauchte_kalorien_walk = berechne_kalorien_walk(prediction_data, "walk")
+        ###################################################################################
 
+        ###################################################################################
         ### CO2-Zähler
         def berechne_zurückgelegte_meter_roller(df):
             durchschnitt = df['speed'].mean()
@@ -490,7 +496,9 @@ def main():
         
         emission_roller = verbrauchte_emission_roller(prediction_data, "roller")
         emission_auto= verbrauchte_emission_auto(prediction_data, "car")
+        ###################################################################################
 
+        ###################################################################################
         # Tortendiagramm erstellen
         activities = {
             "car": 0,
@@ -515,14 +523,13 @@ def main():
                 values=[1],
                 names=list(filtered_activities.keys()),
                 title='Verteilung der Aktivitäten',
-                hole=0.7  # Vollständig gefüllte Torte für eine Aktivität
+                hole=0.7
             )
         else:
             df = pd.DataFrame.from_dict(filtered_activities, orient='index', columns=['value'])
             fig_pie = px.pie(df, names=df.index, values='value', title='Verteilung der Aktivitäten')
             fig_pie.update_traces(textposition='inside', textinfo='percent+label')
         fig_pie.update_traces(marker=dict(colors=farben))
-        # Größe des Tortendiagramms anpassen
         fig_pie.update_layout(
             height=400,
             width=600,
@@ -530,9 +537,9 @@ def main():
             paper_bgcolor='#282C34',
             font=dict(color='white')
         )
+        ###################################################################################
 
-
-
+        ###################################################################################
         ### Filter Balkendiagramm
 
         acti_list = ["car", "bike", "walk", "subway", "idle", "roller"]
@@ -555,10 +562,6 @@ def main():
             hour_act_dict[key] = {}
             for hour in activity_list_mapper[key].keys():
                 hour_act_dict[key][hour] = sum(activity_list_mapper[key][hour])
-
-        #st.write(hour_act_dict)
-        #st.write(start_minutes)
-
 
         # Liste der Kategorien
         categories = list(hour_act_dict.keys())
@@ -596,7 +599,8 @@ def main():
             st.pyplot(fig2)
         with bilder:
             st.image("Car.png")
-
+        
+        # Zweite horizontal_bar
         rechnungen, bar_chart = st.columns(2)
         with rechnungen:
             if emission_roller + emission_auto > 1000:
@@ -636,7 +640,8 @@ def main():
                         unsafe_allow_html=True)
 
                         st.image("Emissionen.png", width=100)
-                    #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
+                        #Quelle: https://www.umweltnetz-schweiz.ch/themen/energie/4166-co2-vergleich-motorroller-und-e-roller.html
+            
             st.markdown(
                     f'<div class="block">'
                     f'<div class="margin-calc" style="background-color: #282C34; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 5px; height: 235px; width:235px;">'
@@ -653,6 +658,8 @@ def main():
             st.image("Kalorien.png", width=100)
         with bar_chart:
             st.plotly_chart(bar2)
+        
+        # Dritte horizontal_bar
         filter_chart, pie_chart = st.columns(2)
         with filter_chart:
             with st.container():
@@ -660,21 +667,7 @@ def main():
         with pie_chart:
             with st.container():
                 st.plotly_chart(fig_pie)
-
-        ###
-
-
-
-          ###############################################################################################
-            ###############################################################################################
-              ###############################################################################################
-                ###############################################################################################
-        ###############################################################################################      
-            ###############################################################################################
-              ###############################################################################################
-                ###############################################################################################
-        ###############################################################################################
-
+        ###################################################################################
         
 if __name__ == "__main__":
     main()
