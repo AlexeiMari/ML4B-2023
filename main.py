@@ -457,7 +457,7 @@ def main():
                 'color': '#FFFFFF',
                 'size': 18
             },
-            'x': 0.5,  # Horizontal zentrieren
+            'x': 0.1,  # Horizontal zentrieren
             'y': 0.95  # Oberhalb der Grafik positionieren
     }
         )
