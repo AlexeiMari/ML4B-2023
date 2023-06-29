@@ -355,7 +355,6 @@ def main():
     if st.button("Klassifizieren!"):
         prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
         st.subheader("Visualisierung")
-        #st.write(prediction_data)
         #SUPER WICHTIG!!! BITTE LESEN
         #
         # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
@@ -373,14 +372,12 @@ def main():
 
         st.subheader("Der Ursprung deiner Daten")
         st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
-        #st.map(gps)
         st.subheader("Deine Fortbewegungsverteilung")
         ### Zeitstrahl
         # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
         aktivitaeten = [key[0] for key in prediction_data]
         haeufigkeiten = [key[1] for key in prediction_data]
         farben = ["#3D7A3F", "#EB7A27","#B4393C", "#FBB024", "#1C516E", "#7A5803"]
-
         # Dictionary zur Zuordnung von Aktivitäten zu Farben
         aktivitaeten_farben = {
             "car": "#ff4d4d",
@@ -389,8 +386,6 @@ def main():
             "subway": "#89cfdc",
             "idle": "#919191",
             "roller": "#ff7a4d"}
-        startfarbe_index = 0
-
         fig2, ax = plt.subplots(figsize=(6, 1))
         fig2.set_facecolor('#282C34')
         startpunkt = 0
@@ -412,12 +407,6 @@ def main():
         ax.axis('off')
         legende_handles = [plt.Rectangle((0, 0), 1, 1, color=farbe) for farbe in legenden_farben]
         ax.legend(legende_handles, legenden_beschriftungen, loc='center', bbox_to_anchor=(0.5, -0.2), ncol=len(legenden_beschriftungen), labelcolor='white', facecolor='#282C34', edgecolor='#282C34', fontsize=6)
-
-        zeitstrahl, bilder = st.columns(2)
-        with zeitstrahl:
-            st.pyplot(fig2)
-        with bilder:
-            st.image("Car.png")
 
         ### Balkendiagramm
         activities = {
@@ -599,6 +588,15 @@ def main():
         with open('style.css') as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+
+        
+        # Erste horizontal_bar
+        zeitstrahl, bilder = st.columns(2)
+        with zeitstrahl:
+            st.pyplot(fig2)
+        with bilder:
+            st.image("Car.png")
+
         rechnungen, bar_chart = st.columns(2)
         with rechnungen:
             if emission_roller + emission_auto > 1000:
@@ -677,23 +675,6 @@ def main():
                 ###############################################################################################
         ###############################################################################################
 
-        st.subheader("Dein Fortbewegungsgraph")
-        output_string = ""
-        import graphviz
-        graph = graphviz.Digraph()
-        i = 0
-        if len(prediction_data) > 1:
-            while i < len(prediction_data) -1:
-                graph.edge((prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min"), (prediction_data[i+1][0] + " " + str(prediction_data[i+1][1]) + " min"))
-                i += 1
-            graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
-        else:
-            graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
-        #st.write(output_string)
-        graph.attr(bgcolor="#282C34")
-        graph.node_attr.update(style='filled', color='white', fontcolor='black')  # Kreise weiß einfärben
-        graph.edge_attr.update(color='white')  # Pfeile weiß einfärben
-        st.graphviz_chart(graph)
         
 if __name__ == "__main__":
     main()

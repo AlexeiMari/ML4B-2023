@@ -94,3 +94,24 @@ ax.axis('off')
 
 st.pyplot(fig)
 
+
+
+#fortbewegungsgraph
+
+        st.subheader("Dein Fortbewegungsgraph")
+        output_string = ""
+        import graphviz
+        graph = graphviz.Digraph()
+        i = 0
+        if len(prediction_data) > 1:
+            while i < len(prediction_data) -1:
+                graph.edge((prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min"), (prediction_data[i+1][0] + " " + str(prediction_data[i+1][1]) + " min"))
+                i += 1
+            graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
+        else:
+            graph.edge(prediction_data[i][0] + " " + str(prediction_data[i][1]) + " min", "End")
+        #st.write(output_string)
+        graph.attr(bgcolor="#282C34")
+        graph.node_attr.update(style='filled', color='white', fontcolor='black')  # Kreise weiß einfärben
+        graph.edge_attr.update(color='white')  # Pfeile weiß einfärben
+        st.graphviz_chart(graph)
