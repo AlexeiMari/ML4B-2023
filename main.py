@@ -551,7 +551,16 @@ def main():
             width=600,
             plot_bgcolor='#282C34',
             paper_bgcolor='#282C34',
-            font=dict(color='white')
+            font=dict(color='white'),
+            title={
+                'text': "Relative Aktivitätsverteilung",
+                'font': {
+                    'color': '#FFFFFF',
+                    'size': 18
+                },
+                'x': 0.3,  # Horizontal zentrieren
+                'y': 0.95  # Oberhalb der Grafik positionieren
+                }
         )
         ###################################################################################
 
@@ -598,7 +607,7 @@ def main():
         layout = go.Layout(
             title={
                 'text': "Aktivitäten nach Stunden",  # Titel hinzufügen
-                'x': 0.5,  # Mittige Positionierung (0-1)
+                'x': 0.3,  # Mittige Positionierung (0-1)
                 'font': {
                     'size': 24  # Schriftgröße anpassen
                 }
