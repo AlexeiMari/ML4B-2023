@@ -664,6 +664,9 @@ def main():
         with pie_chart:
             with st.container():
                 st.plotly_chart(fig_pie)
+        
+        # Vierte horizontal_bar
+        st.map(gps)
         ###################################################################################
         
 if __name__ == "__main__":
