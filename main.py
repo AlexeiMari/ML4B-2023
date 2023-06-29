@@ -450,7 +450,8 @@ def main():
         height=474,
         width=600,
         xaxis_title="Fortbewegungsarten",
-        yaxis_title="Anzahl an Minuten"
+        yaxis_title="Anzahl an Minuten",
+        title="Absolute Aktivitätsverteilung"
         )
         ###################################################################################
 
