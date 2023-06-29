@@ -451,7 +451,15 @@ def main():
         width=600,
         xaxis_title="Fortbewegungsarten",
         yaxis_title="Anzahl an Minuten",
-        title="Absolute Aktivitätsverteilung"
+        title={
+            'text': "Absolute Aktivitätsverteilung",
+            'font': {
+                'color': '#FFFFFF',
+                'size': 18
+            },
+            'x': 0.5,  # Horizontal zentrieren
+            'y': 0.95  # Oberhalb der Grafik positionieren
+    }
         )
         ###################################################################################
 
