@@ -595,7 +595,14 @@ def main():
             )
 
         # Layout für das Diagramm definieren
-        layout = go.Layout(title="Aktivitäten nach Stunden", barmode='group', xaxis={'title': 'Stunde des Tages'}, yaxis={'title': 'Minuten'}, plot_bgcolor='#282C34', paper_bgcolor='#282C34', width= 1000, height= 400)
+        layout = go.Layout(
+            title={
+                'text': "Aktivitäten nach Stunden",  # Titel hinzufügen
+                'x': 0.5,  # Mittige Positionierung (0-1)
+                'font': {
+                    'size': 24  # Schriftgröße anpassen
+                }
+            },barmode='group', xaxis={'title': 'Stunde des Tages'}, yaxis={'title': 'Minuten'}, plot_bgcolor='#282C34', paper_bgcolor='#282C34', width= 1000, height= 400)
 
         # Figur erstellen und Daten hinzufügen
         fig = go.Figure(data=bar_data, layout=layout)
