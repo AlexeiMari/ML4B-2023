@@ -589,9 +589,9 @@ def main():
         # Streamlit-Element für das Diagramm anzeigen
         with open('style.css') as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+        ###################################################################################
 
-
-        
+        ###################################################################################
         # Erste horizontal_bar
         zeitstrahl, bilder = st.columns(2)
         with zeitstrahl:
