@@ -595,12 +595,11 @@ def main():
             )
 
         # Layout für das Diagramm definieren
-        layout = go.Layout(barmode='group', xaxis={'title': 'Stunde des Tages'}, yaxis={'title': 'Minuten'}, plot_bgcolor='#282C34', paper_bgcolor='#282C34', width= 1000, height= 400)
+        layout = go.Layout(title="Aktivitäten nach Stunden", barmode='group', xaxis={'title': 'Stunde des Tages'}, yaxis={'title': 'Minuten'}, plot_bgcolor='#282C34', paper_bgcolor='#282C34', width= 1000, height= 400)
 
         # Figur erstellen und Daten hinzufügen
         fig = go.Figure(data=bar_data, layout=layout)
 
-        # Streamlit-Element für das Diagramm anzeigen
         with open('style.css') as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
         ###################################################################################
