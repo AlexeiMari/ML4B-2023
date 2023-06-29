@@ -354,25 +354,29 @@ def main():
     uploaded_file = st.file_uploader("Bitte lade Sensordaten hoch. Diese können ein .JSON-Format oder auch ein .zip-Format haben, die CSVs enthalten.", accept_multiple_files=False)
     if st.button("Klassifizieren!"):
         prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
-        st.subheader("Visualisierung")
-        #SUPER WICHTIG!!! BITTE LESEN
-        #
-        # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
-        #   Aktivität liegt in Index 0
-        #   Länge liegt in Index 1
-        #   Startstunde liegt in Index 2
-        #
-        # gps = gps Daten, sind nur wichtig für die Karte, auf der ein Weg eingezeichnet wird
-        #
-        # metric_data = die eingelesenen Daten in ihrer transformierten Form. Wird eigentlich nicht weiter verwendet, ab dieser Stelle hier im Code
-        #
-        # raw_predictions = Die Ausgabe unseres ML Modells. Eine Liste von Strings.
-        #
-        # start_minutes = int. Als die Aufnahme der hochgeladenen Daten gestartet wurde, war es prediction_data[0][2] Stunden und start_minutes Minuten spät
+        text, bild = st.columns(2)
+        with text:
+            st.subheader("Visualisierung")
+            #SUPER WICHTIG!!! BITTE LESEN
+            #
+            # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
+            #   Aktivität liegt in Index 0
+            #   Länge liegt in Index 1
+            #   Startstunde liegt in Index 2
+            #
+            # gps = gps Daten, sind nur wichtig für die Karte, auf der ein Weg eingezeichnet wird
+            #
+            # metric_data = die eingelesenen Daten in ihrer transformierten Form. Wird eigentlich nicht weiter verwendet, ab dieser Stelle hier im Code
+            #
+            # raw_predictions = Die Ausgabe unseres ML Modells. Eine Liste von Strings.
+            #
+            # start_minutes = int. Als die Aufnahme der hochgeladenen Daten gestartet wurde, war es prediction_data[0][2] Stunden und start_minutes Minuten spät
 
-        st.subheader("Der Ursprung deiner Daten")
-        st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
-        st.subheader("Deine Fortbewegungsverteilung")
+            st.subheader("Der Ursprung deiner Daten")
+            st.write("Keine Sorge, nur du kannst diese Daten sehen, wir haben nicht genug Geld für Streamlit Pro, daher können wir die nicht speichern ;D")
+            st.subheader("Deine Fortbewegungsverteilung")
+        with bild:
+            st.image("Bild1.png")
         ###################################################################################
         ### Zeitstrahl
         # Extrahieren der Aktivitäten und Häufigkeiten aus dem JSON
@@ -597,7 +601,7 @@ def main():
         with zeitstrahl:
             st.pyplot(fig2)
         with bilder:
-            st.image("Car.png")
+            st.write("")
         
         # Zweite horizontal_bar
         rechnungen, bar_chart = st.columns(2)
@@ -664,6 +668,9 @@ def main():
         with pie_chart:
             with st.container():
                 st.plotly_chart(fig_pie)
+        
+        # Vierte horizontal_bar
+        st.map(gps)
         ###################################################################################
         
 if __name__ == "__main__":
