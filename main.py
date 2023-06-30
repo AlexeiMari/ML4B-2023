@@ -356,7 +356,7 @@ def main():
         prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
         text, bild = st.columns(2)
         with text:
-            st.subheader("Visualisierung")
+            st.subheader("Dein Mobilitäts-Dashboard")
             #SUPER WICHTIG!!! BITTE LESEN
             #
             # prediction_data = geordnete Tupelliste. Jedes Tupel speichert eine Aktivität, eine Länge in Minuten und die Stunde, zu der die Aktivität gestartet wurde.
