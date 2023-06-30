@@ -20,7 +20,7 @@ with party:
     lottie_party = load_lottieurl("https://assets2.lottiefiles.com/packages/lf20_6aYlBl.json")
     st_lottie(lottie_party, width=800, height=600)
 with student:
-    lottie_student = load_lottieurl("https://assets8.lottiefiles.com/packages/lf20_dxscbaot.json")
+    lottie_student = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_ei2gf306.json")
     st_lottie(lottie_student, width=800, height=600)
 
 st.subheader("Deswegen kam uns eine geniale Idee!")
