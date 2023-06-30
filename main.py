@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from stqdm import stqdm
 import datetime
 
-st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide")
+st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide", initial_sidebar_state="collapsed")
 
 ### Attributes
 local = False
