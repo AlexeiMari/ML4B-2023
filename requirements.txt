@@ -7,3 +7,4 @@ tsfresh==0.20.0
 plotly==5.9.0
 stqdm==0.0.5
 matplotlib==3.7.1
+streamlit-lottie==0.0.5
