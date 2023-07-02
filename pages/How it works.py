@@ -158,17 +158,17 @@ f2 = '''
         root = math.sqrt(mean)
         return root
         
-                    temp["roll__standard_deviation"] = dict["Orientation"]["roll"].std()
-                    temp["roll__variance"] = dict["Orientation"]["roll"].var()
-                    temp["roll__root_mean_square"] = rms(dict["Orientation"]["roll"])
+    temp["roll__standard_deviation"] = dict["Orientation"]["roll"].std()
+    temp["roll__variance"] = dict["Orientation"]["roll"].var()
+    temp["roll__root_mean_square"] = rms(dict["Orientation"]["roll"])
 
-                    temp["pitch__standard_deviation"] = dict["Orientation"]["pitch"].std()
-                    temp["pitch__variance"] = dict["Orientation"]["pitch"].var()
-                    temp["pitch__root_mean_square"] = rms(dict["Orientation"]["pitch"])
-                    temp["pitch__absolute_maximum"] = dict["Orientation"]["pitch"].abs().max()
+    temp["pitch__standard_deviation"] = dict["Orientation"]["pitch"].std()
+    temp["pitch__variance"] = dict["Orientation"]["pitch"].var()
+    temp["pitch__root_mean_square"] = rms(dict["Orientation"]["pitch"])
+    temp["pitch__absolute_maximum"] = dict["Orientation"]["pitch"].abs().max()
 
-                    temp["yaw__standard_deviation"] = dict["Orientation"]["yaw"].std()
-                    temp["yaw__variance"] = dict["Orientation"]["yaw"].var()'''
+    temp["yaw__standard_deviation"] = dict["Orientation"]["yaw"].std()
+    temp["yaw__variance"] = dict["Orientation"]["yaw"].var()'''
 
 st.code(f2, language = "python")
 
