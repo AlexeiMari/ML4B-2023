@@ -180,7 +180,7 @@ st.write("Jetzt sind wir im letzen Schritt der Datenvorverarbeitung angekommen. 
          "kann man die Vektoren wieder zusammenführen.")
 st.write("Nun 'brechen' wir die Dictionaries auf. Wir konkatenieren die Metrikvektoren der jeweiligen Sensoren, sodass wir pro Sensor genau einen Dataframe haben. Jeder Dataframe hat so viele "
          "Reihen, wie Einträge in der Liste nach der split_data Methode waren. Diese Dataframes konkatenieren wir nun noch vertikal und unsere Daten sind endlich im fertigen Format.")
-st.image("FinalenDatensatzZusammenstellen.png.png", caption = "Zusammenfügung der Metrikvektoren")
+st.image("FinalenDatensatzZusammenstellen.png", caption = "Zusammenfügung der Metrikvektoren")
 st.write("Jetzt haben wir einen Dataframe, mit dem wir ein Machine Learning Modell trainieren können!")
 
 st.header("Machine Learning")
