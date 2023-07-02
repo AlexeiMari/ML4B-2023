@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from stqdm import stqdm
 import datetime
 
-st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide")
+st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide", initial_sidebar_state="collapsed")
 
 ### Attributes
 local = False
@@ -339,6 +339,22 @@ def time_line_data_to_tupel(time_line):
 ### Pythonic Area
 
 ### Streamlit Area
+st.header("Hey Leute, hier ist das legendäre Team \"Silicon Valley\"!")
+import requests
+from streamlit_lottie import st_lottie
+def load_lottiefile(filepath: str):
+    with open(filepath, "r") as f:
+        return json.load(f)
+def load_lottieurl(url: str):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+lottie_party = load_lottieurl("https://assets1.lottiefiles.com/packages/lf20_3vbOcw.json")
+st_lottie(lottie_party,width=1200, height=800)
+st.write("Wir haben ein mega cooles Projekt am Start, bei dem wir ein Modell entwickelt haben, das deine Fortbewegung auf den Punkt genau klassifizieren kann. Und das Beste daran: Du bekommst ein verdammt schickes Dashboard serviert, das alle wichtigen Infos übersichtlich darstellt. Da hast du einen Zeitstrahl, der dir alle deine Aktivitäten zeigt und das sogar in der richtigen Reihenfolge! Und wir haben sogar eine genaue Aufschlüsselung deiner Aktivitäten. Aber halt, es wird noch besser: Wir haben sogar die Kalorien, die du verbrannt hast, und die CO2-Emissionen berechnet.")
+st.subheader("Aber genug von diesen langweilgen einleitenden Worten! Lass uns loslegen!")
+st.image("Bild2.png")
 st.subheader("Lass uns deine Fortbewegung klassifizieren!")
 st.write("Zunächst brauchen wir selbstverständlich ein paar Daten, die wir klassifizieren können")
 farben_dict = {

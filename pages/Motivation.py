@@ -3,10 +3,10 @@ import json
 import streamlit as st 
 from streamlit_lottie import st_lottie
 
-st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide")
+st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide", initial_sidebar_state="collapsed")
 
 st.header("Wie kamen wir auf diese Idee?")
-st.write("Das Leben als Student ist eine anspruchsvolle Herausforderung. Neben den Vergnügungen wie Feiern, Schlafen und das Genießen des Lebens, müssen wir uns zusätzlich mit den akademischen Pflichten auseinandersetzen. Doch unsere Universität und insbesondere unser Lehrstuhl haben beschlossen, dass es nicht ausreichend schwierig ist. Deshalb werden die bedauernswerten Wirtschaftsinformatikstudenten zusätzlich zu all dem bereits Genannten auch noch gezwungen, in eine andere Stadt zu pendeln.")
+st.write("Das Leben als Student ist eine anspruchsvolle Herausforderung. Neben den Vergnügungen wie Feiern, Schlafen und das Genießen des Lebens, müssen wir uns zusätzlich mit den akademischen Pflichten auseinandersetzen. Doch unsere Universität und insbesondere unsere Fakultät haben beschlossen, dass es nicht ausreichend schwierig ist. Deshalb werden die bedauernswerten Wirtschaftsinformatikstudenten zusätzlich zu all dem bereits Genannten auch noch gezwungen, in eine andere Stadt zu pendeln.")
 def load_lottiefile(filepath: str):
     with open(filepath, "r") as f:
         return json.load(f)
@@ -20,7 +20,7 @@ with party:
     lottie_party = load_lottieurl("https://assets2.lottiefiles.com/packages/lf20_6aYlBl.json")
     st_lottie(lottie_party, width=800, height=600)
 with student:
-    lottie_student = load_lottieurl("https://assets8.lottiefiles.com/packages/lf20_dxscbaot.json")
+    lottie_student = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_ei2gf306.json")
     st_lottie(lottie_student, width=800, height=600)
 
 st.subheader("Deswegen kam uns eine geniale Idee!")
