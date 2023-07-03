@@ -355,6 +355,8 @@ st_lottie(lottie_party,width=1200, height=800)
 st.write("Wir haben ein mega cooles Projekt am Start, bei dem wir ein Modell entwickelt haben, das deine Fortbewegung auf den Punkt genau klassifizieren kann. Und das Beste daran: Du bekommst ein verdammt schickes Dashboard serviert, das alle wichtigen Infos übersichtlich darstellt. Da hast du einen Zeitstrahl, der dir alle deine Aktivitäten zeigt und das sogar in der richtigen Reihenfolge! Und wir haben sogar eine genaue Aufschlüsselung deiner Aktivitäten. Aber halt, es wird noch besser: Wir haben sogar die Kalorien, die du verbrannt hast, und die CO2-Emissionen berechnet.")
 st.subheader("Aber genug von diesen langweilgen einleitenden Worten! Lass uns loslegen!")
 st.image("Bild2.png")
+st.header("Bitte beachten!", icon=":heavy_exclamation_mark:")
+st.write("Falls du unser Model nutzen möchtest, dann musst du sicherstellen, dass deine Messungen Sensordaten für Accelerometer (Beschleunigung), Location (GPS) und Orientation (Neigung) enthalten. Es ist kein Problem wenn noch mehr Daten von anderen Sensoren enthalten sind, aber diese drei müssen auf jeden Fall dabei sein!")
 st.subheader("Lass uns deine Fortbewegung klassifizieren!")
 st.write("Zunächst brauchen wir selbstverständlich ein paar Daten, die wir klassifizieren können")
 farben_dict = {
