@@ -209,7 +209,7 @@ st.write(evdf)
 
 st.write("In dieser Tabelle sind eben jene Merkmale und die 10 Modelle abgebildet, was wir sehen, ist, dass der Gradient Boosting Classifier mit Standardeinstellungen am Besten für "
          "unsere Zwecke ist.")
-st.image("barplotMLModells.png", caption = "Accuracy, Precision und Recall der trainierten Modelle")
+st.image("barplotMLModells.PNG", caption = "Accuracy, Precision und Recall der trainierten Modelle")
 
 st.write("")
 st.write("Den Gradient Boosting Classifier mit Standardeinstellungen haben wir dann deployt und für unsere Seite verwendet.")
