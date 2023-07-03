@@ -185,7 +185,9 @@ st.write("Nun 'brechen' wir die Dictionaries auf. Wir konkatenieren die Metrikve
 st.image("FinalenDatensatzZusammenstellen.png", caption = "Zusammenfügung der Metrikvektoren")
 st.write("Jetzt haben wir einen Dataframe, mit dem wir ein Machine Learning Modell trainieren können!")
 
+
 st.header("Machine Learning")
+
 st.write("Obwohl das hier jetzt ja der Hauptschritt ist, wenn man so will, ist dieser der trivialste. Wir haben insgesamt 6 verschiedene ML Algorithmen trainiert und uns 10 "
          "Modelle insgesamt trainieren lassen. Diese Modelle sind:")
 st.markdown("- Support Vector Classifier mit Standardeinstellungen")
@@ -201,8 +203,10 @@ st.markdown("- Gradient Boosting Classifier mit hyperparameter Tuning über lear
 
 st.write("Die Qualität der Modelle haben wir dann anhand von ihrer Accuracy, Precision und ihrem Recall bewertet. Für tieferes Verständnis haben wir auch zu jedem Modell einen "
          "Confusion Report zusammen mit einer Confusion Matrix erstellt und betrachtet.")
-pd.read_csv("eval_df.csv")
-st.write(pd.read_csv("eval_df.csv"))
+
+evdf = pd.read_csv("eval_df.csv")
+st.write(evdf)
+
 st.write("In dieser Tabelle sind eben jene Merkmale und die 10 Modelle abgebildet, was wir sehen, ist, dass der Gradient Boosting Classifier mit Standardeinstellungen am Besten für "
          "unsere Zwecke ist.")
 st.image("Unbenannt.png", caption = "Accuracy, Precision und Recall der trainierten Modelle")
