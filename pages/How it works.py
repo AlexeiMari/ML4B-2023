@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+
 st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide", initial_sidebar_state="collapsed")
 st.title("How it works")
 st.write("Die Technik hinter unserer Seite")
@@ -184,4 +186,30 @@ st.image("FinalenDatensatzZusammenstellen.png", caption = "Zusammenfügung der M
 st.write("Jetzt haben wir einen Dataframe, mit dem wir ein Machine Learning Modell trainieren können!")
 
 st.header("Machine Learning")
+st.write("Obwohl das hier jetzt ja der Hauptschritt ist, wenn man so will, ist dieser der trivialste. Wir haben insgesamt 6 verschiedene ML Algorithmen trainiert und uns 10 "
+         "Modelle insgesamt trainieren lassen. Diese Modelle sind:")
+st.markdown("- Support Vector Classifier mit Standardeinstellungen")
+st.markdown("- Support Vector Classifier mit hyperparameter Tuning über den Kernel und den C-Wert")
+st.markdown("- Gaussian Naive Bayes mit Standardeinstellungen")
+st.markdown("- K-Nearest Neighbour mit Standardeinstellungen")
+st.markdown("- K-Nearest Neighbour mit hyperparameter Tuning über n_neighbours und weights")
+st.markdown("- Randomforest mit Standardeinstellungen")
+st.markdown("- Randomforest mit hyperparameter Tuning über max_features, n_estimators und min_samples_split")
+st.markdown("- Multi-layer Perceptron Classifier mit hyperparameter Tuning über solver und max_iter")
+st.markdown("- Gradient Boosting Classifier mit Standardeinstellungen")
+st.markdown("- Gradient Boosting Classifier mit hyperparameter Tuning über learning_rate, n_estimators und min_samples_split")
 
+st.write("Die Qualität der Modelle haben wir dann anhand von ihrer Accuracy, Precision und ihrem Recall bewertet. Für tieferes Verständnis haben wir auch zu jedem Modell einen "
+         "Confusion Report zusammen mit einer Confusion Matrix erstellt und betrachtet.")
+pd.read_csv("eval_df.csv")
+st.write(pd.read_csv("eval_df.csv"))
+st.write("In dieser Tabelle sind eben jene Merkmale und die 10 Modelle abgebildet, was wir sehen, ist, dass der Gradient Boosting Classifier mit Standardeinstellungen am Besten für "
+         "unsere Zwecke ist.")
+st.image("Unbenannt.png", caption = "Accuracy, Precision und Recall der trainierten Modelle")
+
+st.write("")
+st.write("Den Gradient Boosting Classifier mit Dtandardeinstellungen haben wir dann deployt und für unsere Seite verwendet.")
+st.write("")
+
+
+st.header("Validierungstest unseres finalen Modells")
