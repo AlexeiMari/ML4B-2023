@@ -369,7 +369,7 @@ farben_dict = {
 }
 
 def main():
-    uploaded_file = st.file_uploader("Bitte lade Sensordaten hoch. Diese können ein .JSON-Format oder auch ein .zip-Format haben, die CSVs enthalten.", accept_multiple_files=False)
+    uploaded_file = st.file_uploader("Bitte lade Sensordaten hoch. Diese können ein .JSON-Format oder auch ein .zip-Format haben, das CSVs enthält.", accept_multiple_files=False)
     if st.button("Klassifizieren!"):
         prediction_data, gps, metric_data, raw_predictions, start_minutes = process_data(uploaded_file)
         text, bild = st.columns(2)
