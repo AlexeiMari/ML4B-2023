@@ -217,3 +217,15 @@ st.write("")
 
 
 st.header("Validierungstest unseres finalen Modells")
+st.write("Die berechnete Qualität des Modells über die Testdaten reicht uns nicht aus, um die Qualität richtig zu bestimmen, da dabei sich ja immer Overfitting einschleichen könnte. "
+         "Daher haben wir Validierungsdaten in verschiedenen Fahrzeugen und Längen gesammelt. Diese Validierungsdaten haben wir durch unsere Website gejagt und überprüft, zu wie viel "
+         "Prozent die Zeitreihen richtig klassifiziert wurden.")
+
+eval = pd.read_excel("0_Eval.xlsx")
+
+eval["Absolute richtige Vorhersagen (berechnet)"] = eval["Aufnahmelänge(min)"] * eval["Anteil an richtigen Vorhersagen"]
+st.subheader("Die Validierungstabelle")
+st.write(eval)
+st.write("Der durchschnittliche Anteil an richtigen Vorhersagen beträgt hier " +str(eval["Anteil an richtigen Vorhersagen"].avg()))
+st.write("Insgesamt wurden in der Validierungsphase von " + str(eval["Aufnahmelänge(min)"].sum()) +
+         " Minuten " + str(eval["Absolute richtige Vorhersagen (berechnet)"].sum()) + " Minuten richtig klassifiziert")
