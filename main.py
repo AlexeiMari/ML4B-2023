@@ -339,7 +339,8 @@ def time_line_data_to_tupel(time_line):
 ### Pythonic Area
 
 ### Streamlit Area
-st.header("Hey Leute, hier ist das legendäre Duo \"Silicon Valley\"!")
+st.header("Hey Leute, hier ist das legendäre Duo \"Silicon Valley\"")
+st.header("mit der App Journey ML!")
 import requests
 from streamlit_lottie import st_lottie
 def load_lottiefile(filepath: str):
