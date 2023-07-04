@@ -221,7 +221,7 @@ st.write("Die berechnete Qualität des Modells über die Testdaten reicht uns ni
          "Daher haben wir Validierungsdaten in verschiedenen Fahrzeugen und Längen gesammelt. Diese Validierungsdaten haben wir durch unsere Website gejagt und überprüft, zu wie viel "
          "Prozent die Zeitreihen richtig klassifiziert wurden.")
 
-eval = pd.read_csv("0_Eval.csv", delimiter=";")
+eval = pd.read_csv("0_Eval.csv", delimiter=";", encoding = "utf-8")
 
 eval["Absolute richtige Vorhersagen (berechnet)"] = eval["Aufnahmelänge(min)"] * eval["Anteil an richtigen Vorhersagen"]
 st.subheader("Die Validierungstabelle")
