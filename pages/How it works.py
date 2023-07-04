@@ -26,10 +26,10 @@ st.write("Wir hätten sogar fast Flugzeuge noch mit reingenommen, aber der Flugz
 
 st.header("Die Daten")
 st.write("Wie viele Daten braucht man, um eine Glühbirne zu wechseln?")
-st.write("Keine Ahnung, aber zum trainieren von einem Machine Learning Modell braucht man eine Menge.")
-st.write("Unser Modell ist darauf trainiert worden, einminütige Sequences zu klassifizieren, demnach ist jede Sequenz, die eine Minute lang geht, "
-         "ein Datenpunkt in unserem Datenbestand. In unserem Datenbestand, mit dem wir das Modell trainiert haben, haben wir pro Kategorie ungefähr 350 Datenpunkte."
-         "Das macht 5h an Daten pro Kategorie. Im Endeffekt haben wir noch mehr Daten, da manche Fortbewegungsarten leichter unzusetzen waren als andere im großen Stil"
+st.write("Keine Ahnung, aber zum trainieren von einem Machine Learning Modell braucht man eine Menge. ")
+st.write("Unser Modell ist darauf trainiert worden, einminütige Sequenzen zu klassifizieren, demnach ist jede Sequenz, die eine Minute lang geht, "
+         "ein Datenpunkt in unserem Datenbestand. In unserem Datenbestand, mit dem wir das Model trainiert haben, haben wir pro Kategorie ungefähr 350 Datenpunkte. "
+         "Das macht 5h an Daten pro Kategorie. Im Endeffekt haben wir noch mehr Daten, da manche Fortbewegungsarten leichter umzusetzen waren als andere im großen Stil"
          ", aber runden wir das einfach Mal auf 350 ab. Also haben wir abgerundet 35h an Daten für dieses Projekt gesammelt.")
 st.write("Die Daten, die wir verwenden sind Sensordaten, die wir mit 6 verschiedenen Handys aufgenommen haben. "
          "Die Sensordaten konnten wir mit der Sensorlogger App sammeln und exportieren, so dass wir damit arbeiten konnten.")
