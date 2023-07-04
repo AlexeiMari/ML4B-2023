@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from stqdm import stqdm
 import datetime
 
-st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Journey ML", page_icon=":oncoming_automobile:", layout="wide", initial_sidebar_state="collapsed")
 
 ### Attributes
 local = False
@@ -339,7 +339,7 @@ def time_line_data_to_tupel(time_line):
 ### Pythonic Area
 
 ### Streamlit Area
-st.header("Hey Leute, hier ist das legendäre Duo \"Silicon Valley\" mit der App Journey ML!")
+st.header("Hey Leute, hier ist das legendäre Duo \"Silicon Valley\" mit Journey ML!")
 import requests
 from streamlit_lottie import st_lottie
 def load_lottiefile(filepath: str):
