@@ -226,8 +226,8 @@ eval = pd.read_csv("0_Eval.csv", delimiter=";", encoding = "cp1252")
 eval["Absolute richtige Vorhersagen (berechnet)"] = eval["Aufnahmelänge(min)"] * eval["Anteil an richtigen Vorhersagen"]
 st.subheader("Die Validierungstabelle")
 st.write(eval)
-rV_avg = (eval["Anteil an richtigen Vorhersagen"].type())
+rV_avg = (eval["Anteil an richtigen Vorhersagen"].sum())
 st.write("Der durchschnittliche Anteil an richtigen Vorhersagen beträgt hier ")
-st.write(rV_avg)
+st.write(type(eval["Anteil an richtigen Vorhersagen"][0]))
 st.write("Insgesamt wurden in der Validierungsphase von " + (eval["Aufnahmelänge(min)"].sum()) +
          " Minuten " + (eval["Absolute richtige Vorhersagen (berechnet)"].sum()) + " Minuten richtig klassifiziert")
