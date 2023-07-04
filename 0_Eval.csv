@@ -1,0 +1,17 @@
+Dateiname;Aufnahmelänge(min);Erwartete Vorhersagen;Anteil an richtigen Vorhersagen;Zeitstrahl;Zusätzliche Infos
+Bicycle_(Some_fast_Segments)-2023-06-24_13-56-57.json;22;Bike;0.955;18 Bike 1 Roller 3 Bike;
+Bicycle_(Straßen)-2023-06-24_14-20-30.json;11;Bike;1.0;11 Bike;
+Bicycle_Flughafen_-2023-06-24_13-38-48.json;8;Bike;0.5;1 Roller 3 Bike 3 Roller 1 Bike;
+Bicycle_Park_-2023-06-24_13-21-09.json;17;Bike;1.0;17 Bike;
+Driving1406-2023-06-14_07-52-29.zip;36;Car;0.472;1 Car 1 Roller 9 Car 1 Roller 4 Bike 2 Idle 1 Bike 7 Car 5 Roller 3 Bike 2 Roller;Stockender Verkehr auf der Autobahn
+DrivingInnerorts1506-2023-06-15_11-05-07.zip;18;Car;1.0;18 Car;
+fahrrad_-2023-05-31_18-26-26.json;4;Bike;0.75;1 Bike 1 Roller 2 Bike;
+fahrrad_-2023-05-31_18-43-42.json;3;Bike;1.0;3 Bike;
+Idle_(Sitting_outside)-2023-06-24_13-49-19.json;5;Idle;0.4;2 Roller 2 Idle 1 Roller;
+Idle_-2023-06-24_13-11-26.json;5;Idle;1.0;5 Idle;
+Lauf_zum_Bäcker_und_zurück_-2023-06-24_08-10-41.zip;16;Walk;1.0;16 Walk;Joa, bin am Morgen Mal zum Bäcker gelaufen. Frühstück und so
+Walk-2023-06-14_08-28-06.zip;83;Walk;0.833;1 Bike 14 Walk 1 Bike 4 Walk 2 Bike 17 Walk 1 Bike 3 Walk 1 Bike 5 Walk 1 Bike 2 Walk 2 Bike 1 Walk 1 Bike 10 Walk 1 Bike 12 Walk 1 Bike 2 Walk 1 Bike;
+Walking2406-2023-06.24_18-09-22.zip;10;Walk;0.7;13 Walk 1 Car 1 Walk 3 Car 2 Idle;
+Idle-2023-06-25_18-17-12.zip;37;Idle;1.0;37 Idle;
+Hinweg Nbg . Erl.csv;19;Car;0.895;1 Bike 17 Car 1 Bike;
+Party Autofahrt.csv;31;Car;0.0;30 Roller 1 Walk;Anderes Auto als in den Trainingsaufnahmen. Und Fahrt bei Nacht
