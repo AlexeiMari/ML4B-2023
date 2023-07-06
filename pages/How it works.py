@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="Mobility Classification App", page_icon=":oncoming_automobile:", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Journey ML", page_icon=":oncoming_automobile:", layout="wide", initial_sidebar_state="collapsed")
 st.title("How it works")
 st.write("Die Technik hinter unserer Seite")
 
