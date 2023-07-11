@@ -32,4 +32,4 @@ main.py: https://github.com/AlexeiMari/ML4B-2023/blob/main/main.py
 Trainingsdata: https://github.com/AlexeiMari/ML4B-2023/blob/main/database_1min_split.csv
 
 ## Creators
-Created by Rene Jokiel and Alexei Mari.
+Created by Rene Jokiel (@BelmontR) and Alexei Marinov (@AlexeiMari).
