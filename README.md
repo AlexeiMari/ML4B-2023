@@ -1,5 +1,5 @@
 # Journey-ML 
-### (Created as a projetct for the course ML4B at FAU in germany)
+### (Created as a projetct for the course Machine Learning for Business (ML4B) at Friedrich-Alexander University in Germany)
 
 JourneyML is a web application that leverages machine learning techniques to analyze and provide insights into user mobility patterns based on uploaded sensor data. 
 By analyzing data from sensors such as accelerometer, location, and orientation, JourneyML generates a detailed timeline of the user's movements and offers various statistics related to their mobility.
@@ -22,7 +22,7 @@ In order to use the App, it is required to upload sensor data containing acceler
 ## Trainingsdata for the Machine Learning Model
 We collected the entire trainingsdataset by ourselves by recording different activities with the Sensor Logger App.
 
-## Project Structe on GitHub
+## Project Structure on GitHub
 In the JupyterNotebooks folder is the Jupyter Notebook which implements the whole Data Preprocessing Pipeline and the Machine Learning parts. The main.py contains all the code for the Streamlit site to work.
 
 Notebook: https://github.com/AlexeiMari/ML4B-2023/blob/main/JupyterNotebooks/Machine%20Learning%20and%20Dataprepro.ipynb
@@ -30,6 +30,8 @@ Notebook: https://github.com/AlexeiMari/ML4B-2023/blob/main/JupyterNotebooks/Mac
 main.py: https://github.com/AlexeiMari/ML4B-2023/blob/main/main.py
 
 Trainingsdata: https://github.com/AlexeiMari/ML4B-2023/blob/main/database_1min_split.csv
+
+JSONs and CSVs for testing the JourneyML Website: https://github.com/AlexeiMari/ML4B-2023/tree/main/TestDataForWebsiteUse 
 
 ## Creators
 Created by Rene Jokiel (@BelmontR) and Alexei Marinov (@AlexeiMari).
